@@ -137,7 +137,7 @@ CREATE TABLE employee(
 CREATE TABLE rating(
    id_rating SERIAL,
    nb_star INTEGER NOT NULL,
-   author VARCHAR(50)  NOT NULL default "anonymous",
+   author VARCHAR(50)  NOT NULL default 'anonymous',
    daty DATE NOT NULL,
    comment TEXT,
    id_product INTEGER NOT NULL,
