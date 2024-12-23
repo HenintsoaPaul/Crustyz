@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Save Product Category</h2>
+
+    <form th:action="@{/categories/save}" th:object="${category}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="Category Name"
+               class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2">
+            Submit Save
+        </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/categories}"> Back to Category List</a>
+</div>
+</body>
+</html>

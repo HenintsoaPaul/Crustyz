@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Employee</title>
+  <link rel="stylesheet"
+        th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container my-2" align="center">
+
+  <h3>Unit detail</h3>
+
+  <a th:href="@{/units/add}" class="btn btn-primary btn-sm mb-3">Add Unit</a>
+
+  <table style="width:80%"
+         class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="unit:${unitsList}">
+      <td th:text="${unit.getId()}"></td>
+      <td th:text="${unit.getName()}"></td>
+
+      <td><a th:href="@{/units/update/{id}(id=${unit.getId()})}"
+             class="btn btn-primary">Update</a>
+        <a th:href="@{/units/delete/{id}(id=${unit.getId()})}"
+           class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
