@@ -10,7 +10,7 @@
 <div class="container">
     <h2>Save Product Category</h2>
 
-    <form th:action="@{/categories/save}" th:object="${category}" method="POST">
+    <form th:action="@{/products/categories/save}" th:object="${category}" method="POST">
         <input type="text" th:field="*{name}" placeholder="Category Name"
                class="form-control mb-4 col-4">
 
@@ -21,7 +21,7 @@
 
     <hr>
 
-    <a th:href="@{/categories}"> Back to Category List</a>
+    <a th:href="@{/products/categories}"> Back to Category List</a>
 </div>
 </body>
 </html>

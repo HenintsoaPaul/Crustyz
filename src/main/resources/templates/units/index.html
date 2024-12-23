@@ -32,10 +32,9 @@
             <td th:text="${unit.getId()}"></td>
             <td th:text="${unit.getName()}"></td>
 
-            <td><a th:href="@{/units/update/{id}(id=${unit.getId()})}"
+            <td>
+                <a th:href="@{/units/update/{id}(id=${unit.getId()})}"
                    class="btn btn-primary">Update</a>
-                <a th:href="@{/units/delete/{id}(id=${unit.getId()})}"
-                   class="btn btn-danger">Delete</a>
             </td>
         </tr>
         </tbody>

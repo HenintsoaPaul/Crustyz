@@ -8,12 +8,12 @@
 </head>
 <body>
 <div class="container">
-    <h2>Update Unit</h2>
+    <h2>Update Category</h2>
 
-    <form th:action="@{/units/save}" th:object="${unit}" method="POST">
-        <input type="hidden" th:field="*{id}" placeholder="Unit Name"
+    <form th:action="@{/products/categories/save}" th:object="${category}" method="POST">
+        <input type="hidden" th:field="*{id}" placeholder="Category Name"
                class="form-control mb-4 col-4">
-        <input type="text" th:field="*{name}" placeholder="Unit Name"
+        <input type="text" th:field="*{name}" placeholder="Category Name"
                class="form-control mb-4 col-4">
 
         <button type="submit" class="btn btn-info col-2">
@@ -23,7 +23,7 @@
 
     <hr>
 
-    <a th:href="@{/units}"> Back to Unit List</a>
+    <a th:href="@{/products/categories}"> Back to Category List</a>
 </div>
 </body>
 </html>

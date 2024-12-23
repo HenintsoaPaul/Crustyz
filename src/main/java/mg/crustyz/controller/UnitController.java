@@ -19,12 +19,6 @@ public class UnitController {
         return "units/index";
     }
 
-    @GetMapping( "/{id}" )
-    public String getById( Model model, @PathVariable Integer id ) {
-        model.addAttribute( "unit", unitRepository.findById( id ) );
-        return "units/detail";
-    }
-
     @GetMapping( "/add" )
     public String gotoSave( Model model ) {
         model.addAttribute( "unit", new Unit() );
