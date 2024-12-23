@@ -1,18 +1,20 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table( name = "employee" )
 public class Employee {
     @Id
-    @ColumnDefault( "nextval('employee_id_employee_seq')" )
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "employee_id_gen" )
+    @SequenceGenerator( name = "employee_id_gen", sequenceName = "employee_id_employee_seq", allocationSize = 1 )
     @Column( name = "id_employee", nullable = false )
     private Integer id;
 

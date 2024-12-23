@@ -1,12 +1,14 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table( name = "rating" )
 public class Rating {
@@ -31,4 +33,5 @@ public class Rating {
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )
     private Product idProduct;
+
 }

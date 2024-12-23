@@ -1,21 +1,23 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table( name = "product" )
 public class Product {
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "product_id_gen" )
-    @SequenceGenerator( name = "product_id_gen", sequenceName = "product_id_product_seq", allocationSize = 1 )
+    @ColumnDefault( "nextval('product_id_product_seq')" )
     @Column( name = "id_product", nullable = false )
     private Integer id;
 
-    @Column( name = "name", length = 50 )
+    @Column( name = "name", nullable = false, length = 50 )
     private String name;
 
     @Column( name = "description", length = Integer.MAX_VALUE )
@@ -25,11 +27,11 @@ public class Product {
     private BigDecimal unitPrice;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_baking", nullable = false )
-    private Baking idBaking;
+    @JoinColumn( name = "id_unit", nullable = false )
+    private mg.crustyz.entity.Unit idUnit;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_product_type", nullable = false )
-    private mg.crustyz.entity.ProductType idProductType;
+    @JoinColumn( name = "id_product_category", nullable = false )
+    private mg.crustyz.entity.ProductCategory idProductCategory;
 
 }

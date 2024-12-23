@@ -1,19 +1,21 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table( name = "mvt_stock" )
-public class MvtStock {
+@Table( name = "mvt_product_stock" )
+public class MvtProductStock {
     @Id
-    @ColumnDefault( "nextval('mvt_stock_id_mvt_stock_seq')" )
-    @Column( name = "id_mvt_stock", nullable = false )
+    @ColumnDefault( "nextval('mvt_product_stock_id_mvt_product_stock_seq')" )
+    @Column( name = "id_mvt_product_stock", nullable = false )
     private Integer id;
 
     @Column( name = "daty", nullable = false )
@@ -23,12 +25,8 @@ public class MvtStock {
     private BigDecimal quantity;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_ingredient", nullable = false )
-    private Ingredient idIngredient;
-
-    @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_stock", nullable = false )
-    private mg.crustyz.entity.Stock idStock;
+    @JoinColumn( name = "id_product", nullable = false )
+    private mg.crustyz.entity.Product idProduct;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_mvt_stock_type", nullable = false )

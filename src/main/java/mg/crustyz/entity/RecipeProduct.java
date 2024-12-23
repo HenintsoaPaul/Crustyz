@@ -1,14 +1,18 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.math.BigDecimal;
+
+@Getter
+@Setter
 @Entity
-@Table( name = "product_recipe" )
-public class ProductRecipe {
+@Table( name = "recipe_product" )
+public class RecipeProduct {
     @EmbeddedId
-    private ProductRecipeId id;
+    private RecipeProductId id;
 
     @MapsId( "idProduct" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
@@ -18,6 +22,9 @@ public class ProductRecipe {
     @MapsId( "idRecipe" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_recipe", nullable = false )
-    private mg.crustyz.entity.Recipe idRecipe;
+    private Recipe idRecipe;
+
+    @Column( name = "quantity_produced", nullable = false, precision = 15, scale = 2 )
+    private BigDecimal quantityProduced;
 
 }

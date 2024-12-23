@@ -4,13 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table( name = "sale" )
 public class Sale {
@@ -24,5 +26,9 @@ public class Sale {
 
     @Column( name = "total_price", nullable = false, precision = 15, scale = 2 )
     private BigDecimal totalPrice;
+
+    @ColumnDefault( "'anonymous'" )
+    @Column( name = "customer_name", length = 50 )
+    private String customerName;
 
 }

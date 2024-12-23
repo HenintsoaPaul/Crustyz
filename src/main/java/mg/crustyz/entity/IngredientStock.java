@@ -1,18 +1,20 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table( name = "stock" )
-public class Stock {
+@Table( name = "ingredient_stock" )
+public class IngredientStock {
     @Id
-    @ColumnDefault( "nextval('stock_id_stock_seq')" )
-    @Column( name = "id_stock", nullable = false )
+    @ColumnDefault( "nextval('ingredient_stock_id_ingredient_stock_seq')" )
+    @Column( name = "id_ingredient_stock", nullable = false )
     private Integer id;
 
     @Column( name = "quantity", nullable = false, precision = 15, scale = 2 )

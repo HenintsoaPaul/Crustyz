@@ -1,13 +1,12 @@
 package mg.crustyz.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table( name = "ingredient" )
 public class Ingredient {
@@ -18,5 +17,9 @@ public class Ingredient {
 
     @Column( name = "name", nullable = false, length = 50 )
     private String name;
+
+    @ManyToOne( fetch = FetchType.LAZY, optional = false )
+    @JoinColumn( name = "id_unit", nullable = false )
+    private mg.crustyz.entity.Unit idUnit;
 
 }
