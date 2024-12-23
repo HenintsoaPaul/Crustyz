@@ -1,19 +1,16 @@
 package mg.crustyz.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "unit", uniqueConstraints = {
         @UniqueConstraint( name = "unit_name_key", columnNames = { "name" } )
 } )
 public class Unit {
     @Id
-    @ColumnDefault( "nextval('unit_id_unit_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_unit", nullable = false )
     private Integer id;
 

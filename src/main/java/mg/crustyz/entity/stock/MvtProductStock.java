@@ -1,20 +1,18 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.stock;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
+import mg.crustyz.entity.product.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "mvt_product_stock" )
 public class MvtProductStock {
     @Id
-    @ColumnDefault( "nextval('mvt_product_stock_id_mvt_product_stock_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_mvt_product_stock", nullable = false )
     private Integer id;
 
@@ -26,7 +24,7 @@ public class MvtProductStock {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )
-    private mg.crustyz.entity.Product idProduct;
+    private Product idProduct;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_mvt_stock_type", nullable = false )

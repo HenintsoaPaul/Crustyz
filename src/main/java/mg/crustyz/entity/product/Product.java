@@ -1,19 +1,16 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.product;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "product" )
 public class Product {
     @Id
-    @ColumnDefault( "nextval('product_id_product_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_product", nullable = false )
     private Integer id;
 
@@ -32,6 +29,6 @@ public class Product {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product_category", nullable = false )
-    private mg.crustyz.entity.ProductCategory idProductCategory;
+    private ProductCategory idProductCategory;
 
 }

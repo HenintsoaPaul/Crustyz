@@ -1,19 +1,17 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.supply;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
+import mg.crustyz.entity.product.Ingredient;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "ingredient_provider" )
 public class IngredientProvider {
     @Id
-    @ColumnDefault( "nextval('ingredient_provider_id_ingredient_provider_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_ingredient_provider", nullable = false )
     private Integer id;
 
@@ -26,6 +24,6 @@ public class IngredientProvider {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_provider", nullable = false )
-    private mg.crustyz.entity.Provider idProvider;
+    private Provider idProvider;
 
 }

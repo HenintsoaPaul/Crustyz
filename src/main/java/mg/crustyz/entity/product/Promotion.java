@@ -1,22 +1,16 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.product;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.Instant;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "promotion" )
 public class Promotion {
     @Id
-    @ColumnDefault( "nextval('promotion_id_promotion_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_promotion", nullable = false )
     private Integer id;
 

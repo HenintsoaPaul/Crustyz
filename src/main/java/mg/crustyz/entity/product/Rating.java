@@ -1,19 +1,17 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.product;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "rating" )
 public class Rating {
     @Id
-    @ColumnDefault( "nextval('rating_id_rating_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_rating", nullable = false )
     private Integer id;
 

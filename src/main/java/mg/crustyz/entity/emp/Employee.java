@@ -1,20 +1,17 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.emp;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "employee" )
 public class Employee {
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "employee_id_gen" )
-    @SequenceGenerator( name = "employee_id_gen", sequenceName = "employee_id_employee_seq", allocationSize = 1 )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_employee", nullable = false )
     private Integer id;
 
@@ -35,6 +32,6 @@ public class Employee {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_employee_type", nullable = false )
-    private mg.crustyz.entity.EmployeeType idEmployeeType;
+    private EmployeeType idEmployeeType;
 
 }

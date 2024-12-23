@@ -1,13 +1,12 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.recipe;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import mg.crustyz.entity.product.Product;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "recipe_product" )
 public class RecipeProduct {

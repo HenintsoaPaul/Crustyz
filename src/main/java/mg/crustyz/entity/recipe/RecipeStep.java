@@ -1,19 +1,18 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.recipe;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
+import mg.crustyz.entity.emp.Employee;
+import mg.crustyz.entity.product.Ingredient;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "recipe_step" )
 public class RecipeStep {
     @Id
-    @ColumnDefault( "nextval('recipe_step_id_recipe_step_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_recipe_step", nullable = false )
     private Integer id;
 

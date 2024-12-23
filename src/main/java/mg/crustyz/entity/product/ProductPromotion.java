@@ -1,13 +1,11 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.product;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "product_promotion" )
 public class ProductPromotion {
@@ -22,7 +20,7 @@ public class ProductPromotion {
     @MapsId( "idPromotion" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_promotion", nullable = false )
-    private mg.crustyz.entity.Promotion idPromotion;
+    private Promotion idPromotion;
 
     @Column( name = "quantity", nullable = false, precision = 15, scale = 2 )
     private BigDecimal quantity;

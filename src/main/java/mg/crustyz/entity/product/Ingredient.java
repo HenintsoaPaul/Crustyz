@@ -1,17 +1,14 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.product;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "ingredient" )
 public class Ingredient {
     @Id
-    @ColumnDefault( "nextval('ingredient_id_ingredient_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_ingredient", nullable = false )
     private Integer id;
 

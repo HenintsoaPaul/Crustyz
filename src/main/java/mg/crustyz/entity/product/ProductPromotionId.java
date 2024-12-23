@@ -1,16 +1,14 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.Hibernate;
 
 import java.io.Serial;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 @Embeddable
 public class ProductPromotionId implements java.io.Serializable {
     @Serial

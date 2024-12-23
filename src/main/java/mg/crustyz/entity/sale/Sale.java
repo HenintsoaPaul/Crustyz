@@ -1,23 +1,18 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.sale;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "sale" )
 public class Sale {
     @Id
-    @ColumnDefault( "nextval('sale_id_sale_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_sale", nullable = false )
     private Integer id;
 

@@ -1,19 +1,17 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.stock;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
+import mg.crustyz.entity.product.Ingredient;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table( name = "ingredient_stock" )
 public class IngredientStock {
     @Id
-    @ColumnDefault( "nextval('ingredient_stock_id_ingredient_stock_seq')" )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_ingredient_stock", nullable = false )
     private Integer id;
 
