@@ -28,6 +28,6 @@ public class MvtIngredientStock {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_mvt_stock_type", nullable = false )
-    private mg.crustyz.entity.MvtStockType idMvtStockType;
+    private MvtStockType idMvtStockType;
 
 }
