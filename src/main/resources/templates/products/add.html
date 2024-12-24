@@ -8,11 +8,42 @@
 </head>
 <body>
 <div class="container">
-    <h2>Save Unit</h2>
+    <h2>Save Product</h2>
 
-    <form th:action="@{/units/save}" th:object="${unit}" method="POST">
-        <input type="text" th:field="*{name}" placeholder="Unit Name"
-               class="form-control mb-4 col-4">
+    <form th:action="@{/products/save}" th:object="${product}" method="POST">
+        <input type="text" required
+               th:field="*{name}" placeholder="Product Name" class="form-control mb-4 col-4">
+        <input type="number" required min="0"
+               th:field="*{unitPrice}" placeholder="Unit Price" class="form-control mb-4 col-4">
+        <textarea type="text"
+                  th:field="*{description}" placeholder="Product Description"
+                  class="form-control mb-4 col-4"></textarea>
+
+        <div class="form-group">
+            <label for="unitsList" class="col-md-3 control-label">Units</label>
+            <div th:if="${unitsList != null and not #lists.isEmpty(unitsList)}" class="col-md-5">
+                <select required th:field="*{unit}" id="unitsList" class="form-control mb-4 col-4">
+                    <option th:each="unit:${unitsList}"
+                            th:value="${unit.getId()}" th:text="${unit.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${unitsList == null and #lists.isEmpty(unitsList)}">
+                <p>No unit found! <a th:href="@{/units/add}">Add Unit?</a></p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="categoriesList" class="col-md-3 control-label">Categories</label>
+            <div th:if="${categoriesList != null and not #lists.isEmpty(categoriesList)}" class="col-md-5">
+                <select required th:field="*{productCategory}" id="categoriesList" class="form-control mb-4 col-4">
+                    <option th:each="category:${categoriesList}"
+                            th:value="${category.getId()}" th:text="${category.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${categoriesList == null and #lists.isEmpty(categoriesList)}">
+                <p>No category found! <a th:href="@{/categories/add}">Add Category?</a></p>
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-info col-2">
             Submit Save
@@ -21,7 +52,7 @@
 
     <hr>
 
-    <a th:href="@{/units}"> Back to Unit List</a>
+    <a th:href="@{/products}"> Back to Product List</a>
 </div>
 </body>
 </html>

@@ -25,10 +25,10 @@ public class Product {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_unit", nullable = false )
-    private mg.crustyz.entity.Unit idUnit;
+    private mg.crustyz.entity.Unit unit;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product_category", nullable = false )
-    private ProductCategory idProductCategory;
+    private ProductCategory productCategory;
 
 }

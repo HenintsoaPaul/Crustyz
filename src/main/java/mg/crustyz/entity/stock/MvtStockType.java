@@ -1,4 +1,4 @@
-package mg.crustyz.entity;
+package mg.crustyz.entity.stock;
 
 import jakarta.persistence.*;
 import lombok.Data;
