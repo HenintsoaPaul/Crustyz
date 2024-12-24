@@ -47,4 +47,13 @@ public class ProductController {
         model.addAttribute( "categoriesList", productCategoryRepository.findAll() );
         return "products/update";
     }
+
+    @GetMapping( "/{id}" )
+    public String detail( Model model, @PathVariable Integer id )
+            throws Exception {
+        Product u = productRepository.findById( id )
+                .orElseThrow( () -> new Exception( "Product not found" ) );
+        model.addAttribute( "product", u );
+        return "products/detail";
+    }
 }

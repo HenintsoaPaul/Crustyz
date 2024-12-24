@@ -12,12 +12,13 @@
 
     <a th:href="@{/products/add}" class="btn btn-primary btn-sm mb-3">Add Product</a>
 
-    <div class="container my-2" align="center">
-        <form th:action="@{/products/search}" method="get" class="form-inline mb-3">
-            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-    </div>
+<!--ATAO JS-->
+<!--    <div class="container my-2" align="center">-->
+<!--        <form th:action="@{/products/search}" method="get" class="form-inline mb-3">-->
+<!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
+<!--            <button type="submit" class="btn btn-primary">Search</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
     <table style="width:80%"
            class="table table-striped table-responsive-md">
@@ -33,14 +34,17 @@
         </thead>
         <tbody>
         <tr th:each="product:${productsList}">
-            <td th:text="${product.getId()}"></td>
+            <td>
+                <a th:href="@{/products/{id}(id=${product.getId()})}"
+                   th:text="${product.getId()}"></a>
+            </td>
             <td th:text="${product.getName()}"></td>
             <td th:text="${product.getDescription()}"></td>
             <td th:text="${product.getUnitPrice()}"></td>
             <td th:text="${product.getUnit().getName()}"></td>
             <td th:text="${product.getProductCategory().getName()}"></td>
-
-            <td><a th:href="@{/products/update/{id}(id=${product.getId()})}"
+            <td>
+                <a th:href="@{/products/update/{id}(id=${product.getId()})}"
                    class="btn btn-primary">Update</a>
             </td>
         </tr>
