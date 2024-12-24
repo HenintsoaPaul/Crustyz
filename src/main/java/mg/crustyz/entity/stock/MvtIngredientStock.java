@@ -24,10 +24,10 @@ public class MvtIngredientStock {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient", nullable = false )
-    private Ingredient idIngredient;
+    private Ingredient ingredient;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_mvt_stock_type", nullable = false )
-    private MvtStockType idMvtStockType;
+    private MvtStockType mvtStockType;
 
 }

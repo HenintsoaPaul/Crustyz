@@ -2,7 +2,7 @@ package mg.crustyz.controller.stock;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.entity.stock.MvtStockType;
-import mg.crustyz.repository.MvtStockTypeRepository;
+import mg.crustyz.repository.stock.MvtStockTypeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
