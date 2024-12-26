@@ -8,10 +8,13 @@ Bakery App
 
 `mvn dependency:resolve`
 
-## Todo
+## Run project
 
-* Dockerfile
+### Setup database
 
-* Add db source
+* Create `crustyz` database.
+* Run `schema.sql`, then `trigger.sql`, then `data.sql` files.
 
-* Create entity
+### Run spring-boot
+
+* Run `mvn spring-boot:run`
