@@ -25,7 +25,7 @@ public class IngredientStockService {
                 .orElseThrow( () -> new Exception( "IngredientStock not found" ) );
     }
 
-    public List<MvtIngredientStock> findAllMvtById( int id ) {
-        return mvtIngredientStockRepository.getByIdIngredientStock( id );
+    public List<MvtIngredientStock> findAllMvtByIdIngredient( int id ) {
+        return mvtIngredientStockRepository.getByIdIngredient( id );
     }
 }

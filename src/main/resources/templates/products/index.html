@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="</head>ISO-8859-1">
-    <title>Employee</title>
+    <title>Crustyz</title>
     <link rel="stylesheet"
           th:href="@{/css/bootstrap.css}">
 </head>
@@ -33,18 +33,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product:${productsList}">
+        <tr th:each="elmt:${productsList}">
             <td>
-                <a th:href="@{/products/{id}(id=${product.getId()})}"
-                   th:text="${product.getId()}"></a>
+                <a th:href="@{/products/{id}(id=${elmt.getId()})}"
+                   th:text="${elmt.getId()}"></a>
             </td>
-            <td th:text="${product.getName()}"></td>
-            <td th:text="${product.getDescription()}"></td>
-            <td th:text="${product.getUnitPrice()}"></td>
-            <td th:text="${product.getUnit().getName()}"></td>
-            <td th:text="${product.getProductCategory().getName()}"></td>
+            <td th:text="${elmt.getName()}"></td>
+            <td th:text="${elmt.getDescription()}"></td>
+            <td th:text="${elmt.getUnitPrice()}"></td>
+            <td th:text="${elmt.getUnit().getName()}"></td>
+            <td th:text="${elmt.getProductCategory().getName()}"></td>
             <td>
-                <a th:href="@{/products/update/{id}(id=${product.getId()})}"
+                <a th:href="@{/products/update/{id}(id=${elmt.getId()})}"
                    class="btn btn-primary">Update</a>
             </td>
         </tr>

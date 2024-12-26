@@ -29,6 +29,6 @@ public class ProductStockController {
 
         model.addAttribute( "stock", productStock );
         model.addAttribute( "mvtList", productStockService.findAllMvtByIdProduct( idProduct ) );
-        return "stocks/ingredients/mvt";
+        return "stocks/products/mvt";
     }
 }

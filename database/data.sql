@@ -12,6 +12,12 @@ VALUES ('Farine', 1),
        ('Levure', 2),
        ('Oeuf', 3);
 
+INSERT INTO mvt_ingredient_stock (daty, quantity, id_ingredient, id_mvt_stock_type)
+VALUES ('02/02/2024', 5, 1, 2),
+       ('02/02/2024', 15, 1, 2),
+       ('02/02/2024', 5, 2, 2),
+       ('02/02/2024', 25, 2, 2);
+
 INSERT INTO provider (name)
 VALUES ('Farine_ko'),
        ('Atody_ko');
@@ -28,6 +34,12 @@ VALUES ('Viennoiserie'),
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
 VALUES ('Pain raisin', 1500, 3, 1),
        ('Gateau au chocolat', 750, 3, 2);
+
+INSERT INTO mvt_product_stock (daty, quantity, id_product, id_mvt_stock_type)
+VALUES ('02/02/2024', 5, 1, 2),
+       ('02/02/2024', 15, 1, 2),
+       ('02/02/2024', 5, 2, 2),
+       ('02/02/2024', 25, 2, 2);
 
 INSERT INTO employee_type (name)
 VALUES ('Cuisinier'),

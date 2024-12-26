@@ -11,5 +11,5 @@ public interface MvtIngredientStockRepository extends JpaRepository<MvtIngredien
     @Query( "SELECT mvt " +
             "FROM MvtIngredientStock mvt " +
             "WHERE mvt.ingredient.id = :id" )
-    List<MvtIngredientStock> getByIdIngredientStock( @Param( "id" ) int id );
+    List<MvtIngredientStock> getByIdIngredient( @Param( "id" ) int id );
 }

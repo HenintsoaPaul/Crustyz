@@ -13,8 +13,8 @@
     </h3>
     <div>
         <p>
-            <b>Ingredient: </b>
-            <span th:text="${stock.ingredient.getName()}"></span>
+            <b>Product: </b>
+            <span th:text="${stock.product.getName()}"></span>
         </p>
         <p>
             <b>Quantite: </b>
@@ -32,7 +32,7 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Ingredient</th>
+            <th>Product</th>
             <th>Date</th>
             <th>Quantity</th>
             <th>Type</th>
@@ -41,7 +41,7 @@
         <tbody>
         <tr th:each="elmt:${mvtList}">
             <td th:text="${elmt.getId()}"></td>
-            <td th:text="${elmt.getIngredient().getName()}"></td>
+            <td th:text="${elmt.getProduct().getName()}"></td>
             <td th:text="${elmt.getDaty()}"></td>
             <td th:text="${elmt.getQuantity()}"></td>
             <td th:text="${elmt.getMvtStockType().getName()}"></td>
