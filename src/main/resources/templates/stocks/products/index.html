@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <!--    <div class="container my-2" align="center">-->
+    <!--        <form th:action="@{/stocks/products/search}" method="get" class="form-inline mb-3">-->
+    <!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
+    <!--            <button type="submit" class="btn btn-primary">Search</button>-->
+    <!--        </form>-->
+    <!--    </div>-->
+
+    <h2>Products Stock</h2>
+
+    <table style="width:80%"
+           class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Product</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="elmt:${productStocksList}">
+            <td>
+                <a th:href="@{/stocks/products/{id}(id=${elmt.getId()})}"
+                   th:text="${elmt.getId()}"></a>
+            </td>
+            <td th:text="${elmt.getProduct().getName()}"></td>
+            <td th:text="${elmt.getQuantity()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

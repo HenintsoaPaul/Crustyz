@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Update MvtStock</h2>
+
+    <form th:action="@{/stocks/mvtStockTypes/save}" th:object="${mvtStockType}" method="POST">
+        <input type="hidden" th:field="*{id}" placeholder="MvtStock Name"
+               class="form-control mb-4 col-4">
+        <input type="text" th:field="*{name}" placeholder="MvtStock Name"
+               class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2">
+            Submit update
+        </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/stocks/mvtStockTypes}"> Back to MvtStock List</a>
+</div>
+</body>
+</html>

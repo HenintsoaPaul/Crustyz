@@ -6,7 +6,7 @@ Bakery App
 
 ## Install project
 
-`mvn depency:resolve`
+`mvn dependency:resolve`
 
 ## Todo
 
