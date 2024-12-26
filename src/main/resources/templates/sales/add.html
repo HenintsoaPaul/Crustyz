@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/henin/ajout-input-fille.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Save Sale</h2>
+    <form th:action="@{/sales/save}" th:object="${saleDTO}" method="POST" id="saleForm">
+        <input type="date" required
+               th:field="*{sale.daty}" class="form-control mb-4 col-4">
+
+        <input type="text"
+               th:field="*{sale.customerName}"
+               value="Anonymous" class="form-control mb-4 col-4">
+
+        <!-- Sale details (this is the container where the dynamic details will be added) -->
+        <div id="filles_container">
+            <div th:each="elmt, iterator :${saleDTO.saleDetails}"
+                 th:id="'detail-' + iterator.index" class="sale-detail">
+                <div>
+                    <label th:for="'qte-' + iterator.index"
+                           class="col-md-3 control-label">Quantité</label>
+                    <input th:id="'qte-' + iterator.index"
+                           th:field="*{saleDetails[__${iterator.index}__].quantity}"
+                           class="form-control mb-4 col-4" type="number" min="0">
+                </div>
+                <div class="form-group">
+                    <label th:for="'productsList-' + iterator.index"
+                           class="col-md-3 control-label">Produit</label>
+                    <select th:id="'productsList-' + iterator.index"
+                            th:field="*{saleDetails[__${iterator.index}__].product}"
+                            class="form-control mb-4 col-4"
+                            required>
+                        <option th:each="product:${productsList}"
+                                th:value="${product.getId()}"
+                                th:text="${product.getName()}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Button to add a new sale detail -->
+<button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Détail</button>
+
+<button type="submit" class="btn btn-info col-2">Submit</button>
+</form>
+<hr>
+<a th:href="@{/sales}"> Back to Sale List</a>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const containerName = 'filles_container';
+        const childrenClass = '.fille_detail';
+
+        document.getElementById('addFilleBtn').addEventListener('click', function () {
+            ajouterInputFille(containerName, childrenClass);
+        });
+    });
+</script>
+</html>
