@@ -15,12 +15,12 @@ public class ProductPromotion {
     @MapsId( "idProduct" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )
-    private Product idProduct;
+    private Product product;
 
     @MapsId( "idPromotion" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_promotion", nullable = false )
-    private Promotion idPromotion;
+    private Promotion promotion;
 
     @Column( name = "quantity", nullable = false, precision = 15, scale = 2 )
     private BigDecimal quantity;

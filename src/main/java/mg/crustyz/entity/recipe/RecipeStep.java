@@ -30,14 +30,14 @@ public class RecipeStep {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_baker", nullable = false )
-    private Employee idBaker;
+    private Employee baker;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient", nullable = false )
-    private Ingredient idIngredient;
+    private Ingredient ingredient;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_recipe", nullable = false )
-    private Recipe idRecipe;
+    private Recipe recipe;
 
 }

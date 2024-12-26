@@ -20,6 +20,6 @@ public class ProductStock {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )
-    private Product idProduct;
+    private Product product;
 
 }

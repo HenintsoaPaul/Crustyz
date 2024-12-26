@@ -17,6 +17,6 @@ public class Ingredient {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_unit", nullable = false )
-    private mg.crustyz.entity.Unit idUnit;
+    private mg.crustyz.entity.Unit unit;
 
 }
