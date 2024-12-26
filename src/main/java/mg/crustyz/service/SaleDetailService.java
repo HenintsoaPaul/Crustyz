@@ -7,6 +7,8 @@ import mg.crustyz.entity.sale.SaleDetail;
 import mg.crustyz.repository.sale.SaleDetailRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SaleDetailService {
@@ -23,5 +25,9 @@ public class SaleDetailService {
         productStockService.saveMvtStock( saleDetail );
 
         return saleDetailRepository.save( saleDetail );
+    }
+
+    public List<SaleDetail> findAllBySale( Sale sale ) {
+        return saleDetailRepository.findAllBySale( sale );
     }
 }

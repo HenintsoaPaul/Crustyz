@@ -2,6 +2,7 @@ package mg.crustyz.controller.sale;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.SaleDTO;
+import mg.crustyz.entity.sale.Sale;
 import mg.crustyz.service.ProductStockService;
 import mg.crustyz.service.SaleService;
 import org.springframework.stereotype.Controller;
@@ -35,12 +36,11 @@ public class SaleController {
         return "redirect:/sales";
     }
 
-//    @GetMapping( "/{id}" )
-//    public String detail( Model model, @PathVariable Integer id )
-//            throws Exception {
-//        Sale u = saleRepository.findById( id )
-//                .orElseThrow( () -> new Exception( "Sale not found" ) );
-//        model.addAttribute( "sale", u );
-//        return "sales/detail";
-//    }
+    @GetMapping( "/{id}" )
+    public String detail( Model model, @PathVariable Integer id ) {
+        Sale sale = saleService.findById( id );
+        model.addAttribute( "sale", sale );
+        model.addAttribute( "saleDetailsList", saleService.findAllDetails( sale ) );
+        return "sales/detail";
+    }
 }

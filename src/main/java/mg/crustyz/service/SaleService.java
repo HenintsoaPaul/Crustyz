@@ -25,11 +25,20 @@ public class SaleService {
             throws Exception {
         Sale s = saleRepository.save( saleDTO.getSale() );
         double totalPrice = 0;
-        for ( SaleDetail sd: saleDTO.getSaleDetails() ) {
+        for ( SaleDetail sd : saleDTO.getSaleDetails() ) {
             saleDetailService.save( s, sd );
             totalPrice += sd.getPrice();
         }
         s.setTotalPrice( totalPrice );
         saleRepository.save( s );
+    }
+
+    public Sale findById( Integer id ) {
+        return saleRepository.findById( id )
+                .orElseThrow( () -> new RuntimeException( "Sale not found" ) );
+    }
+
+    public List<SaleDetail> findAllDetails( Sale sale ) {
+        return saleDetailService.findAllBySale( sale );
     }
 }

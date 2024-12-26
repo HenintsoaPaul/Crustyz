@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <div>
+        <h2>Vente</h2>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Prix total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${sale.getId()}"></td>
+                <td th:text="${sale.getDaty()}"></td>
+                <td th:text="${sale.getCustomerName()}"></td>
+                <td th:text="${sale.getTotalPrice()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>Details de vente</h2>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Produit</th>
+                <th>PU</th>
+                <th>Quantite</th>
+                <th>Prix total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="elmt:${saleDetailsList}">
+                <td th:text="${elmt.getId()}"></td>
+                <td th:text="${elmt.getProduct().getName()}"></td>
+                <td th:text="${elmt.getProduct().getUnitPrice()}"></td>
+                <td th:text="${elmt.getQuantity()}"></td>
+                <td th:text="${elmt.getPrice()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
