@@ -16,7 +16,7 @@
 
         <input type="text"
                th:field="*{sale.customerName}"
-               value="Anonymous" class="form-control mb-4 col-4">
+               placeholder="Anonymous" class="form-control mb-4 col-4">
 
         <!-- Sale details (this is the container where the dynamic details will be added) -->
         <div id="filles_container">
@@ -43,16 +43,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Button to add a new sale detail -->
+        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Détail Vente</button>
+
+        <button type="submit" class="btn btn-info col-2">Submit</button>
     </form>
-</div>
-
-<!-- Button to add a new sale detail -->
-<button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Détail</button>
-
-<button type="submit" class="btn btn-info col-2">Submit</button>
-</form>
-<hr>
-<a th:href="@{/sales}"> Back to Sale List</a>
+    <hr>
+    <a th:href="@{/sales}"> Back to Sale List</a>
 </div>
 </body>
 <script>
