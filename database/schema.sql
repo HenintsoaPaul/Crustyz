@@ -55,6 +55,7 @@ CREATE TABLE unit
 (
     id_unit SERIAL,
     name    VARCHAR(50) NOT NULL,
+    symbol VARCHAR(5) NOT NULL,
     PRIMARY KEY (id_unit),
     UNIQUE (name)
 );
