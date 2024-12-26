@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.SaleDTO;
 import mg.crustyz.entity.sale.Sale;
 import mg.crustyz.entity.sale.SaleDetail;
-import mg.crustyz.repository.sale.SaleDetailRepository;
 import mg.crustyz.repository.sale.SaleRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,27 +14,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SaleService {
     private final SaleRepository saleRepository;
-    private final SaleDetailRepository saleDetailRepository;
+    private final SaleDetailService saleDetailService;
 
     public List<Sale> findAll() {
         return saleRepository.findAll();
     }
 
     @Transactional
-    public void save( SaleDTO saleDTO ) {
+    public void save( SaleDTO saleDTO )
+            throws Exception {
         Sale s = saleRepository.save( saleDTO.getSale() );
-        double totalPrice = 0; // Mbola mila calcul
-        double price = 0;
-
+        double totalPrice = 0;
         for ( SaleDetail sd: saleDTO.getSaleDetails() ) {
-            price += sd.getProduct().getUnitPrice() * sd.getQuantity();
-            totalPrice += price;
-
-            sd.setSale( s );
-            sd.setPrice( price );
-            saleDetailRepository.save( sd );
+            saleDetailService.save( s, sd );
+            totalPrice += sd.getPrice();
         }
-
         s.setTotalPrice( totalPrice );
         saleRepository.save( s );
     }

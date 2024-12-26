@@ -16,12 +16,12 @@
 
         <input type="text"
                th:field="*{sale.customerName}"
-               placeholder="Anonymous" class="form-control mb-4 col-4">
+               value="Anonymous" class="form-control mb-4 col-4">
 
         <!-- Sale details (this is the container where the dynamic details will be added) -->
         <div id="filles_container">
             <div th:each="elmt, iterator :${saleDTO.saleDetails}"
-                 th:id="'detail-' + iterator.index" class="sale-detail">
+                 th:id="'detail-' + iterator.index" class="fille_detail">
                 <div>
                     <label th:for="'qte-' + iterator.index"
                            class="col-md-3 control-label">Quantité</label>
@@ -36,9 +36,11 @@
                             th:field="*{saleDetails[__${iterator.index}__].product}"
                             class="form-control mb-4 col-4"
                             required>
-                        <option th:each="product:${productsList}"
-                                th:value="${product.getId()}"
-                                th:text="${product.getName()}"></option>
+                        <option th:each="elmt:${productStocksList}"
+                                th:value="${elmt.getProduct().getId()}"
+                                th:text="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}"
+                                th:title="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}">
+                        </option>
                     </select>
                 </div>
             </div>
