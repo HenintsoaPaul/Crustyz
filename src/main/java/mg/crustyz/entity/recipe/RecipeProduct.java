@@ -16,12 +16,12 @@ public class RecipeProduct {
     @MapsId( "idProduct" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )
-    private Product idProduct;
+    private Product product;
 
     @MapsId( "idRecipe" )
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_recipe", nullable = false )
-    private Recipe idRecipe;
+    private Recipe recipe;
 
     @Column( name = "quantity_produced", nullable = false, precision = 15, scale = 2 )
     private BigDecimal quantityProduced;

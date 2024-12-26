@@ -20,10 +20,10 @@ public class IngredientProvider {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient", nullable = false )
-    private Ingredient idIngredient;
+    private Ingredient ingredient;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_provider", nullable = false )
-    private Provider idProvider;
+    private Provider provider;
 
 }

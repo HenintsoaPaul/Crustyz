@@ -17,4 +17,7 @@ public class Unit {
     @Column( name = "name", nullable = false, length = 50 )
     private String name;
 
+    @Column( name = "symbol", nullable = false, length = 50 )
+    private String symbol;
+
 }

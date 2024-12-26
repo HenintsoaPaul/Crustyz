@@ -22,6 +22,6 @@ public class Supply {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_provider", nullable = false )
-    private Provider idProvider;
+    private Provider provider;
 
 }

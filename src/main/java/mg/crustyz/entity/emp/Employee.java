@@ -32,6 +32,6 @@ public class Employee {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_employee_type", nullable = false )
-    private EmployeeType idEmployeeType;
+    private EmployeeType employeeType;
 
 }
