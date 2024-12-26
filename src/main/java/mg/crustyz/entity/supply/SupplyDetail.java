@@ -22,10 +22,10 @@ public class SupplyDetail {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient_provider", nullable = false )
-    private IngredientProvider idIngredientProvider;
+    private IngredientProvider ingredientProvider;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_supply", nullable = false )
-    private Supply idSupply;
+    private Supply supply;
 
 }
