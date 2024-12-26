@@ -20,6 +20,6 @@ public class IngredientStock {
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient", nullable = false )
-    private Ingredient idIngredient;
+    private Ingredient ingredient;
 
 }
