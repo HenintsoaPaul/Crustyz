@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.math.BigDecimal;
-import java.time.Instant;
+
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -17,10 +17,10 @@ public class Sale {
     private Integer id;
 
     @Column( name = "daty", nullable = false )
-    private Instant daty;
+    private LocalDate daty;
 
-    @Column( name = "total_price", nullable = false, precision = 15, scale = 2 )
-    private BigDecimal totalPrice;
+    @Column( name = "total_price", nullable = false )
+    private double totalPrice;
 
     @ColumnDefault( "'anonymous'" )
     @Column( name = "customer_name", length = 50 )

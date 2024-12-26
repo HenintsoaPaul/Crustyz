@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import mg.crustyz.entity.product.Product;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Entity
@@ -15,8 +15,8 @@ public class ProductStock {
     @Column( name = "id_stock_product", nullable = false )
     private Integer id;
 
-    @Column( name = "quantity", nullable = false, precision = 15, scale = 2 )
-    private BigDecimal quantity;
+    @Column( name = "quantity", nullable = false )
+    private double quantity;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import mg.crustyz.entity.product.Product;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Entity
@@ -23,7 +23,7 @@ public class RecipeProduct {
     @JoinColumn( name = "id_recipe", nullable = false )
     private Recipe recipe;
 
-    @Column( name = "quantity_produced", nullable = false, precision = 15, scale = 2 )
-    private BigDecimal quantityProduced;
+    @Column( name = "quantity_produced", nullable = false )
+    private double quantityProduced;
 
 }
