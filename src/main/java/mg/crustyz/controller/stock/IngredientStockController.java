@@ -1,6 +1,7 @@
 package mg.crustyz.controller.stock;
 
 import lombok.RequiredArgsConstructor;
+import mg.crustyz.entity.stock.IngredientStock;
 import mg.crustyz.service.IngredientStockService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +22,11 @@ public class IngredientStockController {
     @GetMapping( "/{id}" )
     public String detail( Model model, @PathVariable Integer id )
             throws Exception {
-        model.addAttribute( "stock", ingredientStockService.findById( id ) );
-        model.addAttribute( "mvtList", ingredientStockService.findAllMvtById( id ) );
+        IngredientStock ingredientStock = ingredientStockService.findById( id );
+        int idIngredient = ingredientStock.getIngredient().getId();
+
+        model.addAttribute( "stock", ingredientStock );
+        model.addAttribute( "mvtList", ingredientStockService.findAllMvtByIdIngredient( idIngredient ) );
         return "stocks/ingredients/mvt";
     }
 }
