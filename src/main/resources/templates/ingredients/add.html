@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Save ingredient</h2>
+
+    <form th:action="@{/ingredients/save}" th:object="${ingredient}" method="POST">
+        <input type="text" required
+               th:field="*{name}" placeholder="ingredient Name" class="form-control mb-4 col-4">
+
+        <div class="form-group">
+            <label for="unitsList" class="col-md-3 control-label">Units</label>
+            <div th:if="${unitsList != null and not #lists.isEmpty(unitsList)}" class="col-md-5">
+                <select required th:field="*{unit}" id="unitsList" class="form-control mb-4 col-4">
+                    <option th:each="unit:${unitsList}"
+                            th:value="${unit.getId()}" th:text="${unit.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${unitsList == null and #lists.isEmpty(unitsList)}">
+                <p>No unit found! <a th:href="@{/units/add}">Add Unit?</a></p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">
+            Submit Save
+        </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/ingredients}"> Back to ingredient List</a>
+</div>
+</body>
+</html>

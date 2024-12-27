@@ -5,7 +5,7 @@ import lombok.Data;
 import mg.crustyz.entity.emp.Employee;
 import mg.crustyz.entity.product.Ingredient;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Entity
@@ -25,12 +25,8 @@ public class RecipeStep {
     @Column( name = "description", length = Integer.MAX_VALUE )
     private String description;
 
-    @Column( name = "quantity_used", precision = 15, scale = 2 )
-    private BigDecimal quantityUsed;
-
-    @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_baker", nullable = false )
-    private Employee baker;
+    @Column( name = "quantity_used" )
+    private double quantityUsed;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient", nullable = false )

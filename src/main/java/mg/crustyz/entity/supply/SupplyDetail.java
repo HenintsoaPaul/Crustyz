@@ -3,7 +3,7 @@ package mg.crustyz.entity.supply;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Entity
@@ -14,11 +14,11 @@ public class SupplyDetail {
     @Column( name = "id_supply_detail", nullable = false )
     private Integer id;
 
-    @Column( name = "quantity", precision = 15, scale = 2 )
-    private BigDecimal quantity;
+    @Column( name = "quantity" )
+    private double quantity;
 
-    @Column( name = "price", precision = 15, scale = 2 )
-    private BigDecimal price;
+    @Column( name = "price" )
+    private double price;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient_provider", nullable = false )

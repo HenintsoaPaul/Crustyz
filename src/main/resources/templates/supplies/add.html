@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/henin/ajout-input-fille.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Save supply</h2>
+    <form th:action="@{/supplies/save}" th:object="${supplyDTO}" method="POST" id="supplyForm">
+        <div>
+            <div class="form-group">
+                <label for="daty" class="col-md-3 control-label">Date de livraison</label>
+                <input id="daty" type="date" required
+                       th:field="*{supply.daty}" class="form-control mb-4 col-4">
+            </div>
+        </div>
+
+        <!-- supply details (this is the container where the dynamic details will be added) -->
+        <div id="filles_container">
+            <div th:each="elmt, iterator :${supplyDTO.supplyDetails}"
+                 th:id="'detail-' + iterator.index" class="fille_detail">
+                <div>
+                    <label th:for="'qte-' + iterator.index"
+                           class="col-md-3 control-label">Quantité</label>
+                    <input th:id="'qte-' + iterator.index"
+                           th:field="*{supplyDetails[__${iterator.index}__].quantity}"
+                           class="form-control mb-4 col-4" type="number" min="0">
+                </div>
+                <div class="form-group">
+                    <label th:for="'ingredientProvidersList-' + iterator.index"
+                           class="col-md-3 control-label">Ingredient</label>
+                    <select th:id="'ingredientProvidersList-' + iterator.index"
+                            th:field="*{supplyDetails[__${iterator.index}__].ingredientProvider}"
+                            class="form-control mb-4 col-4"
+                            required>
+                        <option th:each="elmt:${ingredientProvidersList}"
+                                th:value="${elmt.getId()}"
+                                th:text="${elmt.getIngredient().getName()}  + '--' + ${elmt.getProvider().getName()} + '--' + ${elmt.getUnitPrice()}"
+                                th:title="${elmt.getIngredient().getName()}  + '--' + ${elmt.getProvider().getName()} + '--' + ${elmt.getUnitPrice()}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button to add a new supply detail -->
+        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Détail</button>
+
+        <button type="submit" class="btn btn-info col-2">Submit</button>
+    </form>
+    <hr>
+    <a th:href="@{/supplies}"> Back to supply List</a>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const containerName = 'filles_container';
+        const childrenClass = '.fille_detail';
+
+        document.getElementById('addFilleBtn').addEventListener('click', function () {
+            ajouterInputFille(containerName, childrenClass);
+        });
+    });
+</script>
+</html>

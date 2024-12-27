@@ -1,10 +1,18 @@
 CREATE TABLE sale
 (
     id_sale       SERIAL,
-    daty          TIMESTAMP      NOT NULL,
+    daty          DATE           NOT NULL,
     total_price   NUMERIC(15, 2) NOT NULL,
     customer_name VARCHAR(50) default 'anonymous',
     PRIMARY KEY (id_sale)
+);
+
+CREATE TABLE supply
+(
+    id_supply   SERIAL,
+    daty        DATE           NOT NULL,
+    total_price NUMERIC(15, 2) NOT NULL,
+    PRIMARY KEY (id_supply)
 );
 
 CREATE TABLE provider
@@ -45,9 +53,9 @@ CREATE TABLE product_category
 
 CREATE TABLE promotion
 (
-    id_promotion  SERIAL,
-    beginning_daty TIMESTAMP NOT NULL,
-    ending_daty   TIMESTAMP NOT NULL,
+    id_promotion   SERIAL,
+    beginning_daty DATE NOT NULL,
+    ending_daty    DATE NOT NULL,
     PRIMARY KEY (id_promotion)
 );
 
@@ -55,19 +63,9 @@ CREATE TABLE unit
 (
     id_unit SERIAL,
     name    VARCHAR(50) NOT NULL,
-    symbol VARCHAR(5) NOT NULL,
+    symbol  VARCHAR(5)  NOT NULL,
     PRIMARY KEY (id_unit),
     UNIQUE (name)
-);
-
-CREATE TABLE supply
-(
-    id_supply   SERIAL,
-    daty        VARCHAR(50),
-    total_price NUMERIC(15, 2) NOT NULL,
-    id_provider INTEGER        NOT NULL,
-    PRIMARY KEY (id_supply),
-    FOREIGN KEY (id_provider) REFERENCES provider (id_provider)
 );
 
 CREATE TABLE ingredient
@@ -156,11 +154,9 @@ CREATE TABLE recipe_step
     no_step        INTEGER,
     description    TEXT,
     quantity_used  NUMERIC(15, 2),
-    id_baker       INTEGER     NOT NULL,
     id_ingredient  INTEGER     NOT NULL,
     id_recipe      INTEGER     NOT NULL,
     PRIMARY KEY (id_recipe_step),
-    FOREIGN KEY (id_baker) REFERENCES employee (id_employee),
     FOREIGN KEY (id_ingredient) REFERENCES ingredient (id_ingredient),
     FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe)
 );

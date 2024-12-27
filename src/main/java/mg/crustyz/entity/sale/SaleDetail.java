@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import mg.crustyz.entity.product.Product;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Entity
@@ -15,11 +15,11 @@ public class SaleDetail {
     @Column( name = "id_sale_detail", nullable = false )
     private Integer id;
 
-    @Column( name = "quantity", precision = 15, scale = 2 )
-    private BigDecimal quantity;
+    @Column( name = "quantity" )
+    private double quantity;
 
-    @Column( name = "price", precision = 15, scale = 2 )
-    private BigDecimal price;
+    @Column( name = "price" )
+    private double price;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_product", nullable = false )

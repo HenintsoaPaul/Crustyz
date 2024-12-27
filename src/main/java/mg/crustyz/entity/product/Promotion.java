@@ -3,7 +3,7 @@ package mg.crustyz.entity.product;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -15,9 +15,9 @@ public class Promotion {
     private Integer id;
 
     @Column( name = "beginning_daty", nullable = false )
-    private Instant beginningDaty;
+    private LocalDate beginningDaty;
 
     @Column( name = "ending_daty", nullable = false )
-    private Instant endingDaty;
+    private LocalDate endingDaty;
 
 }

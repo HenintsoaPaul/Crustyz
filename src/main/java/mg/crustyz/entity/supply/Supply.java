@@ -3,7 +3,8 @@ package mg.crustyz.entity.supply;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
+
 
 @Data
 @Entity
@@ -15,13 +16,9 @@ public class Supply {
     private Integer id;
 
     @Column( name = "daty", length = 50 )
-    private String daty;
+    private LocalDate daty;
 
-    @Column( name = "total_price", nullable = false, precision = 15, scale = 2 )
-    private BigDecimal totalPrice;
-
-    @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_provider", nullable = false )
-    private Provider provider;
+    @Column( name = "total_price", nullable = false )
+    private double totalPrice;
 
 }
