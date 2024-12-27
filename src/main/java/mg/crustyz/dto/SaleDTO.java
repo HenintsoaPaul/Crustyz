@@ -11,10 +11,5 @@ import java.util.List;
 @Data
 public class SaleDTO {
     private Sale sale;
-    private List<SaleDetail> saleDetails;
-
-    public SaleDTO() {
-        this.saleDetails = new ArrayList<>();
-        this.saleDetails.add(new SaleDetail());
-    }
+    private List<SaleDetail> saleDetails = new ArrayList<>();
 }
