@@ -3,7 +3,7 @@ package mg.crustyz.entity.emp;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 
 @Data
@@ -27,8 +27,8 @@ public class Employee {
     @Column( name = "hire_date", nullable = false )
     private LocalDate hireDate;
 
-    @Column( name = "salary", nullable = false, precision = 15, scale = 2 )
-    private BigDecimal salary;
+    @Column( name = "salary", nullable = false )
+    private double salary;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_employee_type", nullable = false )

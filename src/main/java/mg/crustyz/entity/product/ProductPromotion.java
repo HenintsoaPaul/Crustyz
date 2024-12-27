@@ -3,7 +3,7 @@ package mg.crustyz.entity.product;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Entity
@@ -22,10 +22,10 @@ public class ProductPromotion {
     @JoinColumn( name = "id_promotion", nullable = false )
     private Promotion promotion;
 
-    @Column( name = "quantity", nullable = false, precision = 15, scale = 2 )
-    private BigDecimal quantity;
+    @Column( name = "quantity", nullable = false )
+    private double quantity;
 
-    @Column( name = "percent_off", precision = 2, scale = 2 )
-    private BigDecimal percentOff;
+    @Column( name = "percent_off" )
+    private double percentOff;
 
 }
