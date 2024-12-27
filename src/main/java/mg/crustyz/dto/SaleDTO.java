@@ -12,4 +12,8 @@ import java.util.List;
 public class SaleDTO {
     private Sale sale;
     private List<SaleDetail> saleDetails = new ArrayList<>();
+
+    public SaleDTO() {
+        this.saleDetails.add( new SaleDetail() );
+    }
 }

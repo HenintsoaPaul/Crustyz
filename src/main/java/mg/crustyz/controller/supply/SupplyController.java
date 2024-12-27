@@ -3,7 +3,7 @@ package mg.crustyz.controller.supply;
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.SupplyDTO;
 import mg.crustyz.entity.supply.Supply;
-import mg.crustyz.service.IngredientStockService;
+import mg.crustyz.repository.supply.IngredientProviderRepository;
 import mg.crustyz.service.SupplyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping( "/supplies" )
 public class SupplyController {
     private final SupplyService supplyService;
-    private final IngredientStockService ingredientStockService;
+    private final IngredientProviderRepository ingredientProviderRepository;
 
     @GetMapping
     public String getAll( Model model ) {
@@ -24,8 +24,8 @@ public class SupplyController {
 
     @GetMapping( "/add" )
     public String gotoSave( Model model ) {
-        model.addAttribute( "ingredientStocksList", ingredientStockService.findAll() );
         model.addAttribute( "supplyDTO", new SupplyDTO() );
+        model.addAttribute( "ingredientProvidersList", ingredientProviderRepository.findAll() );
         return "supplies/add";
     }
 
