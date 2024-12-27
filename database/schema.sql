@@ -63,7 +63,7 @@ CREATE TABLE unit
 CREATE TABLE supply
 (
     id_supply   SERIAL,
-    daty        VARCHAR(50),
+    daty        DATE           NOT NULL,
     total_price NUMERIC(15, 2) NOT NULL,
     id_provider INTEGER        NOT NULL,
     PRIMARY KEY (id_supply),

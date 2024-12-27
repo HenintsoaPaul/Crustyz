@@ -3,6 +3,7 @@ package mg.crustyz.entity.supply;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 
 
 @Data
@@ -15,7 +16,7 @@ public class Supply {
     private Integer id;
 
     @Column( name = "daty", length = 50 )
-    private String daty;
+    private LocalDate daty;
 
     @Column( name = "total_price", nullable = false )
     private double totalPrice;
