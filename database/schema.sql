@@ -154,11 +154,9 @@ CREATE TABLE recipe_step
     no_step        INTEGER,
     description    TEXT,
     quantity_used  NUMERIC(15, 2),
-    id_baker       INTEGER     NOT NULL,
     id_ingredient  INTEGER     NOT NULL,
     id_recipe      INTEGER     NOT NULL,
     PRIMARY KEY (id_recipe_step),
-    FOREIGN KEY (id_baker) REFERENCES employee (id_employee),
     FOREIGN KEY (id_ingredient) REFERENCES ingredient (id_ingredient),
     FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe)
 );

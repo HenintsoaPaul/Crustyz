@@ -29,10 +29,6 @@ public class RecipeStep {
     private double quantityUsed;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_baker", nullable = false )
-    private Employee baker;
-
-    @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_ingredient", nullable = false )
     private Ingredient ingredient;
 

@@ -2,6 +2,7 @@ package mg.crustyz.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import mg.crustyz.CrustyzProperties;
 import mg.crustyz.entity.supply.SupplyDetail;
 import mg.crustyz.entity.stock.IngredientStock;
 import mg.crustyz.entity.stock.MvtIngredientStock;
@@ -19,6 +20,8 @@ public class IngredientStockService {
     private final IngredientStockRepository ingredientStockRepository;
     private final MvtIngredientStockRepository mvtIngredientStockRepository;
     private final MvtStockTypeRepository mvtStockTypeRepository;
+
+    private final CrustyzProperties properties;
 
     public List<IngredientStock> findAll() {
         return ingredientStockRepository.findAll();
@@ -42,7 +45,8 @@ public class IngredientStockService {
         mvt.setIngredient( supplyDetail.getIngredientProvider().getIngredient() );
         mvt.setDaty( supplyDetail.getSupply().getDaty() );
 
-        MvtStockType type = mvtStockTypeRepository.findById( 1 )
+        int idEntree = properties.getIdMvtEntree();
+        MvtStockType type = mvtStockTypeRepository.findById( idEntree )
                 .orElseThrow( () -> new Exception( "MvtStockType not found" ) );
         mvt.setMvtStockType( type );
 
