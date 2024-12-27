@@ -7,6 +7,14 @@ CREATE TABLE sale
     PRIMARY KEY (id_sale)
 );
 
+CREATE TABLE supply
+(
+    id_supply   SERIAL,
+    daty        DATE           NOT NULL,
+    total_price NUMERIC(15, 2) NOT NULL,
+    PRIMARY KEY (id_supply)
+);
+
 CREATE TABLE provider
 (
     id_provider SERIAL,
@@ -58,16 +66,6 @@ CREATE TABLE unit
     symbol  VARCHAR(5)  NOT NULL,
     PRIMARY KEY (id_unit),
     UNIQUE (name)
-);
-
-CREATE TABLE supply
-(
-    id_supply   SERIAL,
-    daty        DATE           NOT NULL,
-    total_price NUMERIC(15, 2) NOT NULL,
-    id_provider INTEGER        NOT NULL,
-    PRIMARY KEY (id_supply),
-    FOREIGN KEY (id_provider) REFERENCES provider (id_provider)
 );
 
 CREATE TABLE ingredient

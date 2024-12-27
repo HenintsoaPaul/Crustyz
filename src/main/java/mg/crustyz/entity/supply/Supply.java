@@ -21,8 +21,4 @@ public class Supply {
     @Column( name = "total_price", nullable = false )
     private double totalPrice;
 
-    @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_provider", nullable = false )
-    private Provider provider;
-
 }
