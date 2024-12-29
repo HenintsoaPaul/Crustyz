@@ -2,7 +2,6 @@ package mg.crustyz.entity.recipe;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import mg.crustyz.entity.emp.Employee;
 import mg.crustyz.entity.product.Ingredient;
 
 

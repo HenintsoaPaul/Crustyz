@@ -28,4 +28,12 @@ public class ProductPromotion {
     @Column( name = "percent_off" )
     private double percentOff;
 
+    public double getPu() {
+        return product.getUnitPrice();
+    }
+
+    public double getPrixApresRemise() {
+        double pu = getPu();
+        return  pu - ( pu * percentOff);
+    }
 }

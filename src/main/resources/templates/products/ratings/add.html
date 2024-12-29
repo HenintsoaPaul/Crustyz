@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Save rating</h2>
+    <form th:action="@{/products/ratings/save}" th:object="${rating}" method="POST" id="ratingForm">
+        <div class="form-group">
+            <label for="daty" class="col-md-3 control-label">Date</label>
+            <input id="daty" type="date" required
+                   th:field="*{daty}" class="form-control mb-4 col-4">
+        </div>
+        <div class="form-group">
+            <label for="author" class="col-md-3 control-label">Auteur</label>
+            <input id="author" type="text" placeholder="Anonymous"
+                   th:field="*{author}" class="form-control mb-4 col-4">
+        </div>
+        <div class="form-group">
+            <label for="coms" class="col-md-3 control-label">Commentaire</label>
+            <textarea id="coms" type="text"
+                   th:field="*{comment}" class="form-control mb-4 col-4">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="nb_star" class="col-md-3 control-label">Note</label>
+            <input id="nb_star" type="number" min="0" max="5" required
+                   th:field="*{nbStar}" class="form-control mb-4 col-4">
+        </div>
+        <div class="form-group">
+            <label for="productsList" class="col-md-3 control-label">Produits</label>
+            <div th:if="${productsList != null and not #lists.isEmpty(productsList)}" class="col-md-5">
+                <select required th:field="*{product}" id="productsList" class="form-control mb-4 col-4">
+                    <option th:each="product:${productsList}"
+                            th:value="${product.getId()}"
+                            th:text="${product.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${productsList == null and #lists.isEmpty(productsList)}">
+                <p>No product found! <a th:href="@{/products/add}">Add Produit?</a></p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">Submit</button>
+    </form>
+    <hr>
+    <a th:href="@{/products/ratings}"> Back to rating List</a>
+</div>
+</body>
+</html>

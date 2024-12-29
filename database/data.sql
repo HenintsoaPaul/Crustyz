@@ -16,7 +16,9 @@ INSERT INTO mvt_ingredient_stock (daty, quantity, id_ingredient, id_mvt_stock_ty
 VALUES ('02/02/2024', 5, 1, 2),
        ('02/02/2024', 15, 1, 2),
        ('02/02/2024', 5, 2, 2),
-       ('02/02/2024', 25, 2, 2);
+       ('02/02/2024', 7, 2, 2),
+       ('02/02/2024', 11, 3, 2),
+       ('02/02/2024', 25, 3, 2);
 
 INSERT INTO provider (name)
 VALUES ('Farine_ko'),

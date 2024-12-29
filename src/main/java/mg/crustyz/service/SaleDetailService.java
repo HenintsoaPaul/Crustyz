@@ -16,7 +16,7 @@ public class SaleDetailService {
     private final ProductStockService productStockService;
 
     @Transactional
-    public SaleDetail save( Sale mother, SaleDetail saleDetail )
+    public void save( Sale mother, SaleDetail saleDetail )
             throws Exception {
         double price = saleDetail.getProduct().getUnitPrice() * saleDetail.getQuantity();
         saleDetail.setPrice( price );
@@ -24,7 +24,7 @@ public class SaleDetailService {
         saleDetail.setSale( mother );
         productStockService.saveMvtStock( saleDetail );
 
-        return saleDetailRepository.save( saleDetail );
+        saleDetailRepository.save( saleDetail );
     }
 
     public List<SaleDetail> findAllBySale( Sale sale ) {

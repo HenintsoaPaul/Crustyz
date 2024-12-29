@@ -2,8 +2,8 @@ package mg.crustyz.controller.product;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.entity.product.Product;
-import mg.crustyz.repository.ProductCategoryRepository;
-import mg.crustyz.repository.ProductRepository;
+import mg.crustyz.repository.product.ProductCategoryRepository;
+import mg.crustyz.repository.product.ProductRepository;
 import mg.crustyz.repository.UnitRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
