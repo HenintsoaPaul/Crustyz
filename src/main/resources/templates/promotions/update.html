@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/henin/ajout-input-fille.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Save promotion</h2>
+    <form th:action="@{/promotions/save}" th:object="${promotionDTO}" method="POST" id="promotionForm">
+        <input type="hidden" th:field="*{promotion.id}">
+        <div>
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label">Nom recette</label>
+                <input id="name" type="text" required
+                       th:field="*{promotion.name}" class="form-control mb-4 col-4">
+            </div>
+            <div class="form-group">
+                <label for="desc" class="col-md-3 control-label">Description</label>
+                <textarea id="desc" type="text"
+                          th:field="*{promotion.description}" class="form-control mb-4 col-4">
+                </textarea>
+            </div>
+        </div>
+        <hr>
+        <div id="promotion_product">
+            <!-- promotion details (this is the container where the dynamic details will be added) -->
+            <div id="filles_container_produit">
+                <div th:each="elmt, iterator :${promotionDTO.promotionProducts}"
+                     th:id="'detail-' + iterator.index" class="fille_detail_produit">
+                    <div class="form-group">
+                        <label th:for="'qte-' + iterator.index"
+                               class="col-md-3 control-label">Quantité Produit</label>
+                        <input th:id="'qte-' + iterator.index"
+                               th:field="*{promotionProducts[__${iterator.index}__].quantityProduced}"
+                               class="form-control mb-4 col-4" type="number" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'productsList-' + iterator.index"
+                               class="col-md-3 control-label">Produit</label>
+                        <select th:id="'productsList-' + iterator.index"
+                                th:field="*{promotionProducts[__${iterator.index}__].product}"
+                                class="form-control mb-4 col-4"
+                                required>
+                            <option th:each="elmt:${productsList}"
+                                    th:value="${elmt.getId()}"
+                                    th:text="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}"
+                                    th:title="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Button to add a new promotion detail -->
+            <button type="button" class="btn btn-secondary col-2" id="addFilleBtn_produit">Ajouter Produits</button>
+        </div>
+        <hr>
+        <div id="promotion_step">
+            <!-- promotion details (this is the container where the dynamic details will be added) -->
+            <div id="filles_container_step">
+                <div th:each="elmt, iterator :${promotionDTO.promotionSteps}"
+                     th:id="'detail-' + iterator.index" class="fille_detail_step">
+                    <div class="form-group">
+                        <label th:for="'anarana-' + iterator.index"
+                               class="col-md-3 control-label">Nom de l'etape</label>
+                        <input th:id="'anarana-' + iterator.index"
+                               th:field="*{promotionSteps[__${iterator.index}__].name}"
+                               class="form-control mb-4 col-4" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'desc-' + iterator.index"
+                               class="col-md-3 control-label">Description</label>
+                        <textarea th:id="'desc-' + iterator.index"
+                                  th:field="*{promotionSteps[__${iterator.index}__].description}"
+                                  class="form-control mb-4 col-4">
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'qte-' + iterator.index"
+                               class="col-md-3 control-label">Quantité Necessaire</label>
+                        <input th:id="'qte-' + iterator.index"
+                               th:field="*{promotionSteps[__${iterator.index}__].quantityUsed}"
+                               class="form-control mb-4 col-4" type="number" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'ingredientsList-' + iterator.index"
+                               class="col-md-3 control-label">Ingredient</label>
+                        <select th:id="'ingredientsList-' + iterator.index"
+                                th:field="*{promotionSteps[__${iterator.index}__].ingredient}"
+                                class="form-control mb-4 col-4"
+                                required>
+                            <option th:each="elmt:${ingredientsList}"
+                                    th:value="${elmt.getId()}"
+                                    th:text="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}"
+                                    th:title="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Button to add a new promotion detail -->
+            <button type="button" class="btn btn-secondary col-2" id="addFilleBtn_step">Ajouter Une Etape</button>
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">Submit</button>
+    </form>
+    <hr>
+    <a th:href="@{/promotions}"> Back to promotion List</a>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const containerName = 'filles_container';
+        const childrenClass = '.fille_detail';
+        const btnId = 'addFilleBtn';
+
+        document.getElementById(`${btnId}_produit`).addEventListener('click', function () {
+            ajouterInputFille(`${containerName}_produit`, `${childrenClass}_produit`);
+        });
+
+        document.getElementById(`${btnId}_step`).addEventListener('click', function () {
+            ajouterInputFille(`${containerName}_step`, `${childrenClass}_step`);
+        });
+    });
+</script>
+</html>
