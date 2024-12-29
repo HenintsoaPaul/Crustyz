@@ -2,7 +2,6 @@ package mg.crustyz.service.recipe;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import mg.crustyz.CrustyzProperties;
 import mg.crustyz.dto.RecipeDTO;
 import mg.crustyz.entity.recipe.Recipe;
 import mg.crustyz.entity.recipe.RecipeProduct;
@@ -42,15 +41,5 @@ public class RecipeService {
         for ( RecipeProduct rp: recipeDTO.getRecipeProducts() ) {
             recipeProductService.save( recipe, rp );
         }
-    }
-
-    public RecipeDTO findDTOById( Integer id )
-            throws Exception {
-        Recipe recipe = this.findById( id );
-
-        RecipeDTO dto = new RecipeDTO();
-        dto.setRecipe( recipe );
-        dto.setRecipeSteps( recipeStepService.findAllByRecipe( recipe ) );
-        return dto;
     }
 }

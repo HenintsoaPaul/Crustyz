@@ -3,6 +3,7 @@ package mg.crustyz.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.CrustyzProperties;
+import mg.crustyz.entity.product.Product;
 import mg.crustyz.entity.sale.SaleDetail;
 import mg.crustyz.entity.stock.MvtStockType;
 import mg.crustyz.entity.stock.ProductStock;
@@ -51,5 +52,11 @@ public class ProductStockService {
         mvt.setMvtStockType( type );
 
         mvtProductStockRepository.save( mvt );
+    }
+
+    public ProductStock findByProduct( Product product )
+            throws Exception {
+        return this.productStockRepository.findByProduct( product )
+                .orElseThrow( () -> new Exception( "ProductStock not found" ) );
     }
 }

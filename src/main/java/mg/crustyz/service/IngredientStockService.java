@@ -3,6 +3,7 @@ package mg.crustyz.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.CrustyzProperties;
+import mg.crustyz.entity.product.Ingredient;
 import mg.crustyz.entity.supply.SupplyDetail;
 import mg.crustyz.entity.stock.IngredientStock;
 import mg.crustyz.entity.stock.MvtIngredientStock;
@@ -51,5 +52,11 @@ public class IngredientStockService {
         mvt.setMvtStockType( type );
 
         mvtIngredientStockRepository.save( mvt );
+    }
+
+    public IngredientStock findByIngredient( Ingredient ingredient )
+            throws Exception {
+        return this.ingredientStockRepository.findByIngredient( ingredient )
+                .orElseThrow( () -> new Exception( "IngredientStock not found" ) );
     }
 }

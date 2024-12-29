@@ -19,4 +19,8 @@ public class RecipeDTO {
         this.recipeSteps.add( new RecipeStep() );
         this.recipeProducts.add( new RecipeProduct() );
     }
+
+    public RecipeDTO( Recipe recipe ) {
+        this.recipe = recipe;
+    }
 }

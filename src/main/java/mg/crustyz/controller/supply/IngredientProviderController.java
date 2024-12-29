@@ -32,8 +32,7 @@ public class IngredientProviderController {
     }
 
     @PostMapping( "/save" )
-    public String save( @ModelAttribute( "ingredientProvider" ) IngredientProvider ingredientProvider )
-            throws Exception {
+    public String save( @ModelAttribute( "ingredientProvider" ) IngredientProvider ingredientProvider ) {
         ingredientProviderRepository.save( ingredientProvider );
         return "redirect:/providers/ingredients";
     }
