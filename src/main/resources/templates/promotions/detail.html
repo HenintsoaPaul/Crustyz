@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <div>
+        <h2>Promotion</h2>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date Debut</th>
+                <th>Date Fin</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${promotion.getId()}"></td>
+                <td th:text="${promotion.getBeginningDaty()}"></td>
+                <td th:text="${promotion.getEndingDaty()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>Details de la Promotion</h2>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantite Remis</th>
+                <th>Quantite Remis Restant</th>
+                <th>Remise (%)</th>
+                <th>Prix Unite</th>
+                <th>Prix Apres Remise</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="elmt:${productPromotions}">
+                <td th:text="${elmt.getProduct().getName()}"></td>
+                <td th:text="${elmt.getQuantity()}"></td>
+                <td>
+                    Mbola tss fonction
+                </td>
+                <td th:text="${elmt.getPercentOff()}"></td>
+                <td th:text="${elmt.getPu()}"></td>
+                <td th:text="${elmt.getPrixApresRemise()}"></td>
+                <td>
+                    <a th:href="@{/sales/add}">
+                        Acheter ce produit
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

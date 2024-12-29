@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.RecipeDTO;
 import mg.crustyz.entity.recipe.Recipe;
 import mg.crustyz.repository.IngredientRepository;
-import mg.crustyz.repository.ProductRepository;
+import mg.crustyz.repository.product.ProductRepository;
 import mg.crustyz.service.recipe.RecipeProductService;
 import mg.crustyz.service.recipe.RecipeService;
 import mg.crustyz.service.recipe.RecipeStepService;

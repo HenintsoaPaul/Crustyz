@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/henin/ajout-input-fille.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Save promotion</h2>
+    <form th:action="@{/promotions/save}" th:object="${promotionDTO}" method="POST" id="promotionForm">
+        <div>
+            <div class="form-group">
+                <label for="daty_bg" class="col-md-3 control-label">Date debut</label>
+                <input id="daty_bg" type="date" required
+                       th:field="*{promotion.beginningDaty}" class="form-control mb-4 col-4">
+            </div>
+            <div class="form-group">
+                <label for="daty_end" class="col-md-3 control-label">Date fin</label>
+                <input id="daty_end" type="date" required
+                       th:field="*{promotion.endingDaty}" class="form-control mb-4 col-4">
+            </div>
+        </div>
+        <hr>
+        <!-- promotion details (this is the container where the dynamic details will be added) -->
+        <div id="filles_container">
+            <div th:each="elmt, iterator :${promotionDTO.productPromotions}"
+                 th:id="'detail-' + iterator.index" class="fille_detail">
+                <div class="form-group">
+                    <label th:for="'qte-' + iterator.index"
+                           class="col-md-3 control-label">Quantité En reduction</label>
+                    <input th:id="'qte-' + iterator.index"
+                           th:field="*{productPromotions[__${iterator.index}__].quantity}"
+                           class="form-control mb-4 col-4" type="number" min="1">
+                </div>
+                <div class="form-group">
+                    <label th:for="'redux-' + iterator.index"
+                           class="col-md-3 control-label">Taux de reduction(%)</label>
+                    <input th:id="'redux-' + iterator.index"
+                           th:field="*{productPromotions[__${iterator.index}__].percentOff}"
+                           class="form-control mb-4 col-4" type="number" step="0.01" min="0.01" max="100">
+                </div>
+                <div class="form-group">
+                    <label th:for="'productsList-' + iterator.index"
+                           class="col-md-3 control-label">Produit</label>
+                    <select th:id="'productsList-' + iterator.index"
+                            th:field="*{productPromotions[__${iterator.index}__].product}"
+                            class="form-control mb-4 col-4"
+                            required>
+                        <option th:each="elmt:${productsList}"
+                                th:value="${elmt.getId()}"
+                                th:text="${elmt.getName()}"
+                                th:title="${elmt.getName()}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!-- Button to add a new promotion detail -->
+            <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Produits</button>
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">Submit</button>
+    </form>
+    <hr>
+    <a th:href="@{/promotions}"> Back to promotion List</a>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const containerName = 'filles_container';
+        const childrenClass = '.fille_detail';
+        const btnId = 'addFilleBtn';
+
+        document.getElementById(btnId).addEventListener('click', function () {
+            ajouterInputFille(containerName, childrenClass);
+        });
+    });
+</script>
+</html>

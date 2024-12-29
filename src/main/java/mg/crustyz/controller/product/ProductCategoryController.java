@@ -2,7 +2,7 @@ package mg.crustyz.controller.product;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.entity.product.ProductCategory;
-import mg.crustyz.repository.ProductCategoryRepository;
+import mg.crustyz.repository.product.ProductCategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
