@@ -43,20 +43,21 @@ public class RecipeController {
         return "redirect:/recipes";
     }
 
-//    @GetMapping( "/update/{id}" )
-//    public String gotoUpdate( Model model, @PathVariable Integer id )
-//            throws Exception {
-//        model.addAttribute( "recipeDTO", recipeService.findDTOById( id ) );
-//        model.addAttribute( "productsList", productRepository.findAll() );
-//        model.addAttribute( "ingredientsList", ingredientRepository.findAll() );
-//        return "recipes/update";
-//    }
+    @GetMapping( "/update/{id}" )
+    public String gotoUpdate( Model model, @PathVariable Integer id )
+            throws Exception {
+        model.addAttribute( "recipeDTO", recipeService.findDTOById( id ) );
+        model.addAttribute( "productsList", productRepository.findAll() );
+        model.addAttribute( "ingredientsList", ingredientRepository.findAll() );
+        return "recipes/update";
+    }
 
     @GetMapping( "/{id}" )
     public String detail( Model model, @PathVariable Integer id )
             throws Exception {
         Recipe recipe = recipeService.findById( id );
         model.addAttribute( "recipe", recipe );
+        model.addAttribute( "recipeSteps", recipeStepService.findAllByRecipe( recipe ) );
         model.addAttribute( "recipeStepDTOs", recipeStepService.findAllDTOByRecipe( recipe ) );
         model.addAttribute( "recipeProductDTOs", recipeProductService.findAllDTOByRecipe( recipe ) );
         return "recipes/detail";

@@ -29,6 +29,31 @@
         </table>
     </div>
     <hr>
+    <div>
+        <h3>Etapes de la recette</h3>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>No Etape</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Ingredient</th>
+                <th>Quantite Utilise</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="step:${recipeSteps}">
+                <td th:text="${step.getRecipeStep().getNoStep()}"></td>
+                <td th:text="${step.getRecipeStep().getName()}"></td>
+                <td th:text="${step.getRecipeStep().getDescription()}"></td>
+                <td th:text="${step.getRecipeStep().getIngredient().getName()}"></td>
+                <td th:text="${step.getRecipeStep().getQuantityUsed()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
     <h2>Details de Recette</h2>
     <div>
         <div>
@@ -61,14 +86,13 @@
         </div>
         <hr>
         <div>
-            <h4>Ingredients necessaires</h4>
+            <h4>Ingredients</h4>
             <table style="width:80%"
                    class="table table-striped table-responsive-md">
                 <thead>
                 <tr>
                     <th>Ingredient</th>
                     <th>Unite</th>
-
                     <th>Quantite En Stock</th>
                 </tr>
                 </thead>

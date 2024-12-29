@@ -42,4 +42,13 @@ public class RecipeService {
             recipeProductService.save( recipe, rp );
         }
     }
+
+    public RecipeDTO findDTOById( Integer id )
+            throws Exception {
+        Recipe recipe = this.findById( id );
+        RecipeDTO dto = new RecipeDTO( recipe );
+        dto.setRecipeSteps( recipeStepService.findAllByRecipe( recipe ) );
+        dto.setRecipeProducts( recipeProductService.findAllByRecipe( recipe ) );
+        return dto;
+    }
 }
