@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="</head>ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <h3>recipes List</h3>
+
+    <a th:href="@{/recipes/add}" class="btn btn-primary btn-sm mb-3">Add recipe</a>
+
+<!--ATAO JS-->
+<!--    <div class="container my-2" align="center">-->
+<!--        <form th:action="@{/recipes/search}" method="get" class="form-inline mb-3">-->
+<!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
+<!--            <button type="submit" class="btn btn-primary">Search</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+    <table style="width:80%"
+           class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="elmt:${recipesList}">
+            <td>
+                <a th:href="@{/recipes/{id}(id=${elmt.getId()})}"
+                   th:text="${elmt.getId()}"></a>
+            </td>
+            <td th:text="${elmt.getName()}"></td>
+            <td th:text="${elmt.getDescription()}"></td>
+            <td>
+                <a th:href="@{/recipes/update/{id}(id=${elmt.getId()})}"
+                   class="btn btn-primary">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

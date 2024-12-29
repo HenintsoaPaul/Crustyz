@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <div>
+        <h2>Recette</h2>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${recipe.getId()}"></td>
+                <td th:text="${recipe.getName()}"></td>
+                <td th:text="${recipe.getDescription()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h3>Etapes de la recette</h3>
+        <table style="width:80%"
+               class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>No Etape</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Ingredient</th>
+                <th>Quantite Utilise</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="step:${recipeSteps}">
+                <td th:text="${step.getRecipeStep().getNoStep()}"></td>
+                <td th:text="${step.getRecipeStep().getName()}"></td>
+                <td th:text="${step.getRecipeStep().getDescription()}"></td>
+                <td th:text="${step.getRecipeStep().getIngredient().getName()}"></td>
+                <td th:text="${step.getRecipeStep().getQuantityUsed()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <h2>Details de Recette</h2>
+    <div>
+        <div>
+            <h4>Produits</h4>
+            <table style="width:80%"
+                   class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Categorie</th>
+                    <th>Unite</th>
+                    <th>PU</th>
+
+                    <th>Quantite En Stock</th>
+                    <th>Estimation Prix total du Stock</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prodDTO:${recipeProductDTOs}">
+                    <td th:text="${prodDTO.getProduct().getName()}"></td>
+                    <td th:text="${prodDTO.getProduct().getProductCategory().getName()}"></td>
+                    <td th:text="${prodDTO.getProduct().getUnit().getName()}"></td>
+                    <td th:text="${prodDTO.getUnitPrice()}"></td>
+
+                    <td th:text="${prodDTO.getQuantity()}"></td>
+                    <td th:text="${prodDTO.getEstimation()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div>
+            <h4>Ingredients</h4>
+            <table style="width:80%"
+                   class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>Ingredient</th>
+                    <th>Unite</th>
+                    <th>Quantite En Stock</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="recipeStepDTO:${recipeStepDTOs}">
+                    <td th:text="${recipeStepDTO.getRecipeStep().getIngredient().getName()}"></td>
+                    <td th:text="${recipeStepDTO.getRecipeStep().getIngredient().getUnit().getName()}"></td>
+                    <td th:text="${recipeStepDTO.getIngredientStock().getQuantity()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

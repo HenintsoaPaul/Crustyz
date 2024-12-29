@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Save provider</h2>
+
+    <form th:action="@{/providers/ingredients/save}" th:object="${ingredientProvider}" method="POST">
+        <div class="form-group">
+            <input type="number" min="0" required
+                   th:field="*{unitPrice}" class="form-control mb-4 col-4">
+        </div>
+        <div class="form-group">
+            <label for="ingredientsList" class="col-md-3 control-label">Ingredients</label>
+            <div th:if="${ingredientsList != null and not #lists.isEmpty(ingredientsList)}" class="col-md-5">
+                <select required th:field="*{ingredient}" id="ingredientsList" class="form-control mb-4 col-4">
+                    <option th:each="ingredient:${ingredientsList}"
+                            th:value="${ingredient.getId()}" th:text="${ingredient.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${ingredientsList == null and #lists.isEmpty(ingredientsList)}">
+                <p>No ingredient found! <a th:href="@{/ingredients/add}">Add Ingredient?</a></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="providersList" class="col-md-3 control-label">Providers</label>
+            <div th:if="${providersList != null and not #lists.isEmpty(providersList)}" class="col-md-5">
+                <select required th:field="*{provider}" id="providersList" class="form-control mb-4 col-4">
+                    <option th:each="provider:${providersList}"
+                            th:value="${provider.getId()}" th:text="${provider.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${providersList == null and #lists.isEmpty(providersList)}">
+                <p>No provider found! <a th:href="@{/providers/add}">Add Provider?</a></p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">
+            Submit Save
+        </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/providers/ingredients}"> Back to provider List</a>
+</div>
+</body>
+</html>

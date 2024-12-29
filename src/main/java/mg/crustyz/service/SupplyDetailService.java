@@ -16,7 +16,7 @@ public class SupplyDetailService {
     private final IngredientStockService ingredientStockService;
 
     @Transactional
-    public SupplyDetail save( Supply mother, SupplyDetail supplyDetail )
+    public void save( Supply mother, SupplyDetail supplyDetail )
             throws Exception {
         double price = supplyDetail.getIngredientProvider().getUnitPrice() * supplyDetail.getQuantity();
         supplyDetail.setPrice( price );
@@ -24,7 +24,7 @@ public class SupplyDetailService {
         supplyDetail.setSupply( mother );
         ingredientStockService.saveMvtStock( supplyDetail );
 
-        return supplyDetailRepository.save( supplyDetail );
+        supplyDetailRepository.save( supplyDetail );
     }
 
     public List<SupplyDetail> findAllBySupply( Supply supply ) {
