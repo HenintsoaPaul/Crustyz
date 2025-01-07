@@ -10,6 +10,7 @@ VALUES ('Kilogramme', 'kg'),
 INSERT INTO ingredient (name, id_unit)
 VALUES ('Farine', 1),
        ('Levure', 2),
+       ('Beurre', 2),
        ('Oeuf', 3);
 
 INSERT INTO mvt_ingredient_stock (daty, quantity, id_ingredient, id_mvt_stock_type)
@@ -36,6 +37,10 @@ VALUES ('Viennoiserie'),
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
 VALUES ('Pain raisin', 1500, 3, 1),
        ('Gateau au chocolat', 750, 3, 2);
+
+INSERT INTO production (daty, quantity, id_product)
+VALUES ('08/01/2025', 5, 1),
+       ('08/01/2025', 2, 2);
 
 INSERT INTO mvt_product_stock (daty, quantity, id_product, id_mvt_stock_type)
 VALUES ('02/02/2024', 5, 1, 2),
