@@ -1,0 +1,7 @@
+<div th:fragment="layout(content)">
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+    <main>
+        <div th:replace="~{::${content}}"></div>
+    </main>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
