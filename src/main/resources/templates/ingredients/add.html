@@ -12,6 +12,7 @@
 
     <form th:action="@{/ingredients/save}" th:object="${ingredient}" method="POST">
         <input type="text" required
+
                th:field="*{name}" placeholder="ingredient Name" class="form-control mb-4 col-4">
 
         <div class="form-group">

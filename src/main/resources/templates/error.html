@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Erreur</title>
+</head>
+<body>
+<h1>Une erreur s'est produite</h1>
+
+<p>URL demandée : <span th:text="${url}"></span></p>
+
+<pre th:text="${#strings.escapeJava(exception.message)}"></pre>
+
+<p><a href="/">Retourner à l'accueil</a></p>
+</body>
+</html>
