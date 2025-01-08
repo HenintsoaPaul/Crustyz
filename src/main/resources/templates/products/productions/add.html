@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Save Product Production</h2>
+
+    <form th:action="@{/products/productions/save}" th:object="${production}" method="POST">
+        <input type="date" th:field="*{daty}"
+               required
+               class="form-control mb-4 col-4">
+
+        <input type="number" th:field="*{quantity}"
+               required
+               class="form-control mb-4 col-4">
+
+        <select id="productsList"
+                th:field="*{product}"
+                class="form-control mb-4 col-4"
+                required>
+            <option th:each="e:${productsList}"
+                    th:value="${e.getId()}"
+                    th:text="${e.getName()}">
+            </option>
+        </select>
+
+        <button type="submit" class="btn btn-info col-2">
+            Submit Save
+        </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/products/productions}"> Back to Production List</a>
+</div>
+</body>
+</html>

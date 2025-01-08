@@ -90,6 +90,16 @@ CREATE TABLE product
     FOREIGN KEY (id_product_category) REFERENCES product_category (id_product_category)
 );
 
+CREATE TABLE production
+(
+    id_production SERIAL,
+    daty          DATE           NOT NULL,
+    quantity      NUMERIC(15, 2) NOT NULL,
+    id_product    INTEGER        NOT NULL,
+    PRIMARY KEY (id_production),
+    FOREIGN KEY (id_product) REFERENCES product (id_product)
+);
+
 CREATE TABLE ingredient_provider
 (
     id_ingredient_provider SERIAL,
