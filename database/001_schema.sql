@@ -160,11 +160,9 @@ CREATE TABLE rating
 CREATE TABLE recipe_step
 (
     id_recipe_step SERIAL,
-    name           VARCHAR(50) NOT NULL,
+    name           VARCHAR(255) NOT NULL,
     no_step        INTEGER,
     description    TEXT,
-    quantity_used  NUMERIC(15, 2),
-    id_ingredient  INTEGER     NOT NULL,
     id_recipe      INTEGER     NOT NULL,
     PRIMARY KEY (id_recipe_step),
     FOREIGN KEY (id_ingredient) REFERENCES ingredient (id_ingredient),
@@ -224,6 +222,16 @@ CREATE TABLE recipe_product
     PRIMARY KEY (id_product, id_recipe),
     FOREIGN KEY (id_product) REFERENCES product (id_product),
     FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe)
+);
+
+CREATE TABLE recipe_step_ingredient
+(
+    id_ingredient  INTEGER,
+    id_recipe_step INTEGER,
+    quantity_used  NUMERIC(15, 2) NOT NULL,
+    PRIMARY KEY (id_ingredient, id_recipe_step),
+    FOREIGN KEY (id_ingredient) REFERENCES ingredient (id_ingredient),
+    FOREIGN KEY (id_recipe_step) REFERENCES recipe_step (id_recipe_step)
 );
 
 CREATE TABLE product_promotion
