@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping( "/sales" )
+@RequestMapping("/sales")
 public class SaleController {
     private final SaleService saleService;
     private final ProductStockService productStockService;
@@ -25,47 +25,56 @@ public class SaleController {
     private final IngredientRepository ingredientRepository;
 
     @GetMapping
-    public String getAll( Model model,
-            @RequestParam(required = false) List<Integer> selectedProductCategories,
-            @RequestParam(required = false) List<Integer> selectedIngredients
-    ) {
+    public String getAll(Model model, @RequestParam(required = false) List<Integer> selectedProductCategories,
+	    @RequestParam(required = false) List<Integer> selectedIngredients) {
 	List<Sale> sales = saleService.findAll();
 	List<ProductCategory> productCategories = productCategoryRepository.findAll();
 	List<Ingredient> ingredients = ingredientRepository.findAll();
 
-        if (selectedIngredients != null && !selectedIngredients.isEmpty()) {
-            sales = saleService.filterByIngredients(selectedIngredients);
-        }
-        if (selectedProductCategories != null && !selectedProductCategories.isEmpty()) {
-            sales = saleService.filterByProductCategories(selectedProductCategories);
-        }
+	boolean misyIngredients;
+	boolean misyProductCategories;
+	boolean misyRoa;
 
-        model.addAttribute( "salesList", sales );
-        model.addAttribute( "productCategoriesList", productCategories );
-	model.addAttribute( "ingredientsList", ingredients );
+	misyIngredients = selectedIngredients != null && !selectedIngredients.isEmpty();
+	misyProductCategories = selectedProductCategories != null && !selectedProductCategories.isEmpty();
+	misyRoa = misyIngredients && misyProductCategories;
 
-        return "sales/index";
+	if (misyRoa) {
+	    sales = saleService.filter(selectedIngredients, selectedProductCategories);
+	} else {
+	    if (misyIngredients) {
+		sales = saleService.filterByIngredients(selectedIngredients);
+	    }
+	    if (misyProductCategories) {
+		sales = saleService.filterByProductCategories(selectedProductCategories);
+	    }
+	}
+
+	model.addAttribute("salesList", sales);
+	model.addAttribute("productCategoriesList", productCategories);
+	model.addAttribute("ingredientsList", ingredients);
+
+	return "sales/index";
     }
 
-    @GetMapping( "/add" )
-    public String gotoSave( Model model ) {
-        model.addAttribute( "productStocksList", productStockService.findAll() );
-        model.addAttribute( "saleDTO", new SaleDTO() );
-        return "sales/add";
+    @GetMapping("/add")
+    public String gotoSave(Model model) {
+	model.addAttribute("productStocksList", productStockService.findAll());
+	model.addAttribute("saleDTO", new SaleDTO());
+	return "sales/add";
     }
 
-    @PostMapping( "/save" )
-    public String save( @ModelAttribute( "saleDTO" ) SaleDTO saleDTO )
-            throws Exception {
-        saleService.save( saleDTO );
-        return "redirect:/sales";
+    @PostMapping("/save")
+    public String save(@ModelAttribute("saleDTO") SaleDTO saleDTO) throws Exception {
+	saleService.save(saleDTO);
+	return "redirect:/sales";
     }
 
-    @GetMapping( "/{id}" )
-    public String detail( Model model, @PathVariable Integer id ) {
-        Sale sale = saleService.findById( id );
-        model.addAttribute( "sale", sale );
-        model.addAttribute( "saleDetailsList", saleService.findAllDetails( sale ) );
-        return "sales/detail";
+    @GetMapping("/{id}")
+    public String detail(Model model, @PathVariable Integer id) {
+	Sale sale = saleService.findById(id);
+	model.addAttribute("sale", sale);
+	model.addAttribute("saleDetailsList", saleService.findAllDetails(sale));
+	return "sales/detail";
     }
 }
