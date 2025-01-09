@@ -157,6 +157,13 @@ CREATE TABLE rating
     FOREIGN KEY (id_product) REFERENCES product (id_product)
 );
 
+CREATE TABLE recipe_step_type
+(
+    id_recipe_step_type SERIAL,
+    name           VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id_recipe_step_type)
+);
+
 CREATE TABLE recipe_step
 (
     id_recipe_step SERIAL,
@@ -164,8 +171,10 @@ CREATE TABLE recipe_step
     no_step        INTEGER,
     description    TEXT,
     id_recipe      INTEGER     NOT NULL,
+    id_recipe_step_type      INTEGER     NOT NULL,
     PRIMARY KEY (id_recipe_step),
-    FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe)
+    FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe),
+    FOREIGN KEY (id_recipe_step_type) REFERENCES recipe_step_type (id_recipe_step_type)
 );
 
 CREATE TABLE mvt_product_stock

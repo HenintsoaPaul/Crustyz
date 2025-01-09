@@ -2,6 +2,10 @@ INSERT INTO mvt_stock_type (name)
 VALUES ('Sortie'),
        ('Entree');
 
+INSERT INTO recipe_step_type (name)
+VALUES ('Production'),
+       ('Supplement');
+
 INSERT INTO unit (name, symbol)
 VALUES ('Kilogramme', 'kg'),
        ('Gramme', 'g'),
@@ -55,15 +59,15 @@ VALUES ('Recette mofo tsisy dobera'),
        ('Recette mofo misy dobera mafilotra'),
        ('Recette Gateau au chocolat');
 
-INSERT INTO recipe_step (name, no_step, description, id_recipe)
-VALUES ('Mikobaka', 1, 'Mila mikobaka farine', 1),
-       ('Manisy atody', 2, 'Atodim-boalavo', 1),
-       ('Mikobaka', 1, 'Mila mikobaka farine', 2),
-       ('Manisy atody', 2, 'Atodim-boalavo', 2),
-       ('Osorana dobera', 3, 'Dobera mafilotra ampiasaina', 2),
-       ('Mélanger les ingrédients secs', 1, 'Afangaro tsara doly aloha.',3),
-       ('Ajouter les ingrédients liquides', 2, 'Topasana tsikelikely', 3),
-       ('Cuire le gâteau', 3, 'Miandry kely', 3);
+INSERT INTO recipe_step (name, no_step, description, id_recipe, id_recipe_step_type)
+VALUES ('Mikobaka', 1, 'Mila mikobaka farine', 1, 1),
+       ('Manisy atody', 2, 'Atodim-boalavo', 1, 1),
+       ('Mikobaka', 1, 'Mila mikobaka farine', 2, 1),
+       ('Manisy atody', 2, 'Atodim-boalavo', 2, 1),
+       ('Osorana dobera', 3, 'Dobera mafilotra ampiasaina', 2, 2),
+       ('Mélanger les ingrédients secs', 1, 'Afangaro tsara doly aloha.',3, 1),
+       ('Ajouter les ingrédients liquides', 2, 'Topasana tsikelikely', 3, 1),
+       ('Cuire le gâteau', 3, 'Miandry kely', 3, 1);
 
 INSERT INTO recipe_step_ingredient (id_recipe_step, id_ingredient, quantity_used)
 VALUES (1, 1, 1),
