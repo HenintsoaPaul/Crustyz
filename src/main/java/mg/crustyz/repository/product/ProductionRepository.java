@@ -13,7 +13,8 @@ public interface ProductionRepository extends JpaRepository<Production, Integer>
             FROM production p
                      JOIN recipe_product rp ON p.id_product = rp.id_product
                      JOIN recipe_step rs ON rp.id_recipe = rs.id_recipe
-                     JOIN ingredient i ON rs.id_ingredient = i.id_ingredient
+                     JOIN recipe_step_ingredient rsi ON rs.id_recipe_step = rsi.id_recipe_step
+                     JOIN ingredient i ON rsi.id_ingredient = i.id_ingredient
             WHERE i.id_ingredient IN (:ingredientIds)
             """, nativeQuery = true)
     List<Production> findByIngredientsIn( List<Integer> ingredientIds );
@@ -21,8 +22,8 @@ public interface ProductionRepository extends JpaRepository<Production, Integer>
     @Query(value = """
             SELECT DISTINCT p.*
             FROM production p
-                     JOIN recipe_product rp ON p.id_product = rp.id_product
-            WHERE rp.id_product IN (:productIds)
+                     JOIN product pr ON pr.id_product = p.id_product
+            WHERE pr.id_product IN (:productIds)
             """, nativeQuery = true)
     List<Production> findByProductsIn(List<Integer> productIds);
 }

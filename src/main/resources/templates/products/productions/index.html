@@ -17,14 +17,12 @@
               method="GET"
               class="form-inline mb-3">
 
-<!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
-
             <!-- Filter by Production -->
             <div>
                 <label>Productions a inclure :</label>
                 <ul>
                     <li th:each="product : ${productsList}">
-                        <input type="checkbox" name="selectedIngredients"
+                        <input type="checkbox" name="selectedProducts"
                                th:value="${product.getId()}"/>
                         <span th:text="${product.getName()}"></span>
                     </li>
