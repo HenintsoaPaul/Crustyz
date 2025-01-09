@@ -41,4 +41,12 @@ public class SaleService {
     public List<SaleDetail> findAllDetails( Sale sale ) {
         return saleDetailService.findAllBySale( sale );
     }
+
+    public List<Sale> filterByIngredients(List<Integer> selectedIngredients) {
+        return saleRepository.filterBySupplements(selectedIngredients);
+    }
+
+    public List<Sale> filterByProductCategories(List<Integer> selectedProductCategories) {
+        return saleRepository.filterByProductCategories(selectedProductCategories);
+    }
 }
