@@ -17,4 +17,12 @@ public interface ProductionRepository extends JpaRepository<Production, Integer>
             WHERE i.id_ingredient IN (:ingredientIds)
             """, nativeQuery = true)
     List<Production> findByIngredientsIn( List<Integer> ingredientIds );
+
+    @Query(value = """
+            SELECT DISTINCT p.*
+            FROM production p
+                     JOIN recipe_product rp ON p.id_product = rp.id_product
+            WHERE rp.id_product IN (:productIds)
+            """, nativeQuery = true)
+    List<Production> findByProductsIn(List<Integer> productIds);
 }

@@ -19,7 +19,18 @@
 
 <!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
 
-            <!-- Generate radio box foreach ingredient -->
+            <!-- Filter by Production -->
+            <div>
+                <label>Productions a inclure :</label>
+                <ul>
+                    <li th:each="product : ${productsList}">
+                        <input type="checkbox" name="selectedIngredients"
+                               th:value="${product.getId()}"/>
+                        <span th:text="${product.getName()}"></span>
+                    </li>
+                </ul>
+            </div>
+            <!-- Filter by Ingredient -->
             <div>
                 <label>Ingrédients a inclure :</label>
                 <ul>

@@ -18,22 +18,28 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping( "/products/productions" )
 public class ProductionController {
-    private final ProductionRepository productionRepository;
     private final IngredientRepository ingredientRepository;
-    private final ProductRepository productRepository;
     private final ProductionService productionService;
 
     @GetMapping
-    public String getAll( Model model, @RequestParam(required = false) List<Integer> selectedIngredients ) {
+    public String getAll( Model model,
+            @RequestParam(required = false) List<Integer> selectedIngredients,
+            @RequestParam(required = false) List<Integer> selectedProducts
+    ) {
         List<Production> productions = productionService.findAll();
         List<Ingredient> ingredients = ingredientRepository.findAll();
+        List<Product> products = productionService.findAllProducts();
 
         if (selectedIngredients != null && !selectedIngredients.isEmpty()) {
             productions = productionService.filterByIngredients(selectedIngredients);
         }
+        if (selectedProducts != null && !selectedProducts.isEmpty()) {
+            productions = productionService.filterByProducts(selectedProducts);
+        }
 
         model.addAttribute( "productionsList", productions );
         model.addAttribute( "ingredientsList", ingredients );
+        model.addAttribute( "productsList", products );
 
         return "products/productions/index";
     }
@@ -42,15 +48,15 @@ public class ProductionController {
     public String gotoSave( Model model ) {
         model.addAttribute( "production", new Production() );
 
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productionService.findAllProducts();
         model.addAttribute( "productsList", products );
 
         return "products/productions/add";
     }
 
     @PostMapping( "/save" )
-    public String save( @ModelAttribute( "production" ) Production production ) {
-        productionRepository.save( production );
+    public String save( @ModelAttribute( "production" ) Production production ) throws Exception {
+        productionService.save( production );
         return "redirect:/products/productions";
     }
 }
