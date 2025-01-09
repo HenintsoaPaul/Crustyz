@@ -25,83 +25,108 @@
             </div>
         </div>
         <hr>
-        <div id="recipe_product">
-            <!-- recipe details (this is the container where the dynamic details will be added) -->
-            <div id="filles_container_produit">
-                <div th:each="elmt, iterator :${recipeDTO.recipeProducts}"
-                     th:id="'detail-' + iterator.index" class="fille_detail_produit">
-                    <div class="form-group">
-                        <label th:for="'qte-' + iterator.index"
-                               class="col-md-3 control-label">Quantité Produit</label>
-                        <input th:id="'qte-' + iterator.index"
-                               th:field="*{recipeProducts[__${iterator.index}__].quantityProduced}"
-                               class="form-control mb-4 col-4" type="number" min="0">
+        <div class="card">
+            <div id="recipe_product" class="card-body">
+                <!-- recipe details (this is the container where the dynamic details will be added) -->
+                <h3>Ajouter des Produits de la recette</h3>
+                <div id="filles_container_produit">
+                    <div th:each="elmt, iterator :${recipeDTO.recipeProducts}"
+                         th:id="'detail-' + iterator.index" class="fille_detail_produit">
+                        <div class="form-group">
+                            <label th:for="'qte-' + iterator.index"
+                                   class="col-md-3 control-label">Quantité Produit</label>
+                            <input th:id="'qte-' + iterator.index"
+                                   th:field="*{recipeProducts[__${iterator.index}__].quantityProduced}"
+                                   class="form-control mb-4 col-4" type="number" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label th:for="'productsList-' + iterator.index"
+                                   class="col-md-3 control-label">Produit</label>
+                            <select th:id="'productsList-' + iterator.index"
+                                    th:field="*{recipeProducts[__${iterator.index}__].product}"
+                                    class="form-control mb-4 col-4"
+                                    required>
+                                <option th:each="elmt:${productsList}"
+                                        th:value="${elmt.getId()}"
+                                        th:text="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}"
+                                        th:title="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}">
+                                </option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label th:for="'productsList-' + iterator.index"
-                               class="col-md-3 control-label">Produit</label>
-                        <select th:id="'productsList-' + iterator.index"
-                                th:field="*{recipeProducts[__${iterator.index}__].product}"
-                                class="form-control mb-4 col-4"
-                                required>
-                            <option th:each="elmt:${productsList}"
-                                    th:value="${elmt.getId()}"
-                                    th:text="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}"
-                                    th:title="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}">
-                            </option>
-                        </select>
-                    </div>
+                    <hr>
                 </div>
+                <!-- Button to add a new recipe detail -->
+                <button type="button" class="btn btn-secondary col-2" id="addFilleBtn_produit">Ajouter Produits</button>
             </div>
-            <!-- Button to add a new recipe detail -->
-            <button type="button" class="btn btn-secondary col-2" id="addFilleBtn_produit">Ajouter Produits</button>
         </div>
         <hr>
-        <div id="recipe_step">
-            <!-- recipe details (this is the container where the dynamic details will be added) -->
-            <div id="filles_container_step">
-                <div th:each="elmt, iterator :${recipeDTO.recipeSteps}"
-                     th:id="'detail-' + iterator.index" class="fille_detail_step">
-                    <div class="form-group">
-                        <label th:for="'anarana-' + iterator.index"
-                               class="col-md-3 control-label">Nom de l'etape</label>
-                        <input th:id="'anarana-' + iterator.index"
-                               th:field="*{recipeSteps[__${iterator.index}__].name}"
-                               class="form-control mb-4 col-4" type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="'desc-' + iterator.index"
-                               class="col-md-3 control-label">Description</label>
-                        <textarea th:id="'desc-' + iterator.index"
-                               th:field="*{recipeSteps[__${iterator.index}__].description}"
-                               class="form-control mb-4 col-4">
+        <div class="card">
+            <div id="recipe_step" class="card-body">
+                <!-- recipe details (this is the container where the dynamic details will be added) -->
+                <h3>Ajouter des Etapes de la recette</h3>
+                <div class="card">
+                    <div id="filles_container_step" class="card-body">
+                        <div th:each="elmt, iteratorStep :${recipeDTO.recipeSteps}"
+                             th:id="'detail-' + iteratorStep.index" class="fille_detail_step">
+                            <div class="form-group">
+                                <label th:for="'anarana-' + iteratorStep.index"
+                                       class="col-md-3 control-label">Nom de l'etape</label>
+                                <input th:id="'anarana-' + iteratorStep.index"
+                                       th:field="*{recipeSteps[__${iteratorStep.index}__].recipeStep.name}"
+                                       class="form-control mb-4 col-4" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label th:for="'desc-' + iteratorStep.index"
+                                       class="col-md-3 control-label">Description</label>
+                                <textarea th:id="'desc-' + iteratorStep.index"
+                                          th:field="*{recipeSteps[__${iteratorStep.index}__].recipeStep.description}"
+                                          class="form-control mb-4 col-4">
                         </textarea>
-                    </div>
-                    <div class="form-group">
-                        <label th:for="'qte-' + iterator.index"
-                               class="col-md-3 control-label">Quantité Necessaire</label>
-                        <input th:id="'qte-' + iterator.index"
-                               th:field="*{recipeSteps[__${iterator.index}__].quantityUsed}"
-                               class="form-control mb-4 col-4" type="number" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label th:for="'ingredientsList-' + iterator.index"
-                               class="col-md-3 control-label">Ingredient</label>
-                        <select th:id="'ingredientsList-' + iterator.index"
-                                th:field="*{recipeSteps[__${iterator.index}__].ingredient}"
-                                class="form-control mb-4 col-4"
-                                required>
-                            <option th:each="elmt:${ingredientsList}"
-                                    th:value="${elmt.getId()}"
-                                    th:text="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}"
-                                    th:title="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}">
-                            </option>
-                        </select>
+                            </div>
+
+                            <hr>
+
+                            <div class="card">
+                                <h6>Ingredients utilises pour cette etape</h6>
+                                <div id="filles_container_ingredient" class="card-body">
+                                    <div th:each="elmt, iteratorIngredient :${recipeDTO.recipeSteps[__${iteratorStep.index}__].rsIngredients}"
+                                         th:id="'detail-' + iteratorIngredient.index" class="fille_detail_ingredient">
+                                        <div class="form-group">
+                                            <label th:for="'qte-' + iteratorIngredient.index"
+                                                   class="col-md-3 control-label">Quantité Necessaire</label>
+                                            <input th:id="'qte-' + iteratorIngredient.index"
+                                                   th:field="*{recipeSteps[__${iteratorStep.index}__].rsIngredients[__${iteratorIngredient.index}__].quantityUsed}"
+                                                   class="form-control mb-4 col-4" type="number" min="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="'ingredientsList-' + iteratorIngredient.index"
+                                                   class="col-md-3 control-label">Ingredient</label>
+                                            <select th:id="'ingredientsList-' + iteratorIngredient.index"
+                                                    th:field="*{recipeSteps[__${iteratorStep.index}__].rsIngredients[__${iteratorIngredient.index}__].ingredient}"
+                                                    class="form-control mb-4 col-4">
+                                                <option th:each="elmt:${ingredientsList}"
+                                                        th:value="${elmt.getId()}"
+                                                        th:text="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}"
+                                                        th:title="${elmt.getName()}  + '--' + ${elmt.getUnit().getSymbol()}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Button to add a new recipe ingredient -->
+                                <button type="button" class="btn btn-primary mb-4" id="addFilleBtn_ingredient">
+                                    Ajouter un Ingredient
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Button to add a new recipe detail -->
+                <button type="button" class="btn btn-secondary mb-4" id="addFilleBtn_step">Ajouter Une Etape</button>
             </div>
-            <!-- Button to add a new recipe detail -->
-            <button type="button" class="btn btn-secondary col-2" id="addFilleBtn_step">Ajouter Une Etape</button>
         </div>
 
         <button type="submit" class="btn btn-info col-2">Submit</button>
@@ -122,6 +147,10 @@
 
         document.getElementById(`${btnId}_step`).addEventListener('click', function () {
             ajouterInputFille(`${containerName}_step`, `${childrenClass}_step`);
+        });
+
+        document.getElementById(`${btnId}_ingredient`).addEventListener('click', function () {
+            ajouterInputFille(`${containerName}_ingredient`, `${childrenClass}_ingredient`);
         });
     });
 </script>
