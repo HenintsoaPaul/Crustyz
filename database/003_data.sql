@@ -5,7 +5,7 @@ VALUES ('Sortie'),
 INSERT INTO unit (name, symbol)
 VALUES ('Kilogramme', 'kg'),
        ('Gramme', 'g'),
-       ('Unite', 'u');
+       ('Piece', 'p');
 
 INSERT INTO ingredient (name, id_unit)
 VALUES ('Farine', 1),
@@ -35,8 +35,24 @@ VALUES ('Viennoiserie'),
        ('Patisserie');
 
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
-VALUES ('Pain raisin', 1500, 3, 1),
-       ('Gateau au chocolat', 750, 3, 2);
+VALUES ('Pain raisin', 1500, 3, 2),
+       ('Gateau au chocolat', 750, 3, 1),
+       ('Mofo dopaina', 500, 3, 2);
+
+INSERT INTO recipe (name)
+VALUES ('Recette mofo tsisy dobera'),
+       ('Recette mofo misy dobera mafilotra');
+
+INSERT INTO recipe_step (name, no_step, description, quantity_used, id_ingredient, id_recipe)
+VALUES ('Mikobaka', 1, 'Mila bokona be', 2, 1, 1),
+       ('Manisy atody', 2, 'Tsy de hoe bokona loatra', 5, 4, 1),
+       ('Mikobaka', 1, 'Mila bokona be', 3, 1, 2),
+       ('Manisy atody', 2, 'Tsy de hoe bokona loatra', 5, 4, 2),
+       ('Osorana dobera', 3, 'Dobera mafilotra ampiasaina', 1, 3, 2);
+
+INSERT INTO recipe_product (id_product, id_recipe, quantity_produced)
+VALUES (1, 1, 1),
+       (3, 2, 1);
 
 INSERT INTO production (daty, quantity, id_product)
 VALUES ('08/01/2025', 5, 1),
