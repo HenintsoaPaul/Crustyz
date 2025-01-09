@@ -165,7 +165,6 @@ CREATE TABLE recipe_step
     description    TEXT,
     id_recipe      INTEGER     NOT NULL,
     PRIMARY KEY (id_recipe_step),
-    FOREIGN KEY (id_ingredient) REFERENCES ingredient (id_ingredient),
     FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe)
 );
 
