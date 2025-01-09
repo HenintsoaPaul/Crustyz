@@ -2,12 +2,18 @@ package mg.crustyz.controller.sale;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.SaleDTO;
+import mg.crustyz.entity.product.Ingredient;
+import mg.crustyz.entity.product.ProductCategory;
 import mg.crustyz.entity.sale.Sale;
+import mg.crustyz.repository.IngredientRepository;
+import mg.crustyz.repository.product.ProductCategoryRepository;
 import mg.crustyz.service.ProductStockService;
 import mg.crustyz.service.SaleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,10 +21,29 @@ import org.springframework.web.bind.annotation.*;
 public class SaleController {
     private final SaleService saleService;
     private final ProductStockService productStockService;
+    private final ProductCategoryRepository productCategoryRepository;
+    private final IngredientRepository ingredientRepository;
 
     @GetMapping
-    public String getAll( Model model ) {
-        model.addAttribute( "salesList", saleService.findAll() );
+    public String getAll( Model model,
+            @RequestParam(required = false) List<Integer> selectedProductCategories,
+            @RequestParam(required = false) List<Integer> selectedIngredients
+    ) {
+	List<Sale> sales = saleService.findAll();
+	List<ProductCategory> productCategories = productCategoryRepository.findAll();
+	List<Ingredient> ingredients = ingredientRepository.findAll();
+
+        if (selectedIngredients != null && !selectedIngredients.isEmpty()) {
+            sales = saleService.filterByIngredients(selectedIngredients);
+        }
+        if (selectedProductCategories != null && !selectedProductCategories.isEmpty()) {
+            sales = saleService.filterByProductCategories(selectedProductCategories);
+        }
+
+        model.addAttribute( "salesList", sales );
+        model.addAttribute( "productCategoriesList", productCategories );
+	model.addAttribute( "ingredientsList", ingredients );
+
         return "sales/index";
     }
 
