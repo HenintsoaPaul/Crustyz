@@ -20,7 +20,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeStepService recipeStepService;
     private final RecipeProductService recipeProductService;
-    private final RecipeSte
+//    private final RecipeSte
 
     public List<Recipe> findAll() {
         return recipeRepository.findAll();

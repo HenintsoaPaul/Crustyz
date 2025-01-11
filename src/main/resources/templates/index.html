@@ -1,37 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="eng">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
     <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/vendor/boxicons/css/boxicons..min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/quill/quill.snow.css}" rel="stylesheet">
+    <link th:href="@{/vendor/quill/quill.bubble.css}" rel="stylesheet">
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{/vendor/simple-datatables/style.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <!-- Vendor JS Files -->
+    <script th:src="@{/vendor/apexcharts/apexcharts.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/chart.js/chart.umd.js}"></script>
+    <script th:src="@{/vendor/echarts/echarts.min.js}"></script>
+    <script th:src="@{/vendor/quill/quill.min.js}"></script>
+    <script th:src="@{/vendor/simple-datatables/simple-datatables.js}"></script>
+    <script th:src="@{/vendor/tinymce/tinymce.min.js}"></script>
+    <script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+    <!-- Template Main JS File -->
+    <script th:src="@{/js/main.js}"></script>
 </head>
+
 <body>
-    <header>
-        <div th:insert="~{fragments/navbar.html}"></div>
-    </header>
-    <main>
-        <section>
-            <h2>Our Specialties</h2>
-            <p>Discover the finest baked goods made with love and the freshest ingredients.</p>
-        </section>
-        <section>
-            <h2>Featured Products</h2>
-            <div class="product">
-                <h3>Sourdough Bread</h3>
-                <p>A classic favorite with a tangy flavor and chewy texture.</p>
-            </div>
-            <div class="product">
-                <h3>Chocolate Croissant</h3>
-                <p>Flaky, buttery pastry filled with rich chocolate.</p>
-            </div>
-            <div class="product">
-                <h3>Blueberry Muffin</h3>
-                <p>Moist and fluffy muffin bursting with fresh blueberries.</p>
-            </div>
-        </section>
-    </main>
-    <div th:insert="~{fragments/footer.html}"></div>
+<div th:replace="~{fragments/header}"></div>
+
+<div th:replace="~{fragments/aside}"></div>
+
+<main id="main" class="main">
+
+    <h1>ACCEUIL</h1>
+
+    <p>This is the home page</p>
+</main>
+
 </body>
-</html>
+
+<div th:replace="~{fragments/footer}"></div>
