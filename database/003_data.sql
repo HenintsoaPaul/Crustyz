@@ -2,6 +2,10 @@ INSERT INTO mvt_stock_type (name)
 VALUES ('Sortie'),
        ('Entree');
 
+INSERT INTO recipe_step_type (name)
+VALUES ('Production'),
+       ('Supplement');
+
 INSERT INTO unit (name, symbol)
 VALUES ('Kilogramme', 'kg'),
        ('Gramme', 'g'),
@@ -42,28 +46,31 @@ VALUES (1500, 1, 1),
        (750, 3, 2);
 
 INSERT INTO product_category (name)
-VALUES ('Viennoiserie'),
-       ('Patisserie');
+VALUES ('Patisserie'),
+       ('Viennoiserie');
 
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
 VALUES ('Pain raisin', 1500, 3, 2),
-       ('Gateau au chocolat', 750, 3, 1),
-       ('Mofo dopaina', 500, 3, 2);
+       ('Gateau', 750, 3, 1),
+       ('Mofo dopaina', 500, 3, 2),
+       ('Croissant', 500, 3, 2);
 
 INSERT INTO recipe (name)
 VALUES ('Recette mofo tsisy dobera'),
        ('Recette mofo misy dobera mafilotra'),
        ('Recette Gateau au chocolat');
 
-INSERT INTO recipe_step (name, no_step, description, id_recipe)
-VALUES ('Mikobaka', 1, 'Mila mikobaka farine', 1),
-       ('Manisy atody', 2, 'Atodim-boalavo', 1),
-       ('Mikobaka', 1, 'Mila mikobaka farine', 2),
-       ('Manisy atody', 2, 'Atodim-boalavo', 2),
-       ('Osorana dobera', 3, 'Dobera mafilotra ampiasaina', 2),
-       ('Mélanger les ingrédients secs', 1, 'Afangaro tsara doly aloha.',3),
-       ('Ajouter les ingrédients liquides', 2, 'Topasana tsikelikely', 3),
-       ('Cuire le gâteau', 3, 'Miandry kely', 3);
+INSERT INTO recipe_step (name, no_step, description, id_recipe, id_recipe_step_type)
+VALUES ('Mikobaka', 1, 'Mila mikobaka farine', 1, 1),
+       ('Manisy atody', 2, 'Atodim-boalavo', 1, 1),
+       ('Mikobaka', 1, 'Mila mikobaka farine', 2, 1),
+       ('Manisy atody', 2, 'Atodim-boalavo', 2, 1),
+       ('Osorana dobera', 3, 'Dobera mafilotra ampiasaina', 2, 2),
+       ('Mélanger les ingrédients secs', 1, 'Afangaro tsara doly aloha.', 3, 1),
+       ('Ajouter les ingrédients liquides', 2, 'Topasana tsikelikely', 3, 1),
+       ('Cuire le gâteau', 3, 'Miandry kely', 3, 1);
+
+-- Supplement beurre
 
 INSERT INTO recipe_step_ingredient (id_recipe_step, id_ingredient, quantity_used)
 VALUES (1, 1, 1),
@@ -79,18 +86,31 @@ VALUES (1, 1, 1),
 
 INSERT INTO recipe_product (id_product, id_recipe, quantity_produced)
 VALUES (1, 1, 1),
-       (2, 2, 1),
-       (3, 3, 1);
+       (3, 2, 1),
+       (2, 3, 1);
 
 INSERT INTO production (daty, quantity, id_product)
 VALUES ('08/01/2025', 5, 1),
        ('08/01/2025', 2, 2);
 
 INSERT INTO mvt_product_stock (daty, quantity, id_product, id_mvt_stock_type)
-VALUES ('02/02/2024', 5, 1, 2),
+VALUES
        ('02/02/2024', 15, 1, 2),
-       ('02/02/2024', 5, 2, 2),
-       ('02/02/2024', 25, 2, 2);
+       ('02/02/2024', 25, 2, 2),
+       ('02/02/2024', 12, 3, 2),
+       ('02/02/2024', 25, 4, 2);
+
+INSERT INTO sale (daty, total_price)
+VALUES ('02/02/2024', 1500),
+       ('02/02/2024', 1750);
+
+INSERT INTO sale_detail (quantity, price, id_product, id_sale)
+VALUES (1, 1500, 1, 1),
+       (2, 1000, 3, 2),
+       (1, 750, 2, 2);
+
+-- Vien 1
+-- Vien 1 + Pat 1
 
 INSERT INTO employee_type (name)
 VALUES ('Cuisinier'),

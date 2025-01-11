@@ -28,4 +28,8 @@ public class RecipeStep {
     @JoinColumn( name = "id_recipe", nullable = false )
     private Recipe recipe;
 
+    @ManyToOne( fetch = FetchType.LAZY, optional = false )
+    @JoinColumn( name = "id_recipe_step_type", nullable = false )
+    private RecipeStepType recipe_step_type;
+
 }
