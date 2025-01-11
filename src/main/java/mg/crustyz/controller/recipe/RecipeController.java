@@ -2,6 +2,7 @@ package mg.crustyz.controller.recipe;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.RecipeDTO;
+import mg.crustyz.dto.form.RecipeFormData;
 import mg.crustyz.entity.recipe.Recipe;
 import mg.crustyz.repository.IngredientRepository;
 import mg.crustyz.repository.product.ProductRepository;
@@ -32,12 +33,14 @@ public class RecipeController {
     public String gotoSave( Model model ) {
         model.addAttribute( "productsList", productRepository.findAll() );
         model.addAttribute( "ingredientsList", ingredientRepository.findAll() );
-        model.addAttribute( "recipeDTO", new RecipeDTO() );
+
+        model.addAttribute( "recipeDTO", new RecipeFormData() );
+//        model.addAttribute( "recipeDTO", new RecipeDTO() );
         return "recipes/add";
     }
 
     @PostMapping( "/save" )
-    public String save( @ModelAttribute( "recipeDTO" ) RecipeDTO recipeDTO )
+    public String save( @ModelAttribute( "recipeDTO" ) RecipeFormData recipeDTO )
             throws Exception {
         recipeService.save( recipeDTO );
         return "redirect:/recipes";
@@ -58,7 +61,7 @@ public class RecipeController {
         Recipe recipe = recipeService.findById( id );
         model.addAttribute( "recipe", recipe );
         model.addAttribute( "recipeSteps", recipeStepService.findAllByRecipe( recipe ) );
-        model.addAttribute( "recipeStepDTOs", recipeStepService.findAllDTOByRecipe( recipe ) );
+//        model.addAttribute( "recipeStepDTOs", recipeStepService.findAllDTOByRecipe( recipe ) );
         model.addAttribute( "recipeProductDTOs", recipeProductService.findAllDTOByRecipe( recipe ) );
         return "recipes/detail";
     }

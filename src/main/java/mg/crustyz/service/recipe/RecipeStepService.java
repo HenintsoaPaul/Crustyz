@@ -33,28 +33,33 @@ public class RecipeStepService {
                 .orElseThrow( () -> new Exception( "RecipeStep not found" ) );
     }
 
-    public RecipeStepDTO findDTOById( int id )
-            throws Exception {
-        RecipeStep rs = findById( id );
-        IngredientStock is = this.ingredientStockService.findByIngredient( rs.getIngredient() );
-        return new RecipeStepDTO( rs, is );
-    }
-
-    public List<RecipeStepDTO> findAllDTOByRecipe( Recipe recipe ) {
-        List<RecipeStepDTO> dtos = new ArrayList<>();
-        this.recipeStepRepository.findAllByRecipe( recipe ).forEach( rs -> {
-            try {
-                dtos.add( this.findDTOById( rs.getId() ) );
-            } catch ( Exception e ) {
-                throw new RuntimeException( e );
-            }
-        } );
-        return dtos;
-    }
+//    public RecipeStepDTO findDTOById( int id )
+//            throws Exception {
+//        RecipeStep rs = findById( id );
+//        IngredientStock is = this.ingredientStockService.findByIngredient( rs.getIngredient() );
+//        return new RecipeStepDTO( rs, is );
+//    }
+//
+//    public List<RecipeStepDTO> findAllDTOByRecipe( Recipe recipe ) {
+//        List<RecipeStepDTO> dtos = new ArrayList<>();
+//        this.recipeStepRepository.findAllByRecipe( recipe ).forEach( rs -> {
+//            try {
+//                dtos.add( this.findDTOById( rs.getId() ) );
+//            } catch ( Exception e ) {
+//                throw new RuntimeException( e );
+//            }
+//        } );
+//        return dtos;
+//    }
 
     @Transactional
-    public void save( Recipe mother, RecipeStep step ) {
+    public void save( Recipe mother, RecipeStep step, int noStep ) {
+//        RecipeStep step = steps.get( i );
+
+
         step.setRecipe( mother );
+        step.setNoStep( noStep );
+
         recipeStepRepository.save( step );
     }
 }

@@ -3,9 +3,12 @@ package mg.crustyz.service.recipe;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.RecipeDTO;
+import mg.crustyz.dto.form.RecipeFormData;
+import mg.crustyz.dto.form.RecipeStepFormData;
 import mg.crustyz.entity.recipe.Recipe;
 import mg.crustyz.entity.recipe.RecipeProduct;
 import mg.crustyz.entity.recipe.RecipeStep;
+import mg.crustyz.entity.recipe.RecipeStepIngredient;
 import mg.crustyz.repository.recipe.RecipeRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeStepService recipeStepService;
     private final RecipeProductService recipeProductService;
+    private final RecipeSte
 
     public List<Recipe> findAll() {
         return recipeRepository.findAll();
@@ -29,16 +33,24 @@ public class RecipeService {
     }
 
     @Transactional
-    public void save( RecipeDTO recipeDTO )
+    public void save( RecipeFormData formData )
             throws Exception {
-        Recipe recipe = recipeRepository.save( recipeDTO.getRecipe() );
-        List<RecipeStep> steps = recipeDTO.getRecipeSteps();
+        Recipe recipe = recipeRepository.save( formData.getRecipe() );
+
+        List<RecipeStepFormData> steps = formData.getRecipeSteps();
         for ( int i = 0; i < steps.size(); i++ ) {
-            RecipeStep step = steps.get( i );
-            step.setNoStep( i + 1 );
-            recipeStepService.save( recipe, steps.get( i ) );
+            RecipeStep step = steps.get( i ).getRecipeStep();
+
+            List<RecipeStepIngredient> recipeStepIngredientList = steps.get(i).getRsIngredients();
+            for ( RecipeStepIngredient rsi : recipeStepIngredientList ) {
+
+            }
+
+
+            recipeStepService.save( recipe, step, i + 1 );
         }
-        for ( RecipeProduct rp: recipeDTO.getRecipeProducts() ) {
+
+        for ( RecipeProduct rp: formData.getRecipeProducts() ) {
             recipeProductService.save( recipe, rp );
         }
     }
