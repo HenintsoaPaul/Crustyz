@@ -29,4 +29,15 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
 	    WHERE pc.id_product_category IN (:productCategoriesId)
 	    """, nativeQuery = true)
     List<Sale> filterByProductCategories(List<Integer> productCategoriesId);
+
+    @Query(value = """
+	    select distinct  sa.* from sale sa 
+	    	                          where sa.id_sale NOT in (SELECT DISTINCT s.id_sale
+	    FROM sale s
+	             JOIN sale_detail sd ON sd.id_sale = s.id_sale
+	             JOIN recipe_product rp ON rp.id_product = sd.id_product
+	             JOIN recipe_step rs ON rp.id_recipe = rs.id_recipe
+	    	    WHERE rs.id_recipe_step_type = 2)
+	    """, nativeQuery = true)
+    List<Sale> filterBySupplementsNature();
 }

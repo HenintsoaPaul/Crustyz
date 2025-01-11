@@ -41,7 +41,18 @@ public class SaleService {
 	return saleDetailService.findAllBySale(sale);
     }
 
+    private boolean isNature( List<Integer> ids ) {
+	for (Integer id : ids) {
+	    if (id == -1) return true;
+	}
+	return false;
+    }
+
     public List<Sale> filterByIngredients(List<Integer> selectedIngredients) {
+	if (isNature(selectedIngredients)) {
+	    return saleRepository.filterBySupplementsNature();
+	}
+
 	return saleRepository.filterBySupplements(selectedIngredients);
     }
 
@@ -51,10 +62,14 @@ public class SaleService {
 
     public List<Sale> filter(List<Integer> selectedIngredients, List<Integer> selectedProductCategories) {
 	List<Sale> s1 = filterByIngredients(selectedIngredients);
+	if (isNature(selectedIngredients)) {
+	    s1 = saleRepository.filterBySupplementsNature();
+	}
+
+
 	List<Sale> s2 = filterByProductCategories(selectedProductCategories);
 
 	List<Sale> result = new ArrayList<>();
-
 	for (Sale s : s1) {
 	    boolean found = false;
 	    for (Sale ss : s2) {

@@ -46,8 +46,8 @@ VALUES (1500, 1, 1),
        (750, 3, 2);
 
 INSERT INTO product_category (name)
-VALUES ('Viennoiserie'),
-       ('Patisserie');
+VALUES ('Patisserie'),
+       ('Viennoiserie');
 
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
 VALUES ('Pain raisin', 1500, 3, 2),
@@ -86,18 +86,19 @@ VALUES (1, 1, 1),
 
 INSERT INTO recipe_product (id_product, id_recipe, quantity_produced)
 VALUES (1, 1, 1),
-       (2, 2, 1),
-       (3, 3, 1);
+       (3, 2, 1),
+       (2, 3, 1);
 
 INSERT INTO production (daty, quantity, id_product)
 VALUES ('08/01/2025', 5, 1),
        ('08/01/2025', 2, 2);
 
 INSERT INTO mvt_product_stock (daty, quantity, id_product, id_mvt_stock_type)
-VALUES ('02/02/2024', 5, 1, 2),
+VALUES
        ('02/02/2024', 15, 1, 2),
-       ('02/02/2024', 5, 2, 2),
-       ('02/02/2024', 25, 2, 2);
+       ('02/02/2024', 25, 2, 2),
+       ('02/02/2024', 12, 3, 2),
+       ('02/02/2024', 25, 4, 2);
 
 INSERT INTO sale (daty, total_price)
 VALUES ('02/02/2024', 1500),
