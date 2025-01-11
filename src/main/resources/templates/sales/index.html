@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container my-2" align="center">
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
     <!--    <div class="container my-2" align="center">-->
     <!--        <form th:action="@{/mvtIngredientStocks/search}" method="get" class="form-inline mb-3">-->
     <!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
@@ -39,6 +32,9 @@
         </tr>
         </tbody>
     </table>
-</div>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 </html>

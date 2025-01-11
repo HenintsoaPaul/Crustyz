@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container my-2" align="center">
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
     <div>
         <h2>Vente</h2>
         <table style="width:80%"
@@ -55,6 +48,9 @@
             </tbody>
         </table>
     </div>
-</div>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 </html>
