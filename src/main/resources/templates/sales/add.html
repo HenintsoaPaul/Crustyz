@@ -16,7 +16,7 @@
                  th:id="'detail-' + iterator.index" class="fille_detail">
                 <div>
                     <label th:for="'qte-' + iterator.index"
-                           class="col-md-3 control-label">Quantité</label>
+                           class="col-md-3 control-label">Quantitï¿½</label>
                     <input th:id="'qte-' + iterator.index"
                            th:field="*{saleDetails[__${iterator.index}__].quantity}"
                            class="form-control mb-4 col-4" type="number" min="0">
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Button to add a new sale detail -->
-        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Détail Vente</button>
+        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Dï¿½tail Vente</button>
 
         <button type="submit" class="btn btn-info col-2">Submit</button>
     </form>

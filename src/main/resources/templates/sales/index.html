@@ -1,17 +1,40 @@
 <div th:replace="~{fragments/_layout}"></div>
 
 <main id="main" class="main">
-    <!--    <div class="container my-2" align="center">-->
-    <!--        <form th:action="@{/mvtIngredientStocks/search}" method="get" class="form-inline mb-3">-->
-    <!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
-    <!--            <button type="submit" class="btn btn-primary">Search</button>-->
-    <!--        </form>-->
-    <!--    </div>-->
+    <div class="container my-2">
+        <form th:action="@{/sales}"
+              method="GET"
+              class="form-inline mb-3">
 
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
+            <!-- Filter by Production -->
+            <div class="card">
+                <div class="card-body">
+                    <label>Categories a inclure :</label>
+                    <ul>
+                        <li th:each="productCategory : ${productCategoriesList}">
+                            <input type="checkbox" name="selectedProductCategories"
+                                   th:value="${productCategory.getId()}"/>
+                            <span th:text="${productCategory.getName()}"></span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+            <!-- Filter by Ingredient -->
+            <div class="card">
+                <div class="card-body">
+                    <label>Supplements a inclure :</label>
+                    <ul>
+                        <li th:each="ingredient : ${ingredientsList}">
+                            <input type="checkbox" name="selectedIngredients"
+                                   th:value="${ingredient.getId()}"/>
+                            <span th:text="${ingredient.getName()}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
     </div>
 
     <table style="width:80%"
