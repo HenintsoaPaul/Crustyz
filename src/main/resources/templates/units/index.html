@@ -3,12 +3,10 @@
 <main id="main" class="main">
     <h3>Nos Unites</h3>
 
-    <a th:href="@{/units/add}" class="btn btn-primary btn-sm mb-3">Add Unit</a>
-
     <div class="container my-2" align="center">
         <form th:action="@{/units/search}" method="get" class="form-inline mb-3">
             <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary">Filtrer</button>
         </form>
     </div>
 
