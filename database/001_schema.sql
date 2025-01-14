@@ -160,18 +160,18 @@ CREATE TABLE rating
 CREATE TABLE recipe_step_type
 (
     id_recipe_step_type SERIAL,
-    name           VARCHAR(255) NOT NULL,
+    name                VARCHAR(255) NOT NULL,
     PRIMARY KEY (id_recipe_step_type)
 );
 
 CREATE TABLE recipe_step
 (
-    id_recipe_step SERIAL,
-    name           VARCHAR(255) NOT NULL,
-    no_step        INTEGER,
-    description    TEXT,
-    id_recipe      INTEGER     NOT NULL,
-    id_recipe_step_type      INTEGER     NOT NULL,
+    id_recipe_step      SERIAL,
+    name                VARCHAR(255) NOT NULL,
+    no_step             INTEGER,
+    description         TEXT,
+    id_recipe           INTEGER      NOT NULL,
+    id_recipe_step_type INTEGER      NOT NULL,
     PRIMARY KEY (id_recipe_step),
     FOREIGN KEY (id_recipe) REFERENCES recipe (id_recipe),
     FOREIGN KEY (id_recipe_step_type) REFERENCES recipe_step_type (id_recipe_step_type)
@@ -251,4 +251,13 @@ CREATE TABLE product_promotion
     PRIMARY KEY (id_product, id_promotion),
     FOREIGN KEY (id_product) REFERENCES product (id_product),
     FOREIGN KEY (id_promotion) REFERENCES promotion (id_promotion)
+);
+
+CREATE TABLE product_of_month
+(
+    id_product_of_month SERIAL,
+    add_date            DATE    not null,
+    id_product          INTEGER not null,
+    PRIMARY KEY (id_product_of_month),
+    FOREIGN KEY (id_product) REFERENCES product (id_product)
 );
