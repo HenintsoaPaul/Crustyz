@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -19,16 +21,19 @@ public class ProductOfMonthController {
 
     @GetMapping
     public String getAll(Model model, @RequestParam(required = false) String monthYear) {
-	if (monthYear == null) {
-	    monthYear = "01";
+	List<ProductOfMonth> pom = productCategoryRepository.findAll();
+
+	if (monthYear != null) {
+	    System.out.println("monthYear = " + monthYear);
+	    LocalDate localDate = LocalDate.parse(monthYear, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+	    pom = productCategoryRepository.findForMonth(localDate.getMonthValue(), localDate.getYear());
 	}
-
-
 
 	// todo: atao distinct par categorie ilay izy satri possible misy miverina
 	// ...
 
-	model.addAttribute("productOfMonthsList", productCategoryRepository.findAll());
+	model.addAttribute("productOfMonthsList", pom);
 	return "products/month/index";
     }
 
@@ -45,12 +50,12 @@ public class ProductOfMonthController {
 	return "redirect:/products/month";
     }
 
-        @GetMapping( "/update/{id}" )
-        public String formNew( Model model, @PathVariable Integer id )
-                throws Exception {
-            ProductOfMonth u = productCategoryRepository.findById( id )
-                    .orElseThrow( () -> new Exception( "ProductOfMonth not found" ) );
-            model.addAttribute( "productOfMonth", u );
-            return "products/month/update";
-        }
+    @GetMapping("/update/{id}")
+    public String formNew(Model model, @PathVariable Integer id) throws Exception {
+	ProductOfMonth u = productCategoryRepository.findById(id)
+		.orElseThrow(() -> new Exception("ProductOfMonth not found"));
+	model.addAttribute("productOfMonth", u);
+	model.addAttribute("productsList", productRepository.findAll());
+	return "products/month/update";
+    }
 }
