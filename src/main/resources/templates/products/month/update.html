@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Crustyz</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Mise a jour de produit du mois</h2>
+
+    <form th:action="@{/products/month/save}" th:object="${productOfMonth}" method="POST">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label for="daty" class="col-md-3 control-label">Date du mois</label>
+            <input id="daty" type="date" required
+                   th:field="*{addDate}" class="form-control mb-4 col-4">
+        </div>
+
+        <div class="form-group">
+            <label for="productsList" class="col-md-3 control-label">Produit</label>
+            <div th:if="${productsList != null and not #lists.isEmpty(productsList)}" class="col-md-5">
+                <select required th:field="*{product}" id="productsList" class="form-control mb-4 col-4">
+                    <option th:each="product:${productsList}"
+                            th:value="${product.getId()}"
+                            th:text="${product.getName()}"></option>
+                </select>
+            </div>
+            <div th:if="${productsList == null and #lists.isEmpty(productsList)}">
+                <p>No product found! <a th:href="@{/products/add}">Add Produit?</a></p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info col-2">
+            Submit Save
+        </button>
+    </form>
+</div>
+</body>
+</html>
