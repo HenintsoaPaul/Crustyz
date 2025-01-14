@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container">
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
     <h2>Save Product Production</h2>
 
     <form th:action="@{/products/productions/save}" th:object="${production}" method="POST">
@@ -37,6 +30,7 @@
     <hr>
 
     <a th:href="@{/products/productions}"> Back to Production List</a>
-</div>
+</main>
+
 </body>
 </html>
