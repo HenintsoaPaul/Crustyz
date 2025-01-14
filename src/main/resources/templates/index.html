@@ -1,37 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-    <header>
-        <div th:insert="~{fragments/navbar.html}"></div>
-    </header>
-    <main>
-        <section>
-            <h2>Our Specialties</h2>
-            <p>Discover the finest baked goods made with love and the freshest ingredients.</p>
-        </section>
-        <section>
-            <h2>Featured Products</h2>
-            <div class="product">
-                <h3>Sourdough Bread</h3>
-                <p>A classic favorite with a tangy flavor and chewy texture.</p>
-            </div>
-            <div class="product">
-                <h3>Chocolate Croissant</h3>
-                <p>Flaky, buttery pastry filled with rich chocolate.</p>
-            </div>
-            <div class="product">
-                <h3>Blueberry Muffin</h3>
-                <p>Moist and fluffy muffin bursting with fresh blueberries.</p>
-            </div>
-        </section>
-    </main>
-    <div th:insert="~{fragments/footer.html}"></div>
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
+    <h1>ACCEUIL</h1>
+
+    <p>This is the home page</p>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 </html>

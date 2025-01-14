@@ -1,53 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
+<div th:replace="~{fragments/_layout}"></div>
 
-<h2>Liste des ventes</h2>
-
-<div class="container my-2" align="center">
-    <h4>Filtre des ventes</h4>
-
-    <div class="card">
-        <div class="card-body">
-            <div class="container my-2" align="center">
-                <form th:action="@{/sales}"
-                      method="GET"
-                      class="form-inline mb-3">
-
-                    <!-- Filter by ProductCategory -->
-                    <div>
-                        <label>Categories a inclure :</label>
-                        <ul>
-                            <li th:each="pt : ${productCategoriesList}">
-                                <input type="checkbox" name="selectedProductCategories"
-                                       th:value="${pt.getId()}"/>
-                                <span th:text="${pt.getName()}"></span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Filter by Ingredient -->
-                    <div>
-                        <label>Supplements a inclure :</label>
-                        <ul>
-                            <li th:each="ingredient : ${ingredientsList}">
-                                <input type="checkbox" name="selectedIngredients"
-                                       th:value="${ingredient.getId()}"/>
-                                <span th:text="${ingredient.getName()}"></span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="selectedIngredients"
-                                       value="-1"/>
-                                <span>Nature</span>
-                            </li>
-                        </ul>
-                    </div>
+<main id="main" class="main">
+    <!--    <div class="container my-2" align="center">-->
+    <!--        <form th:action="@{/mvtIngredientStocks/search}" method="get" class="form-inline mb-3">-->
+    <!--            <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">-->
+    <!--            <button type="submit" class="btn btn-primary">Search</button>-->
+    <!--        </form>-->
+    <!--    </div>-->
 
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
@@ -77,6 +36,9 @@
         </tr>
         </tbody>
     </table>
-</div>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 </html>
