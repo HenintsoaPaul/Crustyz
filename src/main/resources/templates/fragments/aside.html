@@ -49,6 +49,98 @@
             </ul>
         </li>
 
+        <!-- Categories -->
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#productCategories-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-box"></i>
+                <span>Categories</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="productCategories-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/products/categories}">
+                        <i class="bi bi-circle"></i>
+                        <span>Liste</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/products/categories/add}">
+                        <i class="bi bi-circle"></i>
+                        <span>Ajout</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Produits -->
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-amazon"></i>
+                <span>Produits</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="products-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/products}">
+                        <i class="bi bi-circle"></i>
+                        <span>Liste</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/products/productions/add}">
+                        <i class="bi bi-circle"></i>
+                        <span>Ajout</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Ingredients -->
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#ingredients-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-activity"></i>
+                <span>Ingredients</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="ingredients-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/ingredients}">
+                        <i class="bi bi-circle"></i>
+                        <span>Liste</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/ingredients/add}">
+                        <i class="bi bi-circle"></i>
+                        <span>Ajout</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Unites -->
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#units-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-unity"></i>
+                <span>Unites</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="units-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/units}">
+                        <i class="bi bi-circle"></i>
+                        <span>Liste</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/units/add}">
+                        <i class="bi bi-circle"></i>
+                        <span>Ajout</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
 
 </aside>

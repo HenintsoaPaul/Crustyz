@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container my-2" align="center">
-    <h3>Units List</h3>
+<div th:replace="~{fragments/_layout}"></div>
 
-    <a th:href="@{/units/add}" class="btn btn-primary btn-sm mb-3">Add Unit</a>
+<main id="main" class="main">
+    <h3>Nos Unites</h3>
 
     <div class="container my-2" align="center">
         <form th:action="@{/units/search}" method="get" class="form-inline mb-3">
             <input type="text" name="searchCriteria" class="form-control mr-2" placeholder="Search by name">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary">Filtrer</button>
         </form>
     </div>
 
@@ -39,6 +30,10 @@
         </tr>
         </tbody>
     </table>
-</div>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 </html>
+
