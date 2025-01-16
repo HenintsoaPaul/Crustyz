@@ -22,7 +22,7 @@ public class Sale {
     @Column( name = "total_price", nullable = false )
     private double totalPrice;
 
-    @ColumnDefault( "'anonymous'" )
+    @ColumnDefault( "'Anonymous'" )
     @Column( name = "customer_name", length = 50 )
     private String customerName;
 
