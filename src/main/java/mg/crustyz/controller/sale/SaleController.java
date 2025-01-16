@@ -69,17 +69,24 @@ public class SaleController {
 			sales.retainAll(salesOnDaty);
 		}
 
-		// DateAchat min max
-		if ((dateAchatMin != null && !dateAchatMin.isEmpty()) || (dateAchatMax != null && !dateAchatMax.isEmpty())) {
-			LocalDate minDate = dateAchatMin != null && !dateAchatMin.isEmpty() ? LocalDate.parse(dateAchatMin, DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
-			LocalDate maxDate = dateAchatMax != null && !dateAchatMax.isEmpty() ? LocalDate.parse(dateAchatMax, DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
+		// dateAchatMin
+		if (dateAchatMin!= null && !dateAchatMin.isEmpty()) {
+			LocalDate dd = LocalDate.parse(dateAchatMin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			System.out.print(dateAchatMin);
 
-System.out.println("min: "  + minDate);
-System.out.println("max: "  + maxDate);
+			List<Sale> salesOnDaty = saleService.findAllSalesAfterDateMin( dd );
 
+			sales.retainAll(salesOnDaty);
+		}
 
-			List<Sale> salesInRange = saleService.findAllSalesInRange(minDate, maxDate);
-			sales.retainAll(salesInRange);
+		// dateAchatMax
+		if (dateAchatMax!= null && !dateAchatMax.isEmpty()) {
+			LocalDate dd = LocalDate.parse(dateAchatMax, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			System.out.print(dateAchatMax);
+
+			List<Sale> salesOnDaty = saleService.findAllSalesBeforeDateMax( dd );
+
+			sales.retainAll(salesOnDaty);
 		}
 
 		model.addAttribute("salesList", sales);

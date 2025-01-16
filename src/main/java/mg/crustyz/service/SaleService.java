@@ -91,7 +91,11 @@ public class SaleService {
 		return saleRepository.findAllByDaty(dd);
 	}
 
-    public List<Sale> findAllSalesInRange(LocalDate minDate, LocalDate maxDate) {
-        return saleRepository.findAllSalesInRange(minDate, maxDate);
+    public List<Sale> findAllSalesAfterDateMin(LocalDate minDate) {
+        return saleRepository.findAllSalesAfterDateMin(minDate);
+    }
+
+	public List<Sale> findAllSalesBeforeDateMax(LocalDate maxDate) {
+        return saleRepository.findAllSalesBeforeDateMax(maxDate);
     }
 }
