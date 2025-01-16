@@ -2,33 +2,35 @@
 
 <main id="main" class="main">
     <div class="my-2">
-        <form th:action="@{/sales}"
-              method="GET"
-              class="form-inline mb-3">
+        <form th:action="@{/sales}" method="GET" class="form-inline mb-3">
             <button type="submit" class="btn btn-primary">Filtrer</button>
 
             <div class="row g-10">
+                <!-- Filter by month year -->
+                <div class="col-2 card">
+                    <label>Date d'achat :</label>
+                    <input type="date" name="dateAchat">
+                </div>
                 <!-- Filter by Production -->
-                <div class="col-6 card">
+                <div class="col-5 card">
                     <div class="card-body py-3">
                         <label>Categories a inclure :</label>
                         <ul>
                             <li th:each="productCategory : ${productCategoriesList}">
                                 <input type="checkbox" name="selectedProductCategories"
-                                       th:value="${productCategory.getId()}"/>
+                                    th:value="${productCategory.getId()}" />
                                 <span th:text="${productCategory.getName()}"></span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <!-- Filter by Ingredient -->
-                <div class="col-6 card">
+                <div class="col-5 card">
                     <div class="card-body py-3">
                         <label>Supplements a inclure :</label>
                         <ul>
                             <li th:each="ingredient : ${ingredientsList}">
-                                <input type="checkbox" name="selectedIngredients"
-                                       th:value="${ingredient.getId()}"/>
+                                <input type="checkbox" name="selectedIngredients" th:value="${ingredient.getId()}" />
                                 <span th:text="${ingredient.getName()}"></span>
                             </li>
                         </ul>
@@ -38,26 +40,24 @@
         </form>
     </div>
 
-    <table style="width:80%"
-           class="table table-striped table-responsive-md">
+    <table style="width:80%" class="table table-striped table-responsive-md">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Date</th>
-            <th>Client</th>
-            <th>Prix total</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Prix total</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="elmt:${salesList}">
-            <td>
-                <a th:href="@{/sales/{id}(id=${elmt.getId()})}"
-                   th:text="${elmt.getId()}"></a>
-            </td>
-            <td th:text="${elmt.getDaty()}"></td>
-            <td th:text="${elmt.getCustomerName()}"></td>
-            <td th:text="${elmt.getTotalPrice()}"></td>
-        </tr>
+            <tr th:each="elmt:${salesList}">
+                <td>
+                    <a th:href="@{/sales/{id}(id=${elmt.getId()})}" th:text="${elmt.getId()}"></a>
+                </td>
+                <td th:text="${elmt.getDaty()}"></td>
+                <td th:text="${elmt.getCustomerName()}"></td>
+                <td th:text="${elmt.getTotalPrice()}"></td>
+            </tr>
         </tbody>
     </table>
 </main>
@@ -65,4 +65,5 @@
 <div th:replace="~{fragments/footer}"></div>
 
 </body>
+
 </html>

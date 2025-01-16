@@ -5,8 +5,6 @@ import mg.crustyz.entity.product.Ingredient;
 import mg.crustyz.entity.product.Product;
 import mg.crustyz.entity.product.Production;
 import mg.crustyz.repository.IngredientRepository;
-import mg.crustyz.repository.product.ProductRepository;
-import mg.crustyz.repository.product.ProductionRepository;
 import mg.crustyz.service.product.ProductionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
