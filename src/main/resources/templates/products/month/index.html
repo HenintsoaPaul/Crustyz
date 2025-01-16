@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="</head>ISO-8859-1">
     <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
 </head>
+
 <body>
-<div class="container my-2" align="center">
-    <h3>Liste des produits du mois</h3>
+    <div class="container my-2">
+        <h3>Liste des produits du mois</h3>
 
-    <div class="container my-2" align="center">
-        <form th:action="@{/products/month}"
-              method="GET"
-              class="form-inline mb-3">
+        <div class="container my-2" align="center">
+            <form th:action="@{/products/month}" method="GET" class="form-inline mb-3">
 
-            <!-- Filter by month year -->
-            <div class="form-control">
-                <input type="date" name="monthYear" required >
-            </div>
+                <!-- Filter by month year -->
+                <div class="form-control">
+                    <label>Mois</label>
+                    <input type="number" default="1" min="1" max="12" name="month">
 
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+                    <label for="">Annee</label>
+                    <input type="number" name="year">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
+        <table style="width:80%" class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Mois</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>PU(Ar)</th>
+                    <th>Unite</th>
+                    <th>Categorie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="elmt : ${productOfMonthsList}">
+                    <td th:text="${elmt.getMonthYear()}"></td>
+                    <td th:text="${elmt.getProduct().getName()}"></td>
+                    <td th:text="${elmt.getProduct().getDescription()}"></td>
+                    <td th:text="${elmt.getProduct().getUnitPrice()}"></td>
+                    <td th:text="${elmt.getProduct().getUnit().getName()}"></td>
+                    <td th:text="${elmt.getProduct().getProductCategory().getName()}"></td>
+                    <td>
+                        <a th:href="@{/products/month/update/{id}(id=${elmt.getId()})}"
+                            class="btn btn-primary">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <table style="width:80%"
-           class="table table-striped table-responsive-md">
-        <thead>
-        <tr>
-            <th>Mois</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>PU(Ar)</th>
-            <th>Unite</th>
-            <th>Categorie</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="elmt : ${productOfMonthsList}">
-            <td th:text="${elmt.getMonthYear()}"></td>
-            <td th:text="${elmt.getProduct().getName()}"></td>
-            <td th:text="${elmt.getProduct().getDescription()}"></td>
-            <td th:text="${elmt.getProduct().getUnitPrice()}"></td>
-            <td th:text="${elmt.getProduct().getUnit().getName()}"></td>
-            <td th:text="${elmt.getProduct().getProductCategory().getName()}"></td>
-            <td>
-                <a th:href="@{/products/month/update/{id}(id=${elmt.getId()})}"
-                   class="btn btn-primary">Update</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 </body>
+
 </html>
