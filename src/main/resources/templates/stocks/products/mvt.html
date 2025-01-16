@@ -1,53 +1,53 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container my-2" align="center">
-    <h3>
-        Reste en Stock
-    </h3>
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
     <div>
-        <p>
-            <b>Product: </b>
-            <span th:text="${stock.product.getName()}"></span>
-        </p>
-        <p>
-            <b>Quantite: </b>
-            <span th:text="${stock.getQuantity()}"></span>
-        </p>
+        <h2>Stock Actuel</h2>
+        <table class="table table-striped table-hover table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>En Stock</th>
+                    <th>Unite</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${stock.product.getName()}"></td>
+                    <td th:text="${stock.getQuantity()}"></td>
+                    <td th:text="${stock.product.getUnit().getName()}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
     <hr>
+    <div>
+        <h5>
+            Details sur les mouvements de stock
+        </h5>
+        <table class="table table-striped table-hover table-responsive-md">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Quantite</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="elmt:${mvtList}">
+                    <td th:text="${elmt.getId()}"></td>
+                    <td th:text="${elmt.getDaty()}"></td>
+                    <td th:text="${elmt.getQuantity()}"></td>
+                    <td th:text="${elmt.getMvtStockType().getName()}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 
-    <h3>
-        Mouvements de Stock
-    </h3>
-    <table style="width:80%"
-           class="table table-striped table-responsive-md">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Product</th>
-            <th>Date</th>
-            <th>Quantity</th>
-            <th>Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="elmt:${mvtList}">
-            <td th:text="${elmt.getId()}"></td>
-            <td th:text="${elmt.getProduct().getName()}"></td>
-            <td th:text="${elmt.getDaty()}"></td>
-            <td th:text="${elmt.getQuantity()}"></td>
-            <td th:text="${elmt.getMvtStockType().getName()}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
+
 </html>
