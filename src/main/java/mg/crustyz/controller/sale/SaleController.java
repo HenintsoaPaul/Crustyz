@@ -30,7 +30,11 @@ public class SaleController {
 	public String getAll(Model model,
 			@RequestParam(required = false) List<Integer> selectedProductCategories,
 			@RequestParam(required = false) List<Integer> selectedIngredients,
-			@RequestParam(required = false) String dateAchat) {
+			@RequestParam(required = false) String dateAchat,
+			@RequestParam(required = false) String dateAchatMin,
+			@RequestParam(required = false) String dateAchatMax
+
+			) {
 
 		List<Sale> sales = saleService.findAll();
 		List<ProductCategory> productCategories = productCategoryRepository.findAll();
@@ -63,8 +67,19 @@ public class SaleController {
 
 			// On recherche les objets a la fois dans sales et salesOnDaty
 			sales.retainAll(salesOnDaty);
-			// for(Sale ss : salesOnDaty) {
-			// }
+		}
+
+		// DateAchat min max
+		if ((dateAchatMin != null && !dateAchatMin.isEmpty()) || (dateAchatMax != null && !dateAchatMax.isEmpty())) {
+			LocalDate minDate = dateAchatMin != null && !dateAchatMin.isEmpty() ? LocalDate.parse(dateAchatMin, DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
+			LocalDate maxDate = dateAchatMax != null && !dateAchatMax.isEmpty() ? LocalDate.parse(dateAchatMax, DateTimeFormatter.ofPattern("yyyy-MM-dd")) : null;
+
+System.out.println("min: "  + minDate);
+System.out.println("max: "  + maxDate);
+
+
+			List<Sale> salesInRange = saleService.findAllSalesInRange(minDate, maxDate);
+			sales.retainAll(salesInRange);
 		}
 
 		model.addAttribute("salesList", sales);

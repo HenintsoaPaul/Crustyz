@@ -90,4 +90,8 @@ public class SaleService {
 	public List<Sale> findAllSalesOn(LocalDate dd) {
 		return saleRepository.findAllByDaty(dd);
 	}
+
+    public List<Sale> findAllSalesInRange(LocalDate minDate, LocalDate maxDate) {
+        return saleRepository.findAllSalesInRange(minDate, maxDate);
+    }
 }
