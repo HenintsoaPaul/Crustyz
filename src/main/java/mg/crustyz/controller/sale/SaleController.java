@@ -59,7 +59,7 @@ public class SaleController {
 			}
 		}
 
-		// todo: tsy misy override otrazao
+		// jour d'Achat
 		if (dateAchat!= null && !dateAchat.isEmpty()) {
 			LocalDate dd = LocalDate.parse(dateAchat, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			System.out.print(dateAchat);

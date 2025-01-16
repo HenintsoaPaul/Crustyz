@@ -1,50 +1,50 @@
 <div th:replace="~{fragments/_layout}"></div>
 
 <main id="main" class="main">
-    <h2>Save Sale</h2>
-    <form th:action="@{/sales/save}" th:object="${saleDTO}" method="POST" id="saleForm">
-        <input type="date" required
-               th:field="*{sale.daty}" class="form-control mb-4 col-4">
+    <h2>Enregisterment de Vente</h2>
 
-        <input type="text"
-               th:field="*{sale.customerName}"
-               value="Anonymous" class="form-control mb-4 col-4">
+    <form th:action="@{/sales/save}" th:object="${saleDTO}" method="POST" id="saleForm">
+
+        <div>
+            <label class="col-md-3 control-label">Date de vente</label>
+            <input type="date" required th:field="*{sale.daty}" class="form-control mb-4 col-4">
+        </div>
+
+        <div>
+            <label class="col-md-3 control-label">Nom client</label>
+            <input type="text" th:field="*{sale.customerName}" placeholder="Anonymous" class="form-control mb-4 col-4">
+        </div>
 
         <!-- Sale details (this is the container where the dynamic details will be added) -->
-        <div id="filles_container">
-            <div th:each="elmt, iterator :${saleDTO.saleDetails}"
-                 th:id="'detail-' + iterator.index" class="fille_detail">
+        <div id="filles_container" class="card px-5 py-5">
+            <h3>Details de la Vente</h3>
+
+            <div th:each="elmt, iterator :${saleDTO.saleDetails}" th:id="'detail-' + iterator.index"
+                class="fille_detail card-body">
                 <div>
-                    <label th:for="'qte-' + iterator.index"
-                           class="col-md-3 control-label">Quantit�</label>
-                    <input th:id="'qte-' + iterator.index"
-                           th:field="*{saleDetails[__${iterator.index}__].quantity}"
-                           class="form-control mb-4 col-4" type="number" min="0">
+                    <label th:for="'qte-' + iterator.index" class="col-md-3 control-label">Quantit�</label>
+                    <input th:id="'qte-' + iterator.index" th:field="*{saleDetails[__${iterator.index}__].quantity}"
+                        class="form-control mb-4 col-4" type="number" min="0">
                 </div>
                 <div class="form-group">
-                    <label th:for="'productsList-' + iterator.index"
-                           class="col-md-3 control-label">Produit</label>
+                    <label th:for="'productsList-' + iterator.index" class="col-md-3 control-label">Produit</label>
                     <select th:id="'productsList-' + iterator.index"
-                            th:field="*{saleDetails[__${iterator.index}__].product}"
-                            class="form-control mb-4 col-4"
-                            required>
-                        <option th:each="elmt:${productStocksList}"
-                                th:value="${elmt.getProduct().getId()}"
-                                th:text="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}"
-                                th:title="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}">
+                        th:field="*{saleDetails[__${iterator.index}__].product}" class="form-control mb-4 col-4"
+                        required>
+                        <option th:each="elmt:${productStocksList}" th:value="${elmt.getProduct().getId()}"
+                            th:text="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}"
+                            th:title="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}">
                         </option>
                     </select>
                 </div>
             </div>
+
+            <!-- Button to add a new sale detail -->
+            <button type="button" class="btn btn-secondary col-6" id="addFilleBtn">Ajouter Detail Vente</button>
         </div>
 
-        <!-- Button to add a new sale detail -->
-        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter D�tail Vente</button>
-
-        <button type="submit" class="btn btn-info col-2">Submit</button>
+        <button type="submit" class="btn btn-success col-2">Valider vente</button>
     </form>
-    <hr>
-    <a th:href="@{/sales}"> Back to Sale List</a>
 </main>
 
 <div th:replace="~{fragments/footer}"></div>
@@ -60,4 +60,5 @@
         });
     });
 </script>
+
 </html>
