@@ -15,4 +15,10 @@ public class MvtStockType {
     @Column( name = "name", nullable = false, length = 50 )
     private String name;
 
+    public String getIcon() {
+        if (id == 1) {
+            return "bi bi-caret-down";
+        }
+        return "bi bi-caret-up";
+    }
 }
