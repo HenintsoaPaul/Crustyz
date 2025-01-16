@@ -26,4 +26,9 @@ public class Sale {
     @Column( name = "customer_name", length = 50 )
     private String customerName;
 
+    public String getCustomerName() {
+        String name = this.customerName;
+        boolean isAnonymous = name == null || name.isBlank();
+        return isAnonymous ? "Anonymous" : this.customerName;
+    }
 }

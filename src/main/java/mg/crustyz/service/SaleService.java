@@ -27,8 +27,11 @@ public class SaleService {
 		Sale s = saleRepository.save(saleDTO.getSale());
 		double totalPrice = 0;
 		for (SaleDetail sd : saleDTO.getSaleDetails()) {
-			saleDetailService.save(s, sd);
-			totalPrice += sd.getPrice();
+			// todo: Solution temporaire
+			if (sd.getProduct() != null) {
+				saleDetailService.save(s, sd);
+				totalPrice += sd.getPrice();	
+			}
 		}
 		s.setTotalPrice(totalPrice);
 		saleRepository.save(s);
