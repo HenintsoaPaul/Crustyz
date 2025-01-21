@@ -8,13 +8,17 @@ import mg.crustyz.entity.sale.Sale;
 public class CommissionDTO {
     private final Employee employee;
     private final double totalCommission;
+    private final double totalSales;
 
-    // private final double tauxCommission;
+    private final double tauxCommission = (double) 5 /100;
 
-    private final double tauxCommission = 5/100;
+    public CommissionDTO(Employee employee, double totalCommission) {
+        this.employee = employee;
+        this.totalCommission = totalCommission * tauxCommission;
+        this.totalSales = totalCommission;
+    }
 
-    public CommissionDTO(Sale sale) {
-        this.employee = sale.getEmployee();
-        this.totalCommission = sale.getTotalPrice() * tauxCommission;
+    public String getFullName() {
+        return this.employee.getName() + " " + this.employee.getFirstName();
     }
 }

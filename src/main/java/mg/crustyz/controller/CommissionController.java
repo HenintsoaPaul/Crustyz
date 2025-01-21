@@ -2,13 +2,15 @@ package mg.crustyz.controller;
 
 import lombok.RequiredArgsConstructor;
 import mg.crustyz.dto.CommissionDTO;
+import mg.crustyz.entity.emp.Employee;
 import mg.crustyz.entity.sale.Sale;
 import mg.crustyz.service.SaleService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,10 +43,17 @@ public class CommissionController {
             sales.retainAll(salesOnDaty);
         }
 
-        List<CommissionDTO> dtos = new ArrayList<>();
-        for (Sale s : sales) {
-            dtos.add(new CommissionDTO(s));
-        }
+        // Group sales by employee and total price
+        Map<Employee, Double> salesByEmployee = sales.stream()
+            .collect(Collectors.groupingBy(
+                Sale::getEmployee,
+                Collectors.summingDouble(Sale::getTotalPrice)
+            ));
+
+        // Convert the map to a list of CommissionDTO
+        List<CommissionDTO> dtos = salesByEmployee.entrySet().stream()
+            .map(entry -> new CommissionDTO(entry.getKey(), entry.getValue()))
+            .collect(Collectors.toList());
 
         System.out.println(dtos);
 
