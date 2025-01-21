@@ -2,6 +2,8 @@ package mg.crustyz.entity.sale;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import mg.crustyz.entity.emp.Employee;
+
 import org.hibernate.annotations.ColumnDefault;
 
 
@@ -25,6 +27,10 @@ public class Sale {
     @ColumnDefault( "'Anonymous'" )
     @Column( name = "customer_name", length = 50 )
     private String customerName;
+
+    @ManyToOne( fetch = FetchType.LAZY, optional = false )
+    @JoinColumn( name = "id_employee", nullable = false )
+    private Employee employee;
 
     public String getCustomerName() {
         String name = this.customerName;

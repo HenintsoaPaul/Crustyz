@@ -94,28 +94,38 @@ VALUES ('08/01/2025', 5, 1),
        ('08/01/2025', 2, 2);
 
 INSERT INTO mvt_product_stock (daty, quantity, id_product, id_mvt_stock_type)
-VALUES
-       ('02/02/2024', 15, 1, 2),
+VALUES ('02/02/2024', 15, 1, 2),
        ('02/02/2024', 25, 2, 2),
        ('02/02/2024', 12, 3, 2),
        ('02/02/2024', 25, 4, 2);
-
-INSERT INTO sale (daty, total_price)
-VALUES ('02/02/2024', 1500),
-       ('02/02/2024', 1750);
-
-INSERT INTO sale_detail (quantity, price, id_product, id_sale)
-VALUES (1, 1500, 1, 1),
-       (2, 1000, 3, 2),
-       (1, 750, 2, 2);
 
 -- Vien 1
 -- Vien 1 + Pat 1
 
 INSERT INTO employee_type (name)
-VALUES ('Cuisinier'),
+VALUES ('Vendeur'),
        ('Serveur');
 
 INSERT INTO employee (name, first_name, cin, hire_date, salary, id_employee_type)
-VALUES ('MANITRAJA', 'Henin Paul', '123456789', '01/01/2024', 500, 1),
-       ('Jean', 'DuJardin', '789123456', '01/01/2024', 250, 2);
+VALUES ('MANITRAJA', 'Henintsoa Paul', '123456789', '01/01/2024', 500, 1),
+       ('Jean', 'DuJardin', '789123456', '01/01/2024', 250, 1);
+
+INSERT INTO sale (daty, total_price, id_employee)
+VALUES ('01/02/2025', 1500, 1),
+       ('01/03/2025', 1750, 2),
+       ('01/10/2025', 1650, 1),
+       ('01/11/2025', 1800, 2),
+       ('01/20/2025', 2000, 1),
+       ('01/21/2025', 1450, 2),
+       ('01/27/2025', 1950, 1),
+       ('01/28/2025', 1850, 2);
+
+INSERT INTO sale_detail (quantity, price, id_product, id_sale)
+VALUES (1, 1500, 1, 1),
+       (2, 1000, 3, 2),
+       (1, 750, 2, 3),
+       (3, 1100, 4, 4),
+       (2, 950, 3, 5),
+       (1, 1150, 2, 6),
+       (2, 1400, 4, 7),
+       (3, 1250, 1, 8);

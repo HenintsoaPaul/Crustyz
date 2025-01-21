@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 public class CrustyzProperties {
     private int idMvtSortie;
     private int idMvtEntree;
+    private double tauxCommission;
 }

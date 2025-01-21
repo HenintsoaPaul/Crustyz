@@ -15,6 +15,19 @@
             <input type="text" th:field="*{sale.customerName}" placeholder="Anonymous" class="form-control mb-4 col-4">
         </div>
 
+        <div class="form-group">
+            <label for="employeesList" class="col-md-3 control-label">Vendeur</label>
+            <div th:if="${employeesList != null and not #lists.isEmpty(employeesList)}" class="col-md-5">
+                <select required th:field="*{sale.employee}" id="employeesList" class="form-control mb-4 col-4">
+                    <option th:each="emp:${employeesList}"
+                            th:value="${emp.getId()}" th:text="${emp.getName()} + ' ' + ${emp.getFirstName()}"></option>
+                </select>
+            </div>
+            <div th:if="${employeesList == null and #lists.isEmpty(employeesList)}">
+                <p>Aucun vendeur! <a th:href="@{/units/add}">Ajouter un employer?</a></p>
+            </div>
+        </div>
+
         <!-- Sale details (this is the container where the dynamic details will be added) -->
         <div id="filles_container" class="card px-5 py-5">
             <h3>Details de la Vente</h3>
@@ -22,7 +35,7 @@
             <div th:each="elmt, iterator :${saleDTO.saleDetails}" th:id="'detail-' + iterator.index"
                 class="fille_detail card-body">
                 <div>
-                    <label th:for="'qte-' + iterator.index" class="col-md-3 control-label">Quantit�</label>
+                    <label th:for="'qte-' + iterator.index" class="col-md-3 control-label">Quantite</label>
                     <input th:id="'qte-' + iterator.index" th:field="*{saleDetails[__${iterator.index}__].quantity}"
                         class="form-control mb-4 col-4" type="number" min="0">
                 </div>

@@ -5,6 +5,7 @@ import mg.crustyz.dto.SaleDTO;
 import mg.crustyz.entity.product.Ingredient;
 import mg.crustyz.entity.product.ProductCategory;
 import mg.crustyz.entity.sale.Sale;
+import mg.crustyz.repository.EmpRepository;
 import mg.crustyz.repository.IngredientRepository;
 import mg.crustyz.repository.product.ProductCategoryRepository;
 import mg.crustyz.service.ProductStockService;
@@ -25,6 +26,7 @@ public class SaleController {
 	private final ProductStockService productStockService;
 	private final ProductCategoryRepository productCategoryRepository;
 	private final IngredientRepository ingredientRepository;
+	private final EmpRepository empRepository; 
 
 	@GetMapping
 	public String getAll(Model model,
@@ -114,7 +116,9 @@ public class SaleController {
 
 	@GetMapping("/add")
 	public String gotoSave(Model model) {
+		model.addAttribute("employeesList", empRepository.findAll());
 		model.addAttribute("productStocksList", productStockService.findAll());
+
 		model.addAttribute("saleDTO", new SaleDTO());
 		return "sales/add";
 	}
