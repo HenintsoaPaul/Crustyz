@@ -53,4 +53,14 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
 			select * from sale s where s.daty <= :dateMax
 			""", nativeQuery = true)
 	List<Sale> findAllSalesBeforeDateMax(LocalDate dateMax);
+
+	@Query(value = """
+			select * from sale s where s.total_price >= :prixMin
+			""", nativeQuery = true)
+	List<Sale> findAllSalesSupTo(int prixMin);
+
+	@Query(value = """
+			select * from sale s where s.total_price <= :prixMax
+			""", nativeQuery = true)
+	List<Sale> findAllSalesInfTo(int prixMax);
 }

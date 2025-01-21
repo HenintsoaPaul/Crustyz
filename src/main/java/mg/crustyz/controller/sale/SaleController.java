@@ -32,9 +32,11 @@ public class SaleController {
 			@RequestParam(required = false) List<Integer> selectedIngredients,
 			@RequestParam(required = false) String dateAchat,
 			@RequestParam(required = false) String dateAchatMin,
-			@RequestParam(required = false) String dateAchatMax
+			@RequestParam(required = false) String dateAchatMax,
+			@RequestParam(required = false) String prixMin,
+			@RequestParam(required = false) String prixMax
 
-			) {
+	) {
 
 		List<Sale> sales = saleService.findAll();
 		List<ProductCategory> productCategories = productCategoryRepository.findAll();
@@ -60,33 +62,47 @@ public class SaleController {
 		}
 
 		// jour d'Achat
-		if (dateAchat!= null && !dateAchat.isEmpty()) {
+		if (dateAchat != null && !dateAchat.isEmpty()) {
 			LocalDate dd = LocalDate.parse(dateAchat, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			System.out.print(dateAchat);
-			List<Sale> salesOnDaty = saleService.findAllSalesOn( dd );
+			List<Sale> salesOnDaty = saleService.findAllSalesOn(dd);
 
 			// On recherche les objets a la fois dans sales et salesOnDaty
 			sales.retainAll(salesOnDaty);
 		}
 
 		// dateAchatMin
-		if (dateAchatMin!= null && !dateAchatMin.isEmpty()) {
+		if (dateAchatMin != null && !dateAchatMin.isEmpty()) {
 			LocalDate dd = LocalDate.parse(dateAchatMin, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			System.out.print(dateAchatMin);
+			System.out.println(dateAchatMin);
 
-			List<Sale> salesOnDaty = saleService.findAllSalesAfterDateMin( dd );
+			List<Sale> salesOnDaty = saleService.findAllSalesAfterDateMin(dd);
 
 			sales.retainAll(salesOnDaty);
 		}
 
 		// dateAchatMax
-		if (dateAchatMax!= null && !dateAchatMax.isEmpty()) {
+		if (dateAchatMax != null && !dateAchatMax.isEmpty()) {
 			LocalDate dd = LocalDate.parse(dateAchatMax, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			System.out.print(dateAchatMax);
+			System.out.println(dateAchatMax);
 
-			List<Sale> salesOnDaty = saleService.findAllSalesBeforeDateMax( dd );
+			List<Sale> salesOnDaty = saleService.findAllSalesBeforeDateMax(dd);
 
 			sales.retainAll(salesOnDaty);
+		}
+
+		// prixMin
+		System.out.println("prixMin: " + prixMin);
+		if (prixMin != null) {
+			List<Sale> salesOnPrix = saleService.findAllSalesSupTo(Integer.parseInt(prixMin));
+			sales.retainAll(salesOnPrix);
+		}
+
+		// prixMax
+		System.out.println("prixMax: " + prixMax);
+		if (prixMax != null) {
+			List<Sale> salesOnPrix = saleService.findAllSalesInfTo(Integer.parseInt(prixMax));
+			sales.retainAll(salesOnPrix);
 		}
 
 		model.addAttribute("salesList", sales);
