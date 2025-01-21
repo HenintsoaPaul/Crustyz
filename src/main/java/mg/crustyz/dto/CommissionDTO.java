@@ -10,12 +10,18 @@ public class CommissionDTO {
     private final double totalCommission;
     private final double totalSales;
 
-    private final double tauxCommission = (double) 5 /100;
+    private double tauxCommission = (double) 5 /100;
 
     public CommissionDTO(Employee employee, double totalCommission) {
         this.employee = employee;
-        this.totalCommission = totalCommission * tauxCommission;
+        this.totalCommission = totalCommission * this.tauxCommission;
         this.totalSales = totalCommission;
+    }
+
+    public CommissionDTO(Employee employee, double totalCommission, double tauxCommission) {
+        this.employee = employee;
+        this.totalSales = totalCommission;
+        this.totalCommission = totalCommission * tauxCommission;
     }
 
     public String getFullName() {

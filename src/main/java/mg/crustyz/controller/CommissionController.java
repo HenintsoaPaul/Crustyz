@@ -1,6 +1,7 @@
 package mg.crustyz.controller;
 
 import lombok.RequiredArgsConstructor;
+import mg.crustyz.CrustyzProperties;
 import mg.crustyz.dto.CommissionDTO;
 import mg.crustyz.entity.emp.Employee;
 import mg.crustyz.entity.sale.Sale;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/commissions")
 public class CommissionController {
     private final SaleService saleService;
+    private final CrustyzProperties crustyzProperties;
 
     @GetMapping
     public String getAll(Model model,
@@ -52,7 +54,7 @@ public class CommissionController {
 
         // Convert the map to a list of CommissionDTO
         List<CommissionDTO> dtos = salesByEmployee.entrySet().stream()
-            .map(entry -> new CommissionDTO(entry.getKey(), entry.getValue()))
+            .map(entry -> new CommissionDTO(entry.getKey(), entry.getValue(), crustyzProperties.getTauxCommission()))
             .collect(Collectors.toList());
 
         System.out.println(dtos);
