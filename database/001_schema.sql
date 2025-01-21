@@ -1,12 +1,3 @@
-CREATE TABLE sale
-(
-    id_sale       SERIAL,
-    daty          DATE           NOT NULL,
-    total_price   NUMERIC(15, 2) NOT NULL,
-    customer_name VARCHAR(50) default 'anonymous',
-    PRIMARY KEY (id_sale)
-);
-
 CREATE TABLE supply
 (
     id_supply   SERIAL,
@@ -189,6 +180,17 @@ CREATE TABLE mvt_product_stock
     FOREIGN KEY (id_mvt_stock_type) REFERENCES mvt_stock_type (id_mvt_stock_type)
 );
 
+CREATE TABLE production
+(
+    id_production SERIAL,
+    daty          DATE           NOT NULL,
+    quantity      NUMERIC(15, 2) NOT NULL,
+    id_product    INTEGER        NOT NULL,
+    PRIMARY KEY (id_production),
+
+    FOREIGN KEY (id_product) REFERENCES product (id_product)
+);
+
 CREATE TABLE product_stock
 (
     id_stock_product SERIAL,
@@ -196,6 +198,17 @@ CREATE TABLE product_stock
     id_product       INTEGER        NOT NULL,
     PRIMARY KEY (id_stock_product),
     FOREIGN KEY (id_product) REFERENCES product (id_product)
+);
+
+CREATE TABLE sale
+(
+    id_sale       SERIAL,
+    daty          DATE           NOT NULL,
+    total_price   NUMERIC(15, 2) NOT NULL,
+    customer_name VARCHAR(50) default 'Anonymous',
+    id_employee   INTEGER        NOT NULL,
+    PRIMARY KEY (id_sale),
+    FOREIGN KEY (id_employee) REFERENCES employee (id_employee)
 );
 
 CREATE TABLE sale_detail
