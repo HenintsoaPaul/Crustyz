@@ -101,4 +101,12 @@ public class SaleService {
 	public List<Sale> findAllSalesBeforeDateMax(LocalDate maxDate) {
         return saleRepository.findAllSalesBeforeDateMax(maxDate);
     }
+
+	public List<Sale> findAllSalesInfTo(int prixMax) {
+        return saleRepository.findAllSalesInfTo(prixMax);
+    }
+
+	public List<Sale> findAllSalesSupTo(int prixMin) {
+        return saleRepository.findAllSalesSupTo(prixMin);
+    }
 }

@@ -26,6 +26,29 @@
             </ul>
         </li>
 
+        <!-- Stocks -->
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#stocks-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-archive"></i>
+                <span>Etat de stocks</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="stocks-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/stocks/ingredients}">
+                        <i class="bi bi-circle"></i>
+                        <span>Stock d'Ingredients</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/stocks/products}">
+                        <i class="bi bi-circle"></i>
+                        <span>Stock de Produits</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- Production -->
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#productions-nav" data-bs-toggle="collapse" href="#">
@@ -75,7 +98,7 @@
         <!-- Produits -->
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-amazon"></i>
+                <i class="bi bi-cake"></i>
                 <span>Produits</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
@@ -98,7 +121,7 @@
         <!-- Ingredients -->
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#ingredients-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-activity"></i>
+                <i class="bi bi-egg"></i>
                 <span>Ingredients</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
@@ -121,7 +144,7 @@
         <!-- Unites -->
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#units-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-unity"></i>
+                <i class="bi bi-box-seam"></i>
                 <span>Unites</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
