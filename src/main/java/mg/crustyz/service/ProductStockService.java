@@ -59,4 +59,8 @@ public class ProductStockService {
         return this.productStockRepository.findByProduct( product )
                 .orElseThrow( () -> new Exception( "ProductStock not found" ) );
     }
+
+    public List<ProductStock> findByProductNameContaining(String nomProduit) {
+       return productStockRepository.findByProductNameContaining(nomProduit);
+    }
 }
