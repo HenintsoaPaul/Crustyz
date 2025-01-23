@@ -187,7 +187,6 @@ CREATE TABLE production
     quantity      NUMERIC(15, 2) NOT NULL,
     id_product    INTEGER        NOT NULL,
     PRIMARY KEY (id_production),
-
     FOREIGN KEY (id_product) REFERENCES product (id_product)
 );
 
@@ -233,6 +232,15 @@ CREATE TABLE supply_detail
     PRIMARY KEY (id_supply_detail),
     FOREIGN KEY (id_ingredient_provider) REFERENCES ingredient_provider (id_ingredient_provider),
     FOREIGN KEY (id_supply) REFERENCES supply (id_supply)
+);
+
+CREATE TABLE comission
+(
+    id_commission   SERIAL,
+    taux_commission NUMERIC(15, 2) NOT NULL,
+    id_sale         INTEGER        NOT NULL,
+    PRIMARY KEY (id_commission),
+    FOREIGN KEY (id_sale) REFERENCES sale (id_sale)
 );
 
 CREATE TABLE recipe_product

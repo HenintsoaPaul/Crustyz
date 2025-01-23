@@ -51,9 +51,9 @@ VALUES ('Patisserie'),
 
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
 VALUES ('Pain raisin', 1500, 3, 2),
-       ('Gateau', 750, 3, 1),
+       ('Gateau', 12000, 3, 1),
        ('Mofo dopaina', 500, 3, 2),
-       ('Croissant', 500, 3, 2);
+       ('Croissant', 5000, 3, 2);
 
 INSERT INTO recipe (name)
 VALUES ('Recette mofo tsisy dobera'),
