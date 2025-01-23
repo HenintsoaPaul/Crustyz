@@ -28,35 +28,39 @@ public class IngredientStockService {
         return ingredientStockRepository.findAll();
     }
 
-    public IngredientStock findById( int id )
+    public IngredientStock findById(int id)
             throws Exception {
-        return ingredientStockRepository.findById( id )
-                .orElseThrow( () -> new Exception( "IngredientStock not found" ) );
+        return ingredientStockRepository.findById(id)
+                .orElseThrow(() -> new Exception("IngredientStock not found"));
     }
 
-    public List<MvtIngredientStock> findAllMvtByIdIngredient( int id ) {
-        return mvtIngredientStockRepository.getByIdIngredient( id );
+    public List<MvtIngredientStock> findAllMvtByIdIngredient(int id) {
+        return mvtIngredientStockRepository.getByIdIngredient(id);
     }
 
     @Transactional
-    public void saveMvtStock( SupplyDetail supplyDetail )
+    public void saveMvtStock(SupplyDetail supplyDetail)
             throws Exception {
         MvtIngredientStock mvt = new MvtIngredientStock();
-        mvt.setQuantity( supplyDetail.getQuantity() );
-        mvt.setIngredient( supplyDetail.getIngredientProvider().getIngredient() );
-        mvt.setDaty( supplyDetail.getSupply().getDaty() );
+        mvt.setQuantity(supplyDetail.getQuantity());
+        mvt.setIngredient(supplyDetail.getIngredientProvider().getIngredient());
+        mvt.setDaty(supplyDetail.getSupply().getDaty());
 
         int idEntree = properties.getIdMvtEntree();
-        MvtStockType type = mvtStockTypeRepository.findById( idEntree )
-                .orElseThrow( () -> new Exception( "MvtStockType not found" ) );
-        mvt.setMvtStockType( type );
+        MvtStockType type = mvtStockTypeRepository.findById(idEntree)
+                .orElseThrow(() -> new Exception("MvtStockType not found"));
+        mvt.setMvtStockType(type);
 
-        mvtIngredientStockRepository.save( mvt );
+        mvtIngredientStockRepository.save(mvt);
     }
 
-    public IngredientStock findByIngredient( Ingredient ingredient )
+    public IngredientStock findByIngredient(Ingredient ingredient)
             throws Exception {
-        return this.ingredientStockRepository.findByIngredient( ingredient )
-                .orElseThrow( () -> new Exception( "IngredientStock not found" ) );
+        return this.ingredientStockRepository.findByIngredient(ingredient)
+                .orElseThrow(() -> new Exception("IngredientStock not found"));
+    }
+
+    public List<IngredientStock> findByIngredientNameContaining(String nomIngredient) {
+        return ingredientStockRepository.findByIngredientNameContaining(nomIngredient);
     }
 }

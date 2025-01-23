@@ -1,59 +1,66 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-    <script th:src="@{/js/henin/ajout-input-fille.js}"></script>
-</head>
-<body>
-<div class="container">
-    <h2>Save Sale</h2>
-    <form th:action="@{/sales/save}" th:object="${saleDTO}" method="POST" id="saleForm">
-        <input type="date" required
-               th:field="*{sale.daty}" class="form-control mb-4 col-4">
+<div th:replace="~{fragments/_layout}"></div>
 
-        <input type="text"
-               th:field="*{sale.customerName}"
-               value="Anonymous" class="form-control mb-4 col-4">
+<main id="main" class="main">
+    <h2>Enregisterment de Vente</h2>
+
+    <form th:action="@{/sales/save}" th:object="${saleDTO}" method="POST" id="saleForm">
+
+        <div>
+            <label class="col-md-3 control-label">Date de vente</label>
+            <input type="date" required th:field="*{sale.daty}" class="form-control mb-4 col-4">
+        </div>
+
+        <div>
+            <label class="col-md-3 control-label">Nom client</label>
+            <input type="text" th:field="*{sale.customerName}" placeholder="Anonymous" class="form-control mb-4 col-4">
+        </div>
+
+        <div class="form-group">
+            <label for="employeesList" class="col-md-3 control-label">Vendeur</label>
+            <div th:if="${employeesList != null and not #lists.isEmpty(employeesList)}" class="col-md-5">
+                <select required th:field="*{sale.employee}" id="employeesList" class="form-control mb-4 col-4">
+                    <option th:each="emp:${employeesList}"
+                            th:value="${emp.getId()}" th:text="${emp.getName()} + ' ' + ${emp.getFirstName()}"></option>
+                </select>
+            </div>
+            <div th:if="${employeesList == null and #lists.isEmpty(employeesList)}">
+                <p>Aucun vendeur! <a th:href="@{/units/add}">Ajouter un employer?</a></p>
+            </div>
+        </div>
 
         <!-- Sale details (this is the container where the dynamic details will be added) -->
-        <div id="filles_container">
-            <div th:each="elmt, iterator :${saleDTO.saleDetails}"
-                 th:id="'detail-' + iterator.index" class="fille_detail">
+        <div id="filles_container" class="card px-5 py-5">
+            <h3>Details de la Vente</h3>
+
+            <div th:each="elmt, iterator :${saleDTO.saleDetails}" th:id="'detail-' + iterator.index"
+                class="fille_detail card-body">
                 <div>
-                    <label th:for="'qte-' + iterator.index"
-                           class="col-md-3 control-label">Quantité</label>
-                    <input th:id="'qte-' + iterator.index"
-                           th:field="*{saleDetails[__${iterator.index}__].quantity}"
-                           class="form-control mb-4 col-4" type="number" min="0">
+                    <label th:for="'qte-' + iterator.index" class="col-md-3 control-label">Quantite</label>
+                    <input th:id="'qte-' + iterator.index" th:field="*{saleDetails[__${iterator.index}__].quantity}"
+                        class="form-control mb-4 col-4" type="number" min="0">
                 </div>
                 <div class="form-group">
-                    <label th:for="'productsList-' + iterator.index"
-                           class="col-md-3 control-label">Produit</label>
+                    <label th:for="'productsList-' + iterator.index" class="col-md-3 control-label">Produit</label>
                     <select th:id="'productsList-' + iterator.index"
-                            th:field="*{saleDetails[__${iterator.index}__].product}"
-                            class="form-control mb-4 col-4"
-                            required>
-                        <option th:each="elmt:${productStocksList}"
-                                th:value="${elmt.getProduct().getId()}"
-                                th:text="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}"
-                                th:title="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}">
+                        th:field="*{saleDetails[__${iterator.index}__].product}" class="form-control mb-4 col-4"
+                        required>
+                        <option th:each="elmt:${productStocksList}" th:value="${elmt.getProduct().getId()}"
+                            th:text="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}"
+                            th:title="${elmt.getProduct().getName()}  + '--' + ${elmt.getQuantity}">
                         </option>
                     </select>
                 </div>
             </div>
         </div>
-
         <!-- Button to add a new sale detail -->
-        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Détail Vente</button>
+        <button type="button" class="btn btn-secondary col-2" id="addFilleBtn">Ajouter Detail Vente</button>
 
-        <button type="submit" class="btn btn-info col-2">Submit</button>
+        <button type="submit" class="btn btn-success col-2">Valider vente</button>
     </form>
-    <hr>
-    <a th:href="@{/sales}"> Back to Sale List</a>
-</div>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -65,4 +72,5 @@
         });
     });
 </script>
+
 </html>

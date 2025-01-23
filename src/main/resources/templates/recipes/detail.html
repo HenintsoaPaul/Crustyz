@@ -44,11 +44,11 @@
             </thead>
             <tbody>
             <tr th:each="step:${recipeSteps}">
-                <td th:text="${step.getRecipeStep().getNoStep()}"></td>
-                <td th:text="${step.getRecipeStep().getName()}"></td>
-                <td th:text="${step.getRecipeStep().getDescription()}"></td>
-                <td th:text="${step.getRecipeStep().getIngredient().getName()}"></td>
-                <td th:text="${step.getRecipeStep().getQuantityUsed()}"></td>
+                <td th:text="${step.getNoStep()}"></td>
+                <td th:text="${step.getName()}"></td>
+                <td th:text="${step.getDescription()}"></td>
+                <td th:text="${step.getIngredient().getName()}"></td>
+                <td th:text="${step.getQuantityUsed()}"></td>
             </tr>
             </tbody>
         </table>

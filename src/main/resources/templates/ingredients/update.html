@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container">
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
     <h2>Update ingredient</h2>
 
     <form th:action="@{/ingredients/save}" th:object="${ingredient}" method="POST">
@@ -34,6 +27,9 @@
     </form>
     <hr>
     <a th:href="@{/ingredients}"> Back to ingredient List</a>
-</div>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
 </body>
 </html>

@@ -1,0 +1,68 @@
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
+    <h3>Liste des productions</h3>
+
+    <div class="container my-2" align="center">
+        <form th:action="@{/products/productions}"
+              method="GET"
+              class="form-inline mb-3">
+
+            <!-- Filter by Production -->
+            <div>
+                <label>Productions a inclure :</label>
+                <ul>
+                    <li th:each="product : ${productsList}">
+                        <input type="checkbox" name="selectedProducts"
+                               th:value="${product.getId()}"/>
+                        <span th:text="${product.getName()}"></span>
+                    </li>
+                </ul>
+            </div>
+            <!-- Filter by Ingredient -->
+            <div>
+                <label>Ingrédients a inclure :</label>
+                <ul>
+                    <li th:each="ingredient : ${ingredientsList}">
+                        <input type="checkbox" name="selectedIngredients"
+                               th:value="${ingredient.getId()}"/>
+                        <span th:text="${ingredient.getName()}"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <!-- Liste des productions -->
+    <table style="width:80%"
+           class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Daty</th>
+            <th>Quantite</th>
+            <th>Produit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod:${productionsList}">
+            <td th:text="${prod.getId()}"></td>
+            <td th:text="${prod.getDaty()}"></td>
+            <td th:text="${prod.getQuantity()}"></td>
+            <td th:text="${prod.getProduct().getName()}"></td>
+
+            <!--            <td>-->
+            <!--                <a th:href="@{/products/productions/update/{id}(id=${categ.getId()})}"-->
+            <!--                   class="btn btn-primary">Update</a>-->
+            <!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
+</body>
+</html>

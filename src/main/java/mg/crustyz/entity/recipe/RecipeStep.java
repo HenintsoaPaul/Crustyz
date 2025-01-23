@@ -24,15 +24,12 @@ public class RecipeStep {
     @Column( name = "description", length = Integer.MAX_VALUE )
     private String description;
 
-    @Column( name = "quantity_used" )
-    private double quantityUsed;
-
-    @ManyToOne( fetch = FetchType.LAZY, optional = false )
-    @JoinColumn( name = "id_ingredient", nullable = false )
-    private Ingredient ingredient;
-
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_recipe", nullable = false )
     private Recipe recipe;
+
+    @ManyToOne( fetch = FetchType.LAZY, optional = false )
+    @JoinColumn( name = "id_recipe_step_type", nullable = false )
+    private RecipeStepType recipe_step_type;
 
 }

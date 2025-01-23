@@ -13,7 +13,7 @@ Bakery App
 ### Setup database
 
 * Create `crustyz` database.
-* Run `schema.sql`, then `trigger.sql`, then `data.sql` files.
+* Run `001_schema.sql`, then `002_trigger.sql`, then `003_data.sql` files.
 
 ### Run spring-boot
 

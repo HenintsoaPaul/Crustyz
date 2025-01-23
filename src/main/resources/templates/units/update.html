@@ -11,7 +11,7 @@
     <h2>Update Unit</h2>
 
     <form th:action="@{/units/save}" th:object="${unit}" method="POST">
-        <input type="hidden" th:field="*{id}" placeholder="Unit Name"
+        <input type="hidden" th:field="*{id}"
                class="form-control mb-4 col-4">
         <input type="text" th:field="*{name}" placeholder="Unit Name"
                class="form-control mb-4 col-4">
@@ -20,7 +20,6 @@
             Submit update
         </button>
     </form>
-
     <hr>
 
     <a th:href="@{/units}"> Back to Unit List</a>
