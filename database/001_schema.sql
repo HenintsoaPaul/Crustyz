@@ -192,15 +192,15 @@ CREATE TABLE mvt_product_stock
     FOREIGN KEY (id_mvt_stock_type) REFERENCES mvt_stock_type (id_mvt_stock_type)
 );
 
-CREATE TABLE production
-(
-    id_production SERIAL,
-    daty          DATE           NOT NULL,
-    quantity      NUMERIC(15, 2) NOT NULL,
-    id_product    INTEGER        NOT NULL,
-    PRIMARY KEY (id_production),
-    FOREIGN KEY (id_product) REFERENCES product (id_product)
-);
+-- CREATE TABLE production
+-- (
+--     id_production SERIAL,
+--     daty          DATE           NOT NULL,
+--     quantity      NUMERIC(15, 2) NOT NULL,
+--     id_product    INTEGER        NOT NULL,
+--     PRIMARY KEY (id_production),
+--     FOREIGN KEY (id_product) REFERENCES product (id_product)
+-- );
 
 CREATE TABLE product_stock
 (
@@ -248,10 +248,11 @@ CREATE TABLE supply_detail
 
 CREATE TABLE comission
 (
-    id_commission   SERIAL,
-    taux_commission NUMERIC(15, 2) NOT NULL,
+    id_comission   SERIAL,
+    taux_comission NUMERIC(15, 2) NOT NULL,
+    comission_amount NUMERIC(15, 2) NOT NULL,
     id_sale         INTEGER        NOT NULL,
-    PRIMARY KEY (id_commission),
+    PRIMARY KEY (id_comission),
     FOREIGN KEY (id_sale) REFERENCES sale (id_sale)
 );
 
