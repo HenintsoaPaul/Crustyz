@@ -31,6 +31,10 @@ public class Employee {
     private double salary;
 
     @ManyToOne( fetch = FetchType.LAZY, optional = false )
+    @JoinColumn( name = "id_employee_sexe", nullable = false )
+    private EmployeeSexe employeeSexe;
+
+    @ManyToOne( fetch = FetchType.LAZY, optional = false )
     @JoinColumn( name = "id_employee_type", nullable = false )
     private EmployeeType employeeType;
 

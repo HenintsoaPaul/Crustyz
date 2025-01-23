@@ -123,6 +123,16 @@ CREATE TABLE mvt_ingredient_stock
     FOREIGN KEY (id_mvt_stock_type) REFERENCES mvt_stock_type (id_mvt_stock_type)
 );
 
+
+CREATE TABLE employee_sexe
+(
+    id_employee_sexe SERIAL,
+    name             VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_employee_sexe),
+    UNIQUE (name)
+);
+
+
 CREATE TABLE employee
 (
     id_employee      SERIAL,
@@ -131,8 +141,10 @@ CREATE TABLE employee
     cin              VARCHAR(50)    NOT NULL,
     hire_date        DATE           NOT NULL,
     salary           NUMERIC(15, 2) NOT NULL,
+    id_employee_sexe INTEGER        NOT NULL,
     id_employee_type INTEGER        NOT NULL,
     PRIMARY KEY (id_employee),
+    FOREIGN KEY (id_employee_sexe) REFERENCES employee_sexe (id_employee_sexe),
     FOREIGN KEY (id_employee_type) REFERENCES employee_type (id_employee_type)
 );
 
