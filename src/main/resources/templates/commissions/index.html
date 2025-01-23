@@ -21,20 +21,42 @@
         </form>
     </div>
 
+    <h2>Commissions par vendeur</h2>
     <table class="table table-striped table-responsive-md">
         <thead>
-            <tr>
-                <th>Vendeur</th>
-                <th>Total Vente</th>
-                <th>Total commission</th>
-            </tr>
+        <tr>
+            <th>Vendeur</th>
+            <th>Commission</th>
+            <th>Taux</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="elmt:${commissionsList}">
-                <td th:text="${elmt.getFullName()}"></td>
-                <td th:text="${elmt.getTotalSales()}"></td>
-                <td th:text="${elmt.getTotalCommission()}"></td>
-            </tr>
+        <tr th:each="elmt:${commissions}">
+            <td th:text="${elmt.getSale().getEmployee().getFullName()}"></td>
+            <td th:text="${elmt.getComission_amount()}"></td>
+            <td th:text="${elmt.getTaux_comission()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Commissions general par Sexe -->
+    <h2>Etat des commissions par sexe</h2>
+    <table class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Sexe</th>
+            <th>Total commission</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Homme</td>
+            <td th:text="${generalComissions.get(0)}"></td>
+        </tr>
+        <tr>
+            <td>Femme</td>
+            <td th:text="${generalComissions.get(1)}"></td>
+        </tr>
         </tbody>
     </table>
 </main>

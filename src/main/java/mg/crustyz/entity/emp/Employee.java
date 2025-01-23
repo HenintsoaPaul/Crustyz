@@ -38,4 +38,8 @@ public class Employee {
     @JoinColumn( name = "id_employee_type", nullable = false )
     private EmployeeType employeeType;
 
+
+    public String getFullName() {
+        return name + " " + firstName;
+    }
 }

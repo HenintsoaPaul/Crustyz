@@ -2,111 +2,170 @@ package mg.crustyz.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import mg.crustyz.CrustyzProperties;
 import mg.crustyz.dto.SaleDTO;
+import mg.crustyz.entity.emp.Comission;
 import mg.crustyz.entity.sale.Sale;
 import mg.crustyz.entity.sale.SaleDetail;
+import mg.crustyz.repository.ComissionRepository;
 import mg.crustyz.repository.sale.SaleRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SaleService {
-	private final SaleRepository saleRepository;
-	private final SaleDetailService saleDetailService;
+    private final SaleRepository saleRepository;
+    private final SaleDetailService saleDetailService;
 
-	public List<Sale> findAll() {
-		return saleRepository.findAll();
-	}
+    private final ComissionRepository comissionRepository;
+    private final CrustyzProperties crustyzProperties;
+    private final double MIN_ACHAT = 20000;
 
-	@Transactional
-	public void save(SaleDTO saleDTO) throws Exception {
-		Sale s = saleRepository.save(saleDTO.getSale());
-		double totalPrice = 0;
-		for (SaleDetail sd : saleDTO.getSaleDetails()) {
-			// todo: Solution temporaire
-			if (sd.getProduct() != null) {
-				saleDetailService.save(s, sd);
-				totalPrice += sd.getPrice();	
-			}
-		}
-		s.setTotalPrice(totalPrice);
-		saleRepository.save(s);
-	}
+    public List<Sale> findAll() {
+        return saleRepository.findAll();
+    }
 
-	public Sale findById(Integer id) {
-		return saleRepository.findById(id).orElseThrow(() -> new RuntimeException("Sale not found"));
-	}
+    @Transactional
+    public void save(SaleDTO saleDTO) throws Exception {
+        Sale s = saleRepository.save(saleDTO.getSale());
+        double totalPrice = 0;
+        for (SaleDetail sd : saleDTO.getSaleDetails()) {
+            // todo: Solution temporaire
+            if (sd.getProduct() != null) {
+                saleDetailService.save(s, sd);
+                totalPrice += sd.getPrice();
+            }
+        }
+        s.setTotalPrice(totalPrice);
 
-	public List<SaleDetail> findAllDetails(Sale sale) {
-		return saleDetailService.findAllBySale(sale);
-	}
+        // todo: insert commission
+        if (s.getTotalPrice() >= MIN_ACHAT) {
+            Comission comission = new Comission();
+            comission.setTaux_comission(crustyzProperties.getTauxCommission());
+            comission.setComission_amount(s.getTotalPrice() * crustyzProperties.getTauxCommission());
+            comission.setSale(s);
 
-	private boolean isNature(List<Integer> ids) {
-		for (Integer id : ids) {
-			if (id == -1)
-				return true;
-		}
-		return false;
-	}
+            comissionRepository.save(comission);
+        }
+        // todo: insert commission
 
-	public List<Sale> filterByIngredients(List<Integer> selectedIngredients) {
-		if (isNature(selectedIngredients)) {
-			return saleRepository.filterBySupplementsNature();
-		}
 
-		return saleRepository.filterBySupplements(selectedIngredients);
-	}
+        saleRepository.save(s);
+    }
 
-	public List<Sale> filterByProductCategories(List<Integer> selectedProductCategories) {
-		return saleRepository.filterByProductCategories(selectedProductCategories);
-	}
+    public Sale findById(Integer id) {
+        return saleRepository.findById(id).orElseThrow(() -> new RuntimeException("Sale not found"));
+    }
 
-	public List<Sale> filter(List<Integer> selectedIngredients, List<Integer> selectedProductCategories) {
-		List<Sale> s1 = filterByIngredients(selectedIngredients);
-		if (isNature(selectedIngredients)) {
-			s1 = saleRepository.filterBySupplementsNature();
-		}
+    public List<SaleDetail> findAllDetails(Sale sale) {
+        return saleDetailService.findAllBySale(sale);
+    }
 
-		List<Sale> s2 = filterByProductCategories(selectedProductCategories);
+    private boolean isNature(List<Integer> ids) {
+        for (Integer id : ids) {
+            if (id == -1)
+                return true;
+        }
+        return false;
+    }
 
-		List<Sale> result = new ArrayList<>();
-		for (Sale s : s1) {
-			boolean found = false;
-			for (Sale ss : s2) {
-				if (s.getId().equals(ss.getId())) {
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				result.add(s);
-			}
-		}
+    public List<Sale> filterByIngredients(List<Integer> selectedIngredients) {
+        if (isNature(selectedIngredients)) {
+            return saleRepository.filterBySupplementsNature();
+        }
 
-		return result;
-	}
+        return saleRepository.filterBySupplements(selectedIngredients);
+    }
 
-	public List<Sale> findAllSalesOn(LocalDate dd) {
-		return saleRepository.findAllByDaty(dd);
-	}
+    public List<Sale> filterByProductCategories(List<Integer> selectedProductCategories) {
+        return saleRepository.filterByProductCategories(selectedProductCategories);
+    }
+
+    public List<Sale> filter(List<Integer> selectedIngredients, List<Integer> selectedProductCategories) {
+        List<Sale> s1 = filterByIngredients(selectedIngredients);
+        if (isNature(selectedIngredients)) {
+            s1 = saleRepository.filterBySupplementsNature();
+        }
+
+        List<Sale> s2 = filterByProductCategories(selectedProductCategories);
+
+        List<Sale> result = new ArrayList<>();
+        for (Sale s : s1) {
+            boolean found = false;
+            for (Sale ss : s2) {
+                if (s.getId().equals(ss.getId())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                result.add(s);
+            }
+        }
+
+        return result;
+    }
+
+    public List<Sale> findAllSalesOn(LocalDate dd) {
+        return saleRepository.findAllByDaty(dd);
+    }
 
     public List<Sale> findAllSalesAfterDateMin(LocalDate minDate) {
         return saleRepository.findAllSalesAfterDateMin(minDate);
     }
 
-	public List<Sale> findAllSalesBeforeDateMax(LocalDate maxDate) {
+    public List<Sale> findAllSalesBeforeDateMax(LocalDate maxDate) {
         return saleRepository.findAllSalesBeforeDateMax(maxDate);
     }
 
-	public List<Sale> findAllSalesInfTo(int prixMax) {
+    public List<Sale> findAllSalesInfTo(int prixMax) {
         return saleRepository.findAllSalesInfTo(prixMax);
     }
 
-	public List<Sale> findAllSalesSupTo(int prixMin) {
+    public List<Sale> findAllSalesSupTo(int prixMin) {
         return saleRepository.findAllSalesSupTo(prixMin);
+    }
+
+    public List<Comission> findAllComissionsBandy() {
+        return comissionRepository.findAllComissionsByEmployeeSexe(1);
+    }
+
+    public List<Comission> findAllComissionsSipa() {
+        return comissionRepository.findAllComissionsByEmployeeSexe(2);
+    }
+
+    public List<Double> getComissions(List<Comission> comissionList) {
+        List<Double> comissions = new ArrayList<>();
+
+        double total = 0;
+        for (Comission c : findAllComissionsBandy()) {
+            if (comissionList.contains(c)) {
+                total += c.getComission_amount();
+            }
+        }
+        comissions.add(total);
+
+        total = 0;
+        for (Comission c : findAllComissionsSipa()) {
+            if (comissionList.contains(c)) {
+                total += c.getComission_amount();
+            }
+        }
+        comissions.add(total);
+
+        return comissions;
+    }
+
+    public List<Comission> findAllComissionsAfterDateMin(LocalDate minDate) {
+        return comissionRepository.findAllComissionsAfterDateMin(minDate);
+    }
+
+    public List<Comission> findAllComissionsBeforeDateMax(LocalDate maxDate) {
+        return comissionRepository.findAllComissionsBeforeDateMax(maxDate);
     }
 }
