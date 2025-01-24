@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -24,7 +23,6 @@ public class SaleService {
 
     private final ComissionRepository comissionRepository;
     private final CrustyzProperties crustyzProperties;
-    private final double MIN_ACHAT = 20000;
 
     public List<Sale> findAll() {
         return saleRepository.findAll();
@@ -43,17 +41,14 @@ public class SaleService {
         }
         s.setTotalPrice(totalPrice);
 
-        // todo: insert commission
-        if (s.getTotalPrice() >= MIN_ACHAT) {
+        if (s.getTotalPrice() >= crustyzProperties.getMinComissionnable()) {
             Comission comission = new Comission();
-            comission.setTaux_comission(crustyzProperties.getTauxCommission());
-            comission.setComission_amount(s.getTotalPrice() * crustyzProperties.getTauxCommission());
+            comission.setTaux_comission(crustyzProperties.getTauxComission());
+            comission.setComission_amount(s.getTotalPrice() * crustyzProperties.getTauxComission());
             comission.setSale(s);
 
             comissionRepository.save(comission);
         }
-        // todo: insert commission
-
 
         saleRepository.save(s);
     }
@@ -129,43 +124,5 @@ public class SaleService {
 
     public List<Sale> findAllSalesSupTo(int prixMin) {
         return saleRepository.findAllSalesSupTo(prixMin);
-    }
-
-    public List<Comission> findAllComissionsBandy() {
-        return comissionRepository.findAllComissionsByEmployeeSexe(1);
-    }
-
-    public List<Comission> findAllComissionsSipa() {
-        return comissionRepository.findAllComissionsByEmployeeSexe(2);
-    }
-
-    public List<Double> getComissions(List<Comission> comissionList) {
-        List<Double> comissions = new ArrayList<>();
-
-        double total = 0;
-        for (Comission c : findAllComissionsBandy()) {
-            if (comissionList.contains(c)) {
-                total += c.getComission_amount();
-            }
-        }
-        comissions.add(total);
-
-        total = 0;
-        for (Comission c : findAllComissionsSipa()) {
-            if (comissionList.contains(c)) {
-                total += c.getComission_amount();
-            }
-        }
-        comissions.add(total);
-
-        return comissions;
-    }
-
-    public List<Comission> findAllComissionsAfterDateMin(LocalDate minDate) {
-        return comissionRepository.findAllComissionsAfterDateMin(minDate);
-    }
-
-    public List<Comission> findAllComissionsBeforeDateMax(LocalDate maxDate) {
-        return comissionRepository.findAllComissionsBeforeDateMax(maxDate);
     }
 }
