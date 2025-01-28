@@ -1,27 +1,39 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Crustyz</title>
-    <link rel="stylesheet"
-          th:href="@{/css/bootstrap.css}">
-</head>
-<body>
-<div class="container">
-    <h2>Save Product Category</h2>
+<div th:replace="~{fragments/_layout}"></div>
 
-    <form th:action="@{/products/categories/save}" th:object="${category}" method="POST">
-        <input type="text" th:field="*{name}" placeholder="Category Name"
-               class="form-control mb-4 col-4">
+<main id="main" class="main">
+    <h2>Modification prix produit</h2>
 
-        <button type="submit" class="btn btn-info col-2">
-            Submit Save
-        </button>
+    <form th:action="@{/products/prices/save}" th:object="${productPrice}" method="POST" id="productPriceForm">
+        <div>
+            <label class="col-md-3 control-label">Date</label>
+            <input type="date" required th:field="*{addDate}" class="form-control mb-4 col-4">
+        </div>
+
+        <div>
+            <label class="col-md-3 control-label">Prix Unite</label>
+            <input type="number" th:field="*{val}" class="form-control mb-4 col-4">
+        </div>
+
+        <div class="form-group">
+            <label for="productList" class="col-md-3 control-label">Produit</label>
+            <div th:if="${productList != null and not #lists.isEmpty(productList)}" class="col-md-5">
+                <select required th:field="*{product}" id="productList" class="form-control mb-4 col-4">
+                    <option th:each="prod:${productList}"
+                            th:value="${prod.getId()}"
+                            th:text="${prod.getName()} + ' -- Pu: ' + ${prod.getUnitPrice()}"></option>
+                </select>
+            </div>
+            <div th:if="${productList == null and #lists.isEmpty(productList)}">
+                <p>Aucun Produit! <a th:href="@{/products/add}">Ajouter un produit?</a></p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success col-2">Valider</button>
     </form>
+</main>
 
-    <hr>
+<div th:replace="~{fragments/footer}"></div>
 
-    <a th:href="@{/products/categories}"> Back to Category List</a>
-</div>
 </body>
+
 </html>

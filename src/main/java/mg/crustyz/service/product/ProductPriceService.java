@@ -20,15 +20,24 @@ public class ProductPriceService {
         return productPriceRepository.findAll();
     }
 
+    public List<Product> findAllProduct() {
+        return productRepository.findAll();
+    }
+
     @Transactional
     public void save(ProductPrice productPrice)
             throws Exception {
         // TODO: update prix produit
-        Product product = productRepository.findById(productPrice.getProduct().getId()).orElseThrow(() -> new Exception("Product not found"));
+        Integer id = productPrice.getProduct().getId();
+        Product product = productRepository.findById(id).orElseThrow(() -> new Exception("Product not found"));
         product.setUnitPrice(productPrice.getVal());
         productRepository.save(product);
         // TODO: update prix produit
 
         productPriceRepository.save(productPrice);
+    }
+
+    public ProductPrice findById(Integer id) throws Exception {
+        return productPriceRepository.findById(id).orElseThrow(() -> new Exception("ProductPrice not found"));
     }
 }
