@@ -248,10 +248,10 @@ CREATE TABLE supply_detail
 
 CREATE TABLE comission
 (
-    id_comission   SERIAL,
-    taux_comission NUMERIC(15, 2) NOT NULL,
+    id_comission     SERIAL,
+    taux_comission   NUMERIC(15, 2) NOT NULL,
     comission_amount NUMERIC(15, 2) NOT NULL,
-    id_sale         INTEGER        NOT NULL,
+    id_sale          INTEGER        NOT NULL,
     PRIMARY KEY (id_comission),
     FOREIGN KEY (id_sale) REFERENCES sale (id_sale)
 );
@@ -295,3 +295,13 @@ CREATE TABLE product_of_month
     PRIMARY KEY (id_product_of_month),
     FOREIGN KEY (id_product) REFERENCES product (id_product)
 );
+
+CREATE TABLE product_price
+(
+    id_product_price SERIAL,
+    add_date         DATE          not null,
+    id_product       INTEGER       not null,
+    val              numeric(15, 2) not null,
+    PRIMARY KEY (id_product_price),
+    FOREIGN KEY (id_product) REFERENCES product (id_product)
+)
