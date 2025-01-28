@@ -123,6 +123,16 @@ CREATE TABLE mvt_ingredient_stock
     FOREIGN KEY (id_mvt_stock_type) REFERENCES mvt_stock_type (id_mvt_stock_type)
 );
 
+
+CREATE TABLE employee_sexe
+(
+    id_employee_sexe SERIAL,
+    name             VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_employee_sexe),
+    UNIQUE (name)
+);
+
+
 CREATE TABLE employee
 (
     id_employee      SERIAL,
@@ -131,8 +141,10 @@ CREATE TABLE employee
     cin              VARCHAR(50)    NOT NULL,
     hire_date        DATE           NOT NULL,
     salary           NUMERIC(15, 2) NOT NULL,
+    id_employee_sexe INTEGER        NOT NULL,
     id_employee_type INTEGER        NOT NULL,
     PRIMARY KEY (id_employee),
+    FOREIGN KEY (id_employee_sexe) REFERENCES employee_sexe (id_employee_sexe),
     FOREIGN KEY (id_employee_type) REFERENCES employee_type (id_employee_type)
 );
 
@@ -180,16 +192,15 @@ CREATE TABLE mvt_product_stock
     FOREIGN KEY (id_mvt_stock_type) REFERENCES mvt_stock_type (id_mvt_stock_type)
 );
 
-CREATE TABLE production
-(
-    id_production SERIAL,
-    daty          DATE           NOT NULL,
-    quantity      NUMERIC(15, 2) NOT NULL,
-    id_product    INTEGER        NOT NULL,
-    PRIMARY KEY (id_production),
-
-    FOREIGN KEY (id_product) REFERENCES product (id_product)
-);
+-- CREATE TABLE production
+-- (
+--     id_production SERIAL,
+--     daty          DATE           NOT NULL,
+--     quantity      NUMERIC(15, 2) NOT NULL,
+--     id_product    INTEGER        NOT NULL,
+--     PRIMARY KEY (id_production),
+--     FOREIGN KEY (id_product) REFERENCES product (id_product)
+-- );
 
 CREATE TABLE product_stock
 (
@@ -235,6 +246,16 @@ CREATE TABLE supply_detail
     FOREIGN KEY (id_supply) REFERENCES supply (id_supply)
 );
 
+CREATE TABLE comission
+(
+    id_comission     SERIAL,
+    taux_comission   NUMERIC(15, 2) NOT NULL,
+    comission_amount NUMERIC(15, 2) NOT NULL,
+    id_sale          INTEGER        NOT NULL,
+    PRIMARY KEY (id_comission),
+    FOREIGN KEY (id_sale) REFERENCES sale (id_sale)
+);
+
 CREATE TABLE recipe_product
 (
     id_product        INTEGER,
@@ -274,3 +295,13 @@ CREATE TABLE product_of_month
     PRIMARY KEY (id_product_of_month),
     FOREIGN KEY (id_product) REFERENCES product (id_product)
 );
+
+CREATE TABLE product_price
+(
+    id_product_price SERIAL,
+    add_date         DATE          not null,
+    id_product       INTEGER       not null,
+    val              numeric(15, 2) not null,
+    PRIMARY KEY (id_product_price),
+    FOREIGN KEY (id_product) REFERENCES product (id_product)
+)

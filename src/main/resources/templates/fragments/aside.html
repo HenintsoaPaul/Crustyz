@@ -111,6 +111,30 @@
             </ul>
         </li>
 
+        <!-- Prix -->
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#productPrices-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-box"></i>
+                <span>Prix Produits</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="productPrices-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a th:href="@{/products/prices}">
+                        <i class="bi bi-circle"></i>
+                        <span>Liste</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/products/prices
+                    /add}">
+                        <i class="bi bi-circle"></i>
+                        <span>Ajout</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- Produits -->
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">

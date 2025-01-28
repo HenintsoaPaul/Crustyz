@@ -51,9 +51,9 @@ VALUES ('Patisserie'),
 
 INSERT INTO product (name, unit_price, id_unit, id_product_category)
 VALUES ('Pain raisin', 1500, 3, 2),
-       ('Gateau', 750, 3, 1),
+       ('Gateau', 12000, 3, 1),
        ('Mofo dopaina', 500, 3, 2),
-       ('Croissant', 500, 3, 2);
+       ('Croissant', 5000, 3, 2);
 
 INSERT INTO recipe (name)
 VALUES ('Recette mofo tsisy dobera'),
@@ -106,9 +106,13 @@ INSERT INTO employee_type (name)
 VALUES ('Vendeur'),
        ('Serveur');
 
-INSERT INTO employee (name, first_name, cin, hire_date, salary, id_employee_type)
-VALUES ('MANITRAJA', 'Henintsoa Paul', '123456789', '01/01/2024', 500, 1),
-       ('Jean', 'DuJardin', '789123456', '01/01/2024', 250, 1);
+INSERT INTO employee_sexe (name)
+VALUES ('Homme'),
+       ('Femme');
+
+INSERT INTO employee (name, first_name, cin, hire_date, salary, id_employee_type, id_employee_sexe)
+VALUES ('MANITRAJA', 'Henintsoa Paul', '123456789', '01/01/2024', 500, 1, 1),
+       ('Jeanne', 'DuJardine', '789123456', '01/01/2024', 250, 1, 2);
 
 INSERT INTO sale (daty, total_price, id_employee)
 VALUES ('01/02/2025', 1500, 1),

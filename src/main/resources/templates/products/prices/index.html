@@ -1,0 +1,54 @@
+<div th:replace="~{fragments/_layout}"></div>
+
+<main id="main" class="main">
+    <div class="my-2">
+        <form th:action="@{/products/prices}" method="GET" class="form-inline mb-3">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+
+            <div class="row g-10">
+                <!-- Filter by produit -->
+                <div class="row g-10">
+                    <div class="col-4 card px-3 py-3">
+                        <label>Produit :</label>
+                        <select required name="idProduct" id="productList" class="form-control mb-4 col-4">
+                            <option th:each="prod:${productList}"
+                                    th:value="${prod.getId()}"
+                                    th:text="${prod.getName()}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <h3>Historique des Prix Produits</h3>
+    <table class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Produit</th>
+            <th>Date</th>
+            <th>Prix Unite</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="elmt:${productPrices}">
+            <td>
+                <a th:href="@{/products/prices/update/{id}(id=${elmt.getId()})}"
+                   class="btn btn-primary">
+                    <span th:text="${elmt.getId()}"></span>
+                </a>
+            </td>
+            <td th:text="${elmt.getProduct().getName()}"></td>
+            <td th:text="${elmt.getAddDate()}"></td>
+            <td th:text="${elmt.getVal()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
+</body>
+
+</html>
