@@ -36,6 +36,8 @@ public class ProductPriceController {
     public String formNew( Model model, @PathVariable Integer id )
             throws Exception {
         model.addAttribute( "productPrice", productPriceService.findById( id ) );
+        model.addAttribute( "productList", productPriceService.findAllProduct() );
+
         return "products/prices/update";
     }
 }
